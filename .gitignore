@@ -1,0 +1,9 @@
+# Large data files
+*.las
+*.npy
+*.npz
+
+# Python
+__pycache__/
+*.pyc
+.env
