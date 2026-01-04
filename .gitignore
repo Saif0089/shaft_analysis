@@ -1,7 +1,6 @@
-# Large data files (except input)
+# Large data files
 *.npy
 *.npz
-output/**/*.las
 
 # Python
 __pycache__/
