@@ -1,0 +1,32 @@
+{
+  "label_to_id": {
+    "column": 0,
+    "guard_copy": 1,
+    "guard2": 2,
+    "guard": 3,
+    "wall": 4,
+    "guard2_copy": 5,
+    "guard_copy_copy_copy_copy_copy": 6,
+    "guard_copy_copy_copy_copy": 7,
+    "wire": 8,
+    "guard_copy_copy_copy": 9,
+    "column2": 10,
+    "guard_copy_copy": 11,
+    "pipe": 12
+  },
+  "id_to_label": {
+    "0": "column",
+    "1": "guard_copy",
+    "2": "guard2",
+    "3": "guard",
+    "4": "wall",
+    "5": "guard2_copy",
+    "6": "guard_copy_copy_copy_copy_copy",
+    "7": "guard_copy_copy_copy_copy",
+    "8": "wire",
+    "9": "guard_copy_copy_copy",
+    "10": "column2",
+    "11": "guard_copy_copy",
+    "12": "pipe"
+  }
+}

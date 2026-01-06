@@ -1,0 +1,33 @@
+# Large point cloud files
+*.ply
+*.pcd
+*.las
+*.laz
+*.xyz
+*.obj
+
+# Model checkpoints (too large)
+training/checkpoints/*.pth
+
+# Large export data (keep structure, ignore large txt files)
+annotation_tool/annotations/pointnet_format/*/segmented_shaft_refined_points.txt
+annotation_tool/annotations/pointnet_format/*/segmented_shaft_refined_labels.txt
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

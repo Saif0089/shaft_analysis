@@ -1,0 +1,1 @@
+from .pointnet2 import PointNet2Segmentation, PointNet2SegmentationMSG, PointNet2SegmentationLight

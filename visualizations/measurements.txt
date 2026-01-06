@@ -1,0 +1,20 @@
+SHAFT POINT CLOUD MEASUREMENTS
+============================================================
+
+Total points: 1,443,488
+Bounding box:
+  X: -14.4134 to -6.6964 (width: 7.7170 m)
+  Y: -4.5264 to 3.4571 (depth: 7.9835 m)
+  Z: -526.1057 to -516.1057 (height: 10.0000 m)
+
+Center: (-10.5549, -0.5347, -521.1057)
+Estimated shaft diameter: 7.5858 m
+Outer wall radius: 3.7929 m
+
+Floor Z-levels:
+  Level 1: Z = -521.5557 m
+  Level 2: Z = -521.2757 m
+  Level 3: Z = -516.5557 m
+  Level 4: Z = -516.2757 m
+
+Point spacing (mean NN distance): 0.089038 m (89.038 mm)

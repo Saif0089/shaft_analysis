@@ -1,0 +1,24 @@
+{
+  "label_to_id": {
+    "wall": 0,
+    "pipe": 1,
+    "guard": 2,
+    "guard2": 3,
+    "column_copy": 4,
+    "wire": 5,
+    "column": 6,
+    "sheet": 7,
+    "column2": 8
+  },
+  "id_to_label": {
+    "0": "wall",
+    "1": "pipe",
+    "2": "guard",
+    "3": "guard2",
+    "4": "column_copy",
+    "5": "wire",
+    "6": "column",
+    "7": "sheet",
+    "8": "column2"
+  }
+}

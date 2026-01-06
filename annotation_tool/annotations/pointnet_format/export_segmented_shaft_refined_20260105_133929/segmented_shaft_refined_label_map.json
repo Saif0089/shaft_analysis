@@ -1,0 +1,8 @@
+{
+  "label_to_id": {
+    "wall": 0
+  },
+  "id_to_label": {
+    "0": "wall"
+  }
+}

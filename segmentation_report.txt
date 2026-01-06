@@ -1,0 +1,28 @@
+SHAFT POINT CLOUD SEGMENTATION REPORT
+============================================================
+
+Input file: ../Navvis5mmShaft14_middle_10m.las
+Total points: 1,443,488
+
+STRUCTURE MEASUREMENTS:
+  Shaft diameter: 7.58m
+  Shaft height: 10.00m
+  Center: (-10.555, -0.535)
+  Platform levels: 4
+    Level 1: Z = -522.418m
+    Level 2: Z = -521.368m
+    Level 3: Z = -516.668m
+    Level 4: Z = -516.268m
+
+SEGMENTATION RESULTS:
+  1. Outer Wall: 852,382 points (59.1%)
+  2. Platform Zones: 185,982 points (12.9%)
+  3. Central Column: 15,795 points (1.1%)
+  4. Horizontal Surfaces: 1,864 points (0.1%)
+  5. Vertical Structures: 384,909 points (26.7%)
+  6. Diagonal/Other: 2,556 points (0.2%)
+
+OUTPUT FILES:
+  segmented_shaft_final.las - Full segmented point cloud
+  segments_final/ - Individual segment files
+  visualizations/ - Visualization images

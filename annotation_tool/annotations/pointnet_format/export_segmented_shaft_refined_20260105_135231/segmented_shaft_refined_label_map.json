@@ -1,0 +1,10 @@
+{
+  "label_to_id": {
+    "wall_copy": 0,
+    "wall": 1
+  },
+  "id_to_label": {
+    "0": "wall_copy",
+    "1": "wall"
+  }
+}

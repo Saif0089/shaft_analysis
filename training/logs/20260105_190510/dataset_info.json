@@ -1,0 +1,23 @@
+{
+  "num_classes": 8,
+  "class_names": [
+    "column",
+    "guard2",
+    "guard",
+    "wall",
+    "wire",
+    "column2",
+    "pipe",
+    "background"
+  ],
+  "label_map": {
+    "column": 1,
+    "guard2": 2,
+    "guard": 3,
+    "wall": 4,
+    "wire": 5,
+    "column2": 6,
+    "pipe": 7,
+    "background": 0
+  }
+}

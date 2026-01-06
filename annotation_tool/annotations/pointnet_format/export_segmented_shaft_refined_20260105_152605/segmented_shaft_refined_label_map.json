@@ -1,0 +1,24 @@
+{
+  "label_to_id": {
+    "wire_copy": 0,
+    "column": 1,
+    "wall": 2,
+    "column_copy": 3,
+    "column_copy_copy_copy": 4,
+    "column_copy_copy": 5,
+    "column_copy_copy_copy_copy": 6,
+    "wire": 7,
+    "pipe": 8
+  },
+  "id_to_label": {
+    "0": "wire_copy",
+    "1": "column",
+    "2": "wall",
+    "3": "column_copy",
+    "4": "column_copy_copy_copy",
+    "5": "column_copy_copy",
+    "6": "column_copy_copy_copy_copy",
+    "7": "wire",
+    "8": "pipe"
+  }
+}

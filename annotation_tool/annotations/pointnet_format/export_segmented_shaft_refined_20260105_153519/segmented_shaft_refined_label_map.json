@@ -1,0 +1,16 @@
+{
+  "label_to_id": {
+    "column": 0,
+    "wall": 1,
+    "wire": 2,
+    "column2": 3,
+    "pipe": 4
+  },
+  "id_to_label": {
+    "0": "column",
+    "1": "wall",
+    "2": "wire",
+    "3": "column2",
+    "4": "pipe"
+  }
+}

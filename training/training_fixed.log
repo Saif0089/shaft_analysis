@@ -1,0 +1,2166 @@
+Using device: cuda
+GPU: NVIDIA RTX A6000
+Memory: 47.7 GB
+Loaded 200000 points, 8 classes from export_segmented_shaft_refined_20260105_161409
+Rare classes (will oversample): {0, 1, 2, 4, 5, 6}
+Created 732 blocks of size 1.0m
+Dataset [train]: 585 blocks, 8 classes
+Loaded 200000 points, 8 classes from export_segmented_shaft_refined_20260105_161409
+Created 322 blocks of size 1.0m
+Dataset [val]: 65 blocks, 8 classes
+
+Model: PointNet++
+Parameters: 967,816
+Class distribution in training:
+  column: 841,604 (17.8%) -> weight 0.44
+  guard2: 26,962 (0.6%) -> weight 1.55
+  guard: 198,916 (4.2%) -> weight 1.55
+  wall: 686,097 (14.5%) -> weight 0.53
+  wire: 41,667 (0.9%) -> weight 1.55
+  column2: 11,236 (0.2%) -> weight 1.55
+  pipe: 557,269 (11.8%) -> weight 0.66
+  background: 2,354,841 (49.9%) -> weight 0.16
+Class weights: ['0.44', '1.55', '1.55', '0.53', '1.55', '1.55', '0.66', '0.16']
+Using Focal+Dice Loss (gamma=2.5)
+Using LR warmup for 10 epochs
+
+Starting training for 300 epochs
+Classes: ['column', 'guard2', 'guard', 'wall', 'wire', 'column2', 'pipe', 'background']
+Train batches: 18, Val batches: 3
+Checkpoints: checkpoints
+Logs: logs/20260105_215502
+
+Epoch 1/300
+  Batch 0/18, Loss: 0.7001
+  Batch 10/18, Loss: 0.5466
+  Train - Loss: 0.5598, Acc: 0.2513, mIoU: 0.1140
+  Val   - Loss: 0.6975, Acc: 0.0827, mIoU: 0.0103
+  New best mIoU: 0.0103
+  Time: 18.8s, LR: 1.00e-04
+
+Epoch 2/300
+  Batch 0/18, Loss: 0.4970
+  Batch 10/18, Loss: 0.4982
+  Train - Loss: 0.4915, Acc: 0.3206, mIoU: 0.1509
+  Val   - Loss: 0.7242, Acc: 0.0827, mIoU: 0.0104
+  New best mIoU: 0.0104
+  Time: 18.5s, LR: 2.00e-04
+
+Epoch 3/300
+  Batch 0/18, Loss: 0.4849
+  Batch 10/18, Loss: 0.5004
+  Train - Loss: 0.4780, Acc: 0.3433, mIoU: 0.1691
+  Val   - Loss: 0.7458, Acc: 0.1085, mIoU: 0.0248
+  New best mIoU: 0.0248
+  Time: 17.7s, LR: 3.00e-04
+
+Epoch 4/300
+  Batch 0/18, Loss: 0.5025
+  Batch 10/18, Loss: 0.4669
+  Train - Loss: 0.4633, Acc: 0.3574, mIoU: 0.1879
+  Val   - Loss: 0.5181, Acc: 0.2990, mIoU: 0.1920
+  New best mIoU: 0.1920
+  Time: 17.3s, LR: 4.00e-04
+
+Epoch 5/300
+  Batch 0/18, Loss: 0.4519
+  Batch 10/18, Loss: 0.4325
+  Train - Loss: 0.4511, Acc: 0.3899, mIoU: 0.2225
+  Val   - Loss: 0.4246, Acc: 0.3928, mIoU: 0.2767
+  New best mIoU: 0.2767
+  Time: 18.0s, LR: 5.00e-04
+
+Epoch 6/300
+  Batch 0/18, Loss: 0.4469
+  Batch 10/18, Loss: 0.4238
+  Train - Loss: 0.4380, Acc: 0.3968, mIoU: 0.2287
+  Val   - Loss: 0.4367, Acc: 0.4053, mIoU: 0.2779
+  New best mIoU: 0.2779
+  Time: 17.8s, LR: 6.00e-04
+
+Epoch 7/300
+  Batch 0/18, Loss: 0.4686
+  Batch 10/18, Loss: 0.4236
+  Train - Loss: 0.4260, Acc: 0.4470, mIoU: 0.2622
+  Val   - Loss: 0.4278, Acc: 0.4472, mIoU: 0.2357
+  Time: 17.5s, LR: 7.00e-04
+
+Epoch 8/300
+  Batch 0/18, Loss: 0.4242
+  Batch 10/18, Loss: 0.4247
+  Train - Loss: 0.4183, Acc: 0.4454, mIoU: 0.2615
+  Val   - Loss: 0.3980, Acc: 0.4348, mIoU: 0.2737
+  Time: 17.3s, LR: 8.00e-04
+
+Epoch 9/300
+  Batch 0/18, Loss: 0.3710
+  Batch 10/18, Loss: 0.4483
+  Train - Loss: 0.3906, Acc: 0.4960, mIoU: 0.3142
+  Val   - Loss: 0.5419, Acc: 0.3713, mIoU: 0.2142
+  Time: 18.2s, LR: 9.00e-04
+
+Epoch 10/300
+  Batch 0/18, Loss: 0.3927
+  Batch 10/18, Loss: 0.3505
+  Train - Loss: 0.3862, Acc: 0.4877, mIoU: 0.3256
+  Val   - Loss: 0.3546, Acc: 0.5082, mIoU: 0.3613
+  New best mIoU: 0.3613
+  Time: 18.1s, LR: 1.00e-03
+
+Epoch 11/300
+  Batch 0/18, Loss: 0.3969
+  Batch 10/18, Loss: 0.3586
+  Train - Loss: 0.3692, Acc: 0.5090, mIoU: 0.3533
+  Val   - Loss: 0.4746, Acc: 0.3589, mIoU: 0.2580
+  Time: 18.0s, LR: 1.00e-03
+
+Epoch 12/300
+  Batch 0/18, Loss: 0.3634
+  Batch 10/18, Loss: 0.3211
+  Train - Loss: 0.3698, Acc: 0.5110, mIoU: 0.3208
+  Val   - Loss: 0.3666, Acc: 0.4847, mIoU: 0.3586
+  Time: 17.5s, LR: 1.00e-03
+
+Epoch 13/300
+  Batch 0/18, Loss: 0.3126
+  Batch 10/18, Loss: 0.3663
+  Train - Loss: 0.3458, Acc: 0.5236, mIoU: 0.3935
+  Val   - Loss: 0.3119, Acc: 0.5549, mIoU: 0.4637
+  New best mIoU: 0.4637
+  Time: 18.0s, LR: 1.00e-03
+
+Epoch 14/300
+  Batch 0/18, Loss: 0.2601
+  Batch 10/18, Loss: 0.3533
+  Train - Loss: 0.3433, Acc: 0.5470, mIoU: 0.3975
+  Val   - Loss: 0.2856, Acc: 0.4952, mIoU: 0.4656
+  New best mIoU: 0.4656
+  Time: 18.0s, LR: 1.00e-03
+
+Epoch 15/300
+  Batch 0/18, Loss: 0.3697
+  Batch 10/18, Loss: 0.3391
+  Train - Loss: 0.3364, Acc: 0.5426, mIoU: 0.3717
+  Val   - Loss: 0.3324, Acc: 0.5454, mIoU: 0.3949
+  Time: 17.6s, LR: 9.99e-04
+
+Epoch 16/300
+  Batch 0/18, Loss: 0.3557
+  Batch 10/18, Loss: 0.3360
+  Train - Loss: 0.3442, Acc: 0.5438, mIoU: 0.3976
+  Val   - Loss: 0.3123, Acc: 0.5393, mIoU: 0.3788
+  Time: 17.6s, LR: 9.99e-04
+
+Epoch 17/300
+  Batch 0/18, Loss: 0.3554
+  Batch 10/18, Loss: 0.3218
+  Train - Loss: 0.3248, Acc: 0.5628, mIoU: 0.4370
+  Val   - Loss: 0.4065, Acc: 0.5215, mIoU: 0.3093
+  Time: 17.8s, LR: 9.99e-04
+
+Epoch 18/300
+  Batch 0/18, Loss: 0.3785
+  Batch 10/18, Loss: 0.3280
+  Train - Loss: 0.3363, Acc: 0.5509, mIoU: 0.4176
+  Val   - Loss: 0.2944, Acc: 0.5878, mIoU: 0.4095
+  Time: 17.7s, LR: 9.98e-04
+
+Epoch 19/300
+  Batch 0/18, Loss: 0.2726
+  Batch 10/18, Loss: 0.3045
+  Train - Loss: 0.3132, Acc: 0.5779, mIoU: 0.4515
+  Val   - Loss: 0.2868, Acc: 0.5454, mIoU: 0.4511
+  Time: 17.7s, LR: 9.98e-04
+
+Epoch 20/300
+  Batch 0/18, Loss: 0.3035
+  Batch 10/18, Loss: 0.2842
+  Train - Loss: 0.3074, Acc: 0.5786, mIoU: 0.4661
+  Val   - Loss: 0.2726, Acc: 0.5672, mIoU: 0.4565
+  Time: 17.7s, LR: 9.97e-04
+
+Epoch 21/300
+  Batch 0/18, Loss: 0.2960
+  Batch 10/18, Loss: 0.3839
+  Train - Loss: 0.3139, Acc: 0.5999, mIoU: 0.4704
+  Val   - Loss: 0.3066, Acc: 0.5791, mIoU: 0.4960
+  New best mIoU: 0.4960
+  Time: 18.0s, LR: 9.96e-04
+
+Epoch 22/300
+  Batch 0/18, Loss: 0.3342
+  Batch 10/18, Loss: 0.3044
+  Train - Loss: 0.3157, Acc: 0.5776, mIoU: 0.4578
+  Val   - Loss: 0.3873, Acc: 0.5738, mIoU: 0.3704
+  Time: 18.1s, LR: 9.96e-04
+
+Epoch 23/300
+  Batch 0/18, Loss: 0.3060
+  Batch 10/18, Loss: 0.2953
+  Train - Loss: 0.3108, Acc: 0.5714, mIoU: 0.4567
+  Val   - Loss: 0.2647, Acc: 0.5944, mIoU: 0.4915
+  Time: 18.3s, LR: 9.95e-04
+
+Epoch 24/300
+  Batch 0/18, Loss: 0.2319
+  Batch 10/18, Loss: 0.3205
+  Train - Loss: 0.2946, Acc: 0.5744, mIoU: 0.4886
+  Val   - Loss: 0.2945, Acc: 0.5901, mIoU: 0.4254
+  Time: 18.9s, LR: 9.94e-04
+
+Epoch 25/300
+  Batch 0/18, Loss: 0.2765
+  Batch 10/18, Loss: 0.3301
+  Train - Loss: 0.3037, Acc: 0.5910, mIoU: 0.4776
+  Val   - Loss: 0.2675, Acc: 0.6058, mIoU: 0.4223
+  Time: 18.3s, LR: 9.93e-04
+
+Epoch 26/300
+  Batch 0/18, Loss: 0.3291
+  Batch 10/18, Loss: 0.2504
+  Train - Loss: 0.3070, Acc: 0.5955, mIoU: 0.4146
+  Val   - Loss: 0.2596, Acc: 0.6294, mIoU: 0.4568
+  Time: 17.7s, LR: 9.93e-04
+
+Epoch 27/300
+  Batch 0/18, Loss: 0.2670
+  Batch 10/18, Loss: 0.3324
+  Train - Loss: 0.2921, Acc: 0.6099, mIoU: 0.4831
+  Val   - Loss: 0.2801, Acc: 0.6503, mIoU: 0.4419
+  Time: 17.8s, LR: 9.92e-04
+
+Epoch 28/300
+  Batch 0/18, Loss: 0.2844
+  Batch 10/18, Loss: 0.2981
+  Train - Loss: 0.3091, Acc: 0.6173, mIoU: 0.4647
+  Val   - Loss: 0.2760, Acc: 0.6385, mIoU: 0.5257
+  New best mIoU: 0.5257
+  Time: 17.7s, LR: 9.91e-04
+
+Epoch 29/300
+  Batch 0/18, Loss: 0.2616
+  Batch 10/18, Loss: 0.3520
+  Train - Loss: 0.3022, Acc: 0.5878, mIoU: 0.4396
+  Val   - Loss: 0.2857, Acc: 0.6133, mIoU: 0.4828
+  Time: 17.7s, LR: 9.89e-04
+
+Epoch 30/300
+  Batch 0/18, Loss: 0.3365
+  Batch 10/18, Loss: 0.2802
+  Train - Loss: 0.3121, Acc: 0.5977, mIoU: 0.4197
+  Val   - Loss: 0.3098, Acc: 0.5412, mIoU: 0.3767
+  Time: 17.6s, LR: 9.88e-04
+
+Epoch 31/300
+  Batch 0/18, Loss: 0.2979
+  Batch 10/18, Loss: 0.2917
+  Train - Loss: 0.2976, Acc: 0.5973, mIoU: 0.4404
+  Val   - Loss: 0.2324, Acc: 0.6106, mIoU: 0.5430
+  New best mIoU: 0.5430
+  Time: 17.8s, LR: 9.87e-04
+
+Epoch 32/300
+  Batch 0/18, Loss: 0.2581
+  Batch 10/18, Loss: 0.2754
+  Train - Loss: 0.3088, Acc: 0.6121, mIoU: 0.4362
+  Val   - Loss: 0.2422, Acc: 0.6268, mIoU: 0.4947
+  Time: 17.7s, LR: 9.86e-04
+
+Epoch 33/300
+  Batch 0/18, Loss: 0.2135
+  Batch 10/18, Loss: 0.2767
+  Train - Loss: 0.2849, Acc: 0.6129, mIoU: 0.4804
+  Val   - Loss: 0.2378, Acc: 0.6217, mIoU: 0.4824
+  Time: 17.8s, LR: 9.85e-04
+
+Epoch 34/300
+  Batch 0/18, Loss: 0.3823
+  Batch 10/18, Loss: 0.2927
+  Train - Loss: 0.2942, Acc: 0.6094, mIoU: 0.4622
+  Val   - Loss: 0.2372, Acc: 0.6239, mIoU: 0.5413
+  Time: 17.8s, LR: 9.83e-04
+
+Epoch 35/300
+  Batch 0/18, Loss: 0.2773
+  Batch 10/18, Loss: 0.2411
+  Train - Loss: 0.2802, Acc: 0.6183, mIoU: 0.4986
+  Val   - Loss: 0.2456, Acc: 0.5942, mIoU: 0.5296
+  Time: 18.5s, LR: 9.82e-04
+
+Epoch 36/300
+  Batch 0/18, Loss: 0.2550
+  Batch 10/18, Loss: 0.2601
+  Train - Loss: 0.2736, Acc: 0.6338, mIoU: 0.4999
+  Val   - Loss: 0.2928, Acc: 0.6169, mIoU: 0.4257
+  Time: 17.7s, LR: 9.80e-04
+
+Epoch 37/300
+  Batch 0/18, Loss: 0.3479
+  Batch 10/18, Loss: 0.2641
+  Train - Loss: 0.2727, Acc: 0.6351, mIoU: 0.5166
+  Val   - Loss: 0.2311, Acc: 0.6475, mIoU: 0.5395
+  Time: 17.8s, LR: 9.79e-04
+
+Epoch 38/300
+  Batch 0/18, Loss: 0.2607
+  Batch 10/18, Loss: 0.2896
+  Train - Loss: 0.2686, Acc: 0.6449, mIoU: 0.5261
+  Val   - Loss: 0.2392, Acc: 0.6044, mIoU: 0.4809
+  Time: 17.7s, LR: 9.77e-04
+
+Epoch 39/300
+  Batch 0/18, Loss: 0.2585
+  Batch 10/18, Loss: 0.2548
+  Train - Loss: 0.2767, Acc: 0.6060, mIoU: 0.4850
+  Val   - Loss: 0.2702, Acc: 0.5918, mIoU: 0.4862
+  Time: 18.2s, LR: 9.76e-04
+
+Epoch 40/300
+  Batch 0/18, Loss: 0.2803
+  Batch 10/18, Loss: 0.2375
+  Train - Loss: 0.2652, Acc: 0.6284, mIoU: 0.5187
+  Val   - Loss: 0.2516, Acc: 0.6844, mIoU: 0.5613
+  New best mIoU: 0.5613
+  Time: 17.7s, LR: 9.74e-04
+
+Epoch 41/300
+  Batch 0/18, Loss: 0.2515
+  Batch 10/18, Loss: 0.2678
+  Train - Loss: 0.2660, Acc: 0.6227, mIoU: 0.5169
+  Val   - Loss: 0.2367, Acc: 0.6627, mIoU: 0.5224
+  Time: 17.8s, LR: 9.72e-04
+
+Epoch 42/300
+  Batch 0/18, Loss: 0.2743
+  Batch 10/18, Loss: 0.2460
+  Train - Loss: 0.2564, Acc: 0.6432, mIoU: 0.5356
+  Val   - Loss: 0.2228, Acc: 0.6253, mIoU: 0.5514
+  Time: 18.3s, LR: 9.70e-04
+
+Epoch 43/300
+  Batch 0/18, Loss: 0.2405
+  Batch 10/18, Loss: 0.2326
+  Train - Loss: 0.2520, Acc: 0.6321, mIoU: 0.5416
+  Val   - Loss: 0.2514, Acc: 0.5901, mIoU: 0.4965
+  Time: 18.1s, LR: 9.68e-04
+
+Epoch 44/300
+  Batch 0/18, Loss: 0.2335
+  Batch 10/18, Loss: 0.2734
+  Train - Loss: 0.2539, Acc: 0.6366, mIoU: 0.5338
+  Val   - Loss: 0.2129, Acc: 0.6567, mIoU: 0.5804
+  New best mIoU: 0.5804
+  Time: 18.2s, LR: 9.66e-04
+
+Epoch 45/300
+  Batch 0/18, Loss: 0.2069
+  Batch 10/18, Loss: 0.2465
+  Train - Loss: 0.2480, Acc: 0.6409, mIoU: 0.5329
+  Val   - Loss: 0.2485, Acc: 0.6225, mIoU: 0.5011
+  Time: 17.9s, LR: 9.65e-04
+
+Epoch 46/300
+  Batch 0/18, Loss: 0.3373
+  Batch 10/18, Loss: 0.2578
+  Train - Loss: 0.2724, Acc: 0.6395, mIoU: 0.5183
+  Val   - Loss: 0.2017, Acc: 0.6290, mIoU: 0.5360
+  Time: 17.8s, LR: 9.62e-04
+
+Epoch 47/300
+  Batch 0/18, Loss: 0.2148
+  Batch 10/18, Loss: 0.2185
+  Train - Loss: 0.2546, Acc: 0.6253, mIoU: 0.5356
+  Val   - Loss: 0.2004, Acc: 0.6338, mIoU: 0.5816
+  New best mIoU: 0.5816
+  Time: 17.7s, LR: 9.60e-04
+
+Epoch 48/300
+  Batch 0/18, Loss: 0.2395
+  Batch 10/18, Loss: 0.2598
+  Train - Loss: 0.2625, Acc: 0.6567, mIoU: 0.5397
+  Val   - Loss: 0.2508, Acc: 0.6769, mIoU: 0.5046
+  Time: 17.8s, LR: 9.58e-04
+
+Epoch 49/300
+  Batch 0/18, Loss: 0.2790
+  Batch 10/18, Loss: 0.2097
+  Train - Loss: 0.2561, Acc: 0.6536, mIoU: 0.5455
+  Val   - Loss: 0.2275, Acc: 0.6339, mIoU: 0.5047
+  Time: 18.3s, LR: 9.56e-04
+
+Epoch 50/300
+  Batch 0/18, Loss: 0.2548
+  Batch 10/18, Loss: 0.2580
+  Train - Loss: 0.2539, Acc: 0.6624, mIoU: 0.5398
+  Val   - Loss: 0.2246, Acc: 0.6377, mIoU: 0.5356
+  Time: 17.7s, LR: 9.54e-04
+
+Epoch 51/300
+  Batch 0/18, Loss: 0.2108
+  Batch 10/18, Loss: 0.2447
+  Train - Loss: 0.2506, Acc: 0.6510, mIoU: 0.5442
+  Val   - Loss: 0.2540, Acc: 0.6347, mIoU: 0.4639
+  Time: 18.1s, LR: 9.52e-04
+
+Epoch 52/300
+  Batch 0/18, Loss: 0.2394
+  Batch 10/18, Loss: 0.2172
+  Train - Loss: 0.2490, Acc: 0.6541, mIoU: 0.5650
+  Val   - Loss: 0.2204, Acc: 0.6386, mIoU: 0.5132
+  Time: 18.4s, LR: 9.49e-04
+
+Epoch 53/300
+  Batch 0/18, Loss: 0.2190
+  Batch 10/18, Loss: 0.2087
+  Train - Loss: 0.2348, Acc: 0.6605, mIoU: 0.5686
+  Val   - Loss: 0.2216, Acc: 0.7174, mIoU: 0.5761
+  Time: 18.3s, LR: 9.47e-04
+
+Epoch 54/300
+  Batch 0/18, Loss: 0.2318
+  Batch 10/18, Loss: 0.2290
+  Train - Loss: 0.2440, Acc: 0.6557, mIoU: 0.5631
+  Val   - Loss: 0.2488, Acc: 0.6377, mIoU: 0.5077
+  Time: 17.5s, LR: 9.44e-04
+
+Epoch 55/300
+  Batch 0/18, Loss: 0.2135
+  Batch 10/18, Loss: 0.2253
+  Train - Loss: 0.2459, Acc: 0.6576, mIoU: 0.5524
+  Val   - Loss: 0.2418, Acc: 0.6755, mIoU: 0.5750
+  Time: 17.7s, LR: 9.42e-04
+
+Epoch 56/300
+  Batch 0/18, Loss: 0.2440
+  Batch 10/18, Loss: 0.2415
+  Train - Loss: 0.2366, Acc: 0.6632, mIoU: 0.5678
+  Val   - Loss: 0.1958, Acc: 0.6715, mIoU: 0.5691
+  Time: 17.6s, LR: 9.39e-04
+
+Epoch 57/300
+  Batch 0/18, Loss: 0.2677
+  Batch 10/18, Loss: 0.3114
+  Train - Loss: 0.2519, Acc: 0.6643, mIoU: 0.5175
+  Val   - Loss: 0.2473, Acc: 0.6077, mIoU: 0.4367
+  Time: 18.0s, LR: 9.37e-04
+
+Epoch 58/300
+  Batch 0/18, Loss: 0.2789
+  Batch 10/18, Loss: 0.2060
+  Train - Loss: 0.2390, Acc: 0.6677, mIoU: 0.5519
+  Val   - Loss: 0.2258, Acc: 0.6856, mIoU: 0.5915
+  New best mIoU: 0.5915
+  Time: 17.8s, LR: 9.34e-04
+
+Epoch 59/300
+  Batch 0/18, Loss: 0.2271
+  Batch 10/18, Loss: 0.2397
+  Train - Loss: 0.2470, Acc: 0.6598, mIoU: 0.5588
+  Val   - Loss: 0.2132, Acc: 0.6055, mIoU: 0.5378
+  Time: 18.0s, LR: 9.31e-04
+
+Epoch 60/300
+  Batch 0/18, Loss: 0.2778
+  Batch 10/18, Loss: 0.2067
+  Train - Loss: 0.2367, Acc: 0.6568, mIoU: 0.5580
+  Val   - Loss: 0.2135, Acc: 0.7012, mIoU: 0.5890
+  Time: 18.2s, LR: 9.29e-04
+
+Epoch 61/300
+  Batch 0/18, Loss: 0.2546
+  Batch 10/18, Loss: 0.2883
+  Train - Loss: 0.2492, Acc: 0.6545, mIoU: 0.5489
+  Val   - Loss: 0.2062, Acc: 0.6813, mIoU: 0.6059
+  New best mIoU: 0.6059
+  Time: 18.7s, LR: 9.26e-04
+
+Epoch 62/300
+  Batch 0/18, Loss: 0.2556
+  Batch 10/18, Loss: 0.2584
+  Train - Loss: 0.2420, Acc: 0.6741, mIoU: 0.5444
+  Val   - Loss: 0.2267, Acc: 0.6723, mIoU: 0.5615
+  Time: 18.0s, LR: 9.23e-04
+
+Epoch 63/300
+  Batch 0/18, Loss: 0.3271
+  Batch 10/18, Loss: 0.2077
+  Train - Loss: 0.2412, Acc: 0.6551, mIoU: 0.5549
+  Val   - Loss: 0.2444, Acc: 0.6313, mIoU: 0.5324
+  Time: 17.9s, LR: 9.20e-04
+
+Epoch 64/300
+  Batch 0/18, Loss: 0.2619
+  Batch 10/18, Loss: 0.3002
+  Train - Loss: 0.2566, Acc: 0.6573, mIoU: 0.5392
+  Val   - Loss: 0.2956, Acc: 0.6350, mIoU: 0.4586
+  Time: 17.6s, LR: 9.17e-04
+
+Epoch 65/300
+  Batch 0/18, Loss: 0.2881
+  Batch 10/18, Loss: 0.2191
+  Train - Loss: 0.2482, Acc: 0.6537, mIoU: 0.5437
+  Val   - Loss: 0.2227, Acc: 0.5941, mIoU: 0.4863
+  Time: 17.7s, LR: 9.14e-04
+
+Epoch 66/300
+  Batch 0/18, Loss: 0.2526
+  Batch 10/18, Loss: 0.2038
+  Train - Loss: 0.2376, Acc: 0.6740, mIoU: 0.5729
+  Val   - Loss: 0.2144, Acc: 0.6534, mIoU: 0.5495
+  Time: 18.1s, LR: 9.11e-04
+
+Epoch 67/300
+  Batch 0/18, Loss: 0.2576
+  Batch 10/18, Loss: 0.1976
+  Train - Loss: 0.2304, Acc: 0.6811, mIoU: 0.5771
+  Val   - Loss: 0.2029, Acc: 0.6412, mIoU: 0.5867
+  Time: 18.4s, LR: 9.08e-04
+
+Epoch 68/300
+  Batch 0/18, Loss: 0.1911
+  Batch 10/18, Loss: 0.2180
+  Train - Loss: 0.2258, Acc: 0.6723, mIoU: 0.5741
+  Val   - Loss: 0.2482, Acc: 0.6875, mIoU: 0.4970
+  Time: 17.7s, LR: 9.05e-04
+
+Epoch 69/300
+  Batch 0/18, Loss: 0.1976
+  Batch 10/18, Loss: 0.2172
+  Train - Loss: 0.2246, Acc: 0.6949, mIoU: 0.5914
+  Val   - Loss: 0.2101, Acc: 0.6854, mIoU: 0.5363
+  Time: 18.3s, LR: 9.01e-04
+
+Epoch 70/300
+  Batch 0/18, Loss: 0.2100
+  Batch 10/18, Loss: 0.2286
+  Train - Loss: 0.2219, Acc: 0.6872, mIoU: 0.5899
+  Val   - Loss: 0.1890, Acc: 0.7164, mIoU: 0.6082
+  New best mIoU: 0.6082
+  Time: 17.9s, LR: 8.98e-04
+
+Epoch 71/300
+  Batch 0/18, Loss: 0.2717
+  Batch 10/18, Loss: 0.2526
+  Train - Loss: 0.2279, Acc: 0.6878, mIoU: 0.5953
+  Val   - Loss: 0.2248, Acc: 0.6797, mIoU: 0.5179
+  Time: 18.0s, LR: 8.95e-04
+
+Epoch 72/300
+  Batch 0/18, Loss: 0.2579
+  Batch 10/18, Loss: 0.2737
+  Train - Loss: 0.2576, Acc: 0.6818, mIoU: 0.5661
+  Val   - Loss: 0.2176, Acc: 0.6286, mIoU: 0.5188
+  Time: 18.8s, LR: 8.92e-04
+
+Epoch 73/300
+  Batch 0/18, Loss: 0.2411
+  Batch 10/18, Loss: 0.2200
+  Train - Loss: 0.2355, Acc: 0.6633, mIoU: 0.5654
+  Val   - Loss: 0.2273, Acc: 0.6332, mIoU: 0.5398
+  Time: 18.1s, LR: 8.88e-04
+
+Epoch 74/300
+  Batch 0/18, Loss: 0.1935
+  Batch 10/18, Loss: 0.2460
+  Train - Loss: 0.2379, Acc: 0.6697, mIoU: 0.5722
+  Val   - Loss: 0.2342, Acc: 0.6313, mIoU: 0.4880
+  Time: 18.3s, LR: 8.85e-04
+
+Epoch 75/300
+  Batch 0/18, Loss: 0.2031
+  Batch 10/18, Loss: 0.3046
+  Train - Loss: 0.2302, Acc: 0.6875, mIoU: 0.5864
+  Val   - Loss: 0.2000, Acc: 0.6798, mIoU: 0.6118
+  New best mIoU: 0.6118
+  Time: 18.0s, LR: 8.81e-04
+
+Epoch 76/300
+  Batch 0/18, Loss: 0.2043
+  Batch 10/18, Loss: 0.1752
+  Train - Loss: 0.2108, Acc: 0.7028, mIoU: 0.6053
+  Val   - Loss: 0.1924, Acc: 0.6590, mIoU: 0.5682
+  Time: 18.4s, LR: 8.78e-04
+
+Epoch 77/300
+  Batch 0/18, Loss: 0.2171
+  Batch 10/18, Loss: 0.2049
+  Train - Loss: 0.2290, Acc: 0.6791, mIoU: 0.5788
+  Val   - Loss: 0.2177, Acc: 0.6560, mIoU: 0.5492
+  Time: 17.7s, LR: 8.74e-04
+
+Epoch 78/300
+  Batch 0/18, Loss: 0.1640
+  Batch 10/18, Loss: 0.3057
+  Train - Loss: 0.2241, Acc: 0.6936, mIoU: 0.5925
+  Val   - Loss: 0.1713, Acc: 0.6572, mIoU: 0.5845
+  Time: 17.8s, LR: 8.70e-04
+
+Epoch 79/300
+  Batch 0/18, Loss: 0.1933
+  Batch 10/18, Loss: 0.2577
+  Train - Loss: 0.2277, Acc: 0.6634, mIoU: 0.5707
+  Val   - Loss: 0.1981, Acc: 0.6763, mIoU: 0.5505
+  Time: 17.8s, LR: 8.67e-04
+
+Epoch 80/300
+  Batch 0/18, Loss: 0.2157
+  Batch 10/18, Loss: 0.2611
+  Train - Loss: 0.2200, Acc: 0.6774, mIoU: 0.5724
+  Val   - Loss: 0.2292, Acc: 0.6486, mIoU: 0.5183
+  Time: 17.8s, LR: 8.63e-04
+
+Epoch 81/300
+  Batch 0/18, Loss: 0.2843
+  Batch 10/18, Loss: 0.2177
+  Train - Loss: 0.2223, Acc: 0.6925, mIoU: 0.5889
+  Val   - Loss: 0.1922, Acc: 0.6958, mIoU: 0.6036
+  Time: 17.8s, LR: 8.59e-04
+
+Epoch 82/300
+  Batch 0/18, Loss: 0.1984
+  Batch 10/18, Loss: 0.2555
+  Train - Loss: 0.2186, Acc: 0.6979, mIoU: 0.5964
+  Val   - Loss: 0.1866, Acc: 0.7011, mIoU: 0.5606
+  Time: 17.9s, LR: 8.56e-04
+
+Epoch 83/300
+  Batch 0/18, Loss: 0.1904
+  Batch 10/18, Loss: 0.2396
+  Train - Loss: 0.2363, Acc: 0.6974, mIoU: 0.5841
+  Val   - Loss: 0.1822, Acc: 0.6792, mIoU: 0.5638
+  Time: 17.8s, LR: 8.52e-04
+
+Epoch 84/300
+  Batch 0/18, Loss: 0.2054
+  Batch 10/18, Loss: 0.2570
+  Train - Loss: 0.2141, Acc: 0.6944, mIoU: 0.5938
+  Val   - Loss: 0.1772, Acc: 0.7098, mIoU: 0.6028
+  Time: 17.6s, LR: 8.48e-04
+
+Epoch 85/300
+  Batch 0/18, Loss: 0.2503
+  Batch 10/18, Loss: 0.1863
+  Train - Loss: 0.2175, Acc: 0.6947, mIoU: 0.6079
+  Val   - Loss: 0.1853, Acc: 0.6611, mIoU: 0.5909
+  Time: 18.5s, LR: 8.44e-04
+
+Epoch 86/300
+  Batch 0/18, Loss: 0.1689
+  Batch 10/18, Loss: 0.1898
+  Train - Loss: 0.2208, Acc: 0.7052, mIoU: 0.6028
+  Val   - Loss: 0.1846, Acc: 0.6819, mIoU: 0.5890
+  Time: 17.8s, LR: 8.40e-04
+
+Epoch 87/300
+  Batch 0/18, Loss: 0.1999
+  Batch 10/18, Loss: 0.1801
+  Train - Loss: 0.2138, Acc: 0.7008, mIoU: 0.6046
+  Val   - Loss: 0.1919, Acc: 0.7031, mIoU: 0.5980
+  Time: 17.8s, LR: 8.36e-04
+
+Epoch 88/300
+  Batch 0/18, Loss: 0.2211
+  Batch 10/18, Loss: 0.1910
+  Train - Loss: 0.2187, Acc: 0.7021, mIoU: 0.5985
+  Val   - Loss: 0.1969, Acc: 0.7160, mIoU: 0.6167
+  New best mIoU: 0.6167
+  Time: 18.7s, LR: 8.32e-04
+
+Epoch 89/300
+  Batch 0/18, Loss: 0.2500
+  Batch 10/18, Loss: 0.2217
+  Train - Loss: 0.2454, Acc: 0.6715, mIoU: 0.5452
+  Val   - Loss: 0.1790, Acc: 0.7006, mIoU: 0.6078
+  Time: 17.7s, LR: 8.28e-04
+
+Epoch 90/300
+  Batch 0/18, Loss: 0.2598
+  Batch 10/18, Loss: 0.2204
+  Train - Loss: 0.2260, Acc: 0.6772, mIoU: 0.5812
+  Val   - Loss: 0.2012, Acc: 0.6643, mIoU: 0.5050
+  Time: 17.8s, LR: 8.24e-04
+
+Epoch 91/300
+  Batch 0/18, Loss: 0.2190
+  Batch 10/18, Loss: 0.2366
+  Train - Loss: 0.2356, Acc: 0.6777, mIoU: 0.5843
+  Val   - Loss: 0.1912, Acc: 0.6645, mIoU: 0.5924
+  Time: 18.2s, LR: 8.20e-04
+
+Epoch 92/300
+  Batch 0/18, Loss: 0.3181
+  Batch 10/18, Loss: 0.2135
+  Train - Loss: 0.2267, Acc: 0.6869, mIoU: 0.5932
+  Val   - Loss: 0.2149, Acc: 0.6596, mIoU: 0.5432
+  Time: 19.1s, LR: 8.16e-04
+
+Epoch 93/300
+  Batch 0/18, Loss: 0.2158
+  Batch 10/18, Loss: 0.2312
+  Train - Loss: 0.2081, Acc: 0.6877, mIoU: 0.5969
+  Val   - Loss: 0.2509, Acc: 0.6639, mIoU: 0.5221
+  Time: 18.4s, LR: 8.11e-04
+
+Epoch 94/300
+  Batch 0/18, Loss: 0.2207
+  Batch 10/18, Loss: 0.1893
+  Train - Loss: 0.2175, Acc: 0.7035, mIoU: 0.6002
+  Val   - Loss: 0.2021, Acc: 0.7185, mIoU: 0.6027
+  Time: 18.3s, LR: 8.07e-04
+
+Epoch 95/300
+  Batch 0/18, Loss: 0.2025
+  Batch 10/18, Loss: 0.2139
+  Train - Loss: 0.2174, Acc: 0.7022, mIoU: 0.6148
+  Val   - Loss: 0.1930, Acc: 0.6966, mIoU: 0.5983
+  Time: 18.5s, LR: 8.03e-04
+
+Epoch 96/300
+  Batch 0/18, Loss: 0.1942
+  Batch 10/18, Loss: 0.2066
+  Train - Loss: 0.2059, Acc: 0.7123, mIoU: 0.6037
+  Val   - Loss: 0.1998, Acc: 0.6998, mIoU: 0.5656
+  Time: 18.4s, LR: 7.98e-04
+
+Epoch 97/300
+  Batch 0/18, Loss: 0.1997
+  Batch 10/18, Loss: 0.2351
+  Train - Loss: 0.2054, Acc: 0.6994, mIoU: 0.6119
+  Val   - Loss: 0.1667, Acc: 0.6897, mIoU: 0.5946
+  Time: 18.0s, LR: 7.94e-04
+
+Epoch 98/300
+  Batch 0/18, Loss: 0.1836
+  Batch 10/18, Loss: 0.2251
+  Train - Loss: 0.2114, Acc: 0.7064, mIoU: 0.6096
+  Val   - Loss: 0.2276, Acc: 0.6697, mIoU: 0.5583
+  Time: 18.5s, LR: 7.90e-04
+
+Epoch 99/300
+  Batch 0/18, Loss: 0.1959
+  Batch 10/18, Loss: 0.2228
+  Train - Loss: 0.2209, Acc: 0.7010, mIoU: 0.6029
+  Val   - Loss: 0.2125, Acc: 0.6816, mIoU: 0.5679
+  Time: 17.8s, LR: 7.85e-04
+
+Epoch 100/300
+  Batch 0/18, Loss: 0.2070
+  Batch 10/18, Loss: 0.1935
+  Train - Loss: 0.2149, Acc: 0.7050, mIoU: 0.6014
+  Val   - Loss: 0.1986, Acc: 0.6818, mIoU: 0.5926
+  Time: 18.5s, LR: 7.81e-04
+
+Epoch 101/300
+  Batch 0/18, Loss: 0.2400
+  Batch 10/18, Loss: 0.2108
+  Train - Loss: 0.1989, Acc: 0.7181, mIoU: 0.6232
+  Val   - Loss: 0.1911, Acc: 0.7149, mIoU: 0.6184
+  New best mIoU: 0.6184
+  Time: 19.0s, LR: 7.76e-04
+
+Epoch 102/300
+  Batch 0/18, Loss: 0.1824
+  Batch 10/18, Loss: 0.2316
+  Train - Loss: 0.2212, Acc: 0.7054, mIoU: 0.5969
+  Val   - Loss: 0.1704, Acc: 0.6855, mIoU: 0.6007
+  Time: 18.2s, LR: 7.72e-04
+
+Epoch 103/300
+  Batch 0/18, Loss: 0.1872
+  Batch 10/18, Loss: 0.2099
+  Train - Loss: 0.2027, Acc: 0.7167, mIoU: 0.6270
+  Val   - Loss: 0.1687, Acc: 0.7080, mIoU: 0.6096
+  Time: 19.5s, LR: 7.67e-04
+
+Epoch 104/300
+  Batch 0/18, Loss: 0.1868
+  Batch 10/18, Loss: 0.2132
+  Train - Loss: 0.2016, Acc: 0.7173, mIoU: 0.6202
+  Val   - Loss: 0.1938, Acc: 0.7004, mIoU: 0.6181
+  Time: 18.3s, LR: 7.63e-04
+
+Epoch 105/300
+  Batch 0/18, Loss: 0.3303
+  Batch 10/18, Loss: 0.2467
+  Train - Loss: 0.2093, Acc: 0.7060, mIoU: 0.6165
+  Val   - Loss: 0.2020, Acc: 0.6463, mIoU: 0.5746
+  Time: 18.4s, LR: 7.58e-04
+
+Epoch 106/300
+  Batch 0/18, Loss: 0.1699
+  Batch 10/18, Loss: 0.1880
+  Train - Loss: 0.2023, Acc: 0.7162, mIoU: 0.6180
+  Val   - Loss: 0.1928, Acc: 0.7188, mIoU: 0.5891
+  Time: 18.3s, LR: 7.53e-04
+
+Epoch 107/300
+  Batch 0/18, Loss: 0.1762
+  Batch 10/18, Loss: 0.1732
+  Train - Loss: 0.2009, Acc: 0.7141, mIoU: 0.6360
+  Val   - Loss: 0.1975, Acc: 0.6961, mIoU: 0.5570
+  Time: 18.2s, LR: 7.49e-04
+
+Epoch 108/300
+  Batch 0/18, Loss: 0.2118
+  Batch 10/18, Loss: 0.2116
+  Train - Loss: 0.2053, Acc: 0.7127, mIoU: 0.6221
+  Val   - Loss: 0.1890, Acc: 0.6729, mIoU: 0.5665
+  Time: 17.9s, LR: 7.44e-04
+
+Epoch 109/300
+  Batch 0/18, Loss: 0.2239
+  Batch 10/18, Loss: 0.2495
+  Train - Loss: 0.2072, Acc: 0.7086, mIoU: 0.6196
+  Val   - Loss: 0.1886, Acc: 0.7021, mIoU: 0.5926
+  Time: 18.0s, LR: 7.39e-04
+
+Epoch 110/300
+  Batch 0/18, Loss: 0.1862
+  Batch 10/18, Loss: 0.2115
+  Train - Loss: 0.2037, Acc: 0.7244, mIoU: 0.6207
+  Val   - Loss: 0.1547, Acc: 0.6924, mIoU: 0.6177
+  Time: 17.9s, LR: 7.34e-04
+
+Epoch 111/300
+  Batch 0/18, Loss: 0.1737
+  Batch 10/18, Loss: 0.1766
+  Train - Loss: 0.1917, Acc: 0.7336, mIoU: 0.6297
+  Val   - Loss: 0.1770, Acc: 0.7328, mIoU: 0.6352
+  New best mIoU: 0.6352
+  Time: 19.3s, LR: 7.30e-04
+
+Epoch 112/300
+  Batch 0/18, Loss: 0.1849
+  Batch 10/18, Loss: 0.2091
+  Train - Loss: 0.1995, Acc: 0.7196, mIoU: 0.6255
+  Val   - Loss: 0.1713, Acc: 0.7209, mIoU: 0.6387
+  New best mIoU: 0.6387
+  Time: 17.8s, LR: 7.25e-04
+
+Epoch 113/300
+  Batch 0/18, Loss: 0.2160
+  Batch 10/18, Loss: 0.1901
+  Train - Loss: 0.2023, Acc: 0.7254, mIoU: 0.6329
+  Val   - Loss: 0.1954, Acc: 0.7137, mIoU: 0.5832
+  Time: 17.8s, LR: 7.20e-04
+
+Epoch 114/300
+  Batch 0/18, Loss: 0.3280
+  Batch 10/18, Loss: 0.2329
+  Train - Loss: 0.2172, Acc: 0.7061, mIoU: 0.5995
+  Val   - Loss: 0.1775, Acc: 0.7091, mIoU: 0.6281
+  Time: 18.1s, LR: 7.15e-04
+
+Epoch 115/300
+  Batch 0/18, Loss: 0.1903
+  Batch 10/18, Loss: 0.2846
+  Train - Loss: 0.2098, Acc: 0.7146, mIoU: 0.6141
+  Val   - Loss: 0.1650, Acc: 0.6955, mIoU: 0.5999
+  Time: 18.8s, LR: 7.10e-04
+
+Epoch 116/300
+  Batch 0/18, Loss: 0.1881
+  Batch 10/18, Loss: 0.2334
+  Train - Loss: 0.2129, Acc: 0.7166, mIoU: 0.6079
+  Val   - Loss: 0.1700, Acc: 0.6998, mIoU: 0.5953
+  Time: 18.0s, LR: 7.05e-04
+
+Epoch 117/300
+  Batch 0/18, Loss: 0.1907
+  Batch 10/18, Loss: 0.1863
+  Train - Loss: 0.2048, Acc: 0.7113, mIoU: 0.6090
+  Val   - Loss: 0.2659, Acc: 0.6800, mIoU: 0.5543
+  Time: 17.8s, LR: 7.00e-04
+
+Epoch 118/300
+  Batch 0/18, Loss: 0.2071
+  Batch 10/18, Loss: 0.2206
+  Train - Loss: 0.1996, Acc: 0.7186, mIoU: 0.6227
+  Val   - Loss: 0.1620, Acc: 0.7057, mIoU: 0.5941
+  Time: 17.9s, LR: 6.95e-04
+
+Epoch 119/300
+  Batch 0/18, Loss: 0.2470
+  Batch 10/18, Loss: 0.1934
+  Train - Loss: 0.2074, Acc: 0.7200, mIoU: 0.6154
+  Val   - Loss: 0.1661, Acc: 0.7147, mIoU: 0.6043
+  Time: 17.8s, LR: 6.90e-04
+
+Epoch 120/300
+  Batch 0/18, Loss: 0.2002
+  Batch 10/18, Loss: 0.1743
+  Train - Loss: 0.1950, Acc: 0.7256, mIoU: 0.6251
+  Val   - Loss: 0.1560, Acc: 0.7163, mIoU: 0.6526
+  New best mIoU: 0.6526
+  Time: 17.9s, LR: 6.85e-04
+
+Epoch 121/300
+  Batch 0/18, Loss: 0.1637
+  Batch 10/18, Loss: 0.2367
+  Train - Loss: 0.2044, Acc: 0.7200, mIoU: 0.6318
+  Val   - Loss: 0.1657, Acc: 0.7285, mIoU: 0.6411
+  Time: 17.9s, LR: 6.80e-04
+
+Epoch 122/300
+  Batch 0/18, Loss: 0.1773
+  Batch 10/18, Loss: 0.1999
+  Train - Loss: 0.2050, Acc: 0.7307, mIoU: 0.6312
+  Val   - Loss: 0.1605, Acc: 0.7263, mIoU: 0.6085
+  Time: 17.8s, LR: 6.75e-04
+
+Epoch 123/300
+  Batch 0/18, Loss: 0.1976
+  Batch 10/18, Loss: 0.1544
+  Train - Loss: 0.1896, Acc: 0.7286, mIoU: 0.6300
+  Val   - Loss: 0.1801, Acc: 0.7005, mIoU: 0.6055
+  Time: 17.8s, LR: 6.70e-04
+
+Epoch 124/300
+  Batch 0/18, Loss: 0.1729
+  Batch 10/18, Loss: 0.2058
+  Train - Loss: 0.1974, Acc: 0.7288, mIoU: 0.6261
+  Val   - Loss: 0.1954, Acc: 0.6869, mIoU: 0.5581
+  Time: 17.8s, LR: 6.65e-04
+
+Epoch 125/300
+  Batch 0/18, Loss: 0.2479
+  Batch 10/18, Loss: 0.2160
+  Train - Loss: 0.2030, Acc: 0.7303, mIoU: 0.6282
+  Val   - Loss: 0.1596, Acc: 0.7255, mIoU: 0.6241
+  Time: 17.9s, LR: 6.60e-04
+
+Epoch 126/300
+  Batch 0/18, Loss: 0.1664
+  Batch 10/18, Loss: 0.1639
+  Train - Loss: 0.2001, Acc: 0.7290, mIoU: 0.6343
+  Val   - Loss: 0.1797, Acc: 0.7069, mIoU: 0.5759
+  Time: 17.8s, LR: 6.55e-04
+
+Epoch 127/300
+  Batch 0/18, Loss: 0.2046
+  Batch 10/18, Loss: 0.1598
+  Train - Loss: 0.2052, Acc: 0.7273, mIoU: 0.6220
+  Val   - Loss: 0.1539, Acc: 0.7239, mIoU: 0.6198
+  Time: 17.8s, LR: 6.50e-04
+
+Epoch 128/300
+  Batch 0/18, Loss: 0.1880
+  Batch 10/18, Loss: 0.2747
+  Train - Loss: 0.2088, Acc: 0.7157, mIoU: 0.6115
+  Val   - Loss: 0.1696, Acc: 0.7103, mIoU: 0.6143
+  Time: 18.4s, LR: 6.45e-04
+
+Epoch 129/300
+  Batch 0/18, Loss: 0.2134
+  Batch 10/18, Loss: 0.2256
+  Train - Loss: 0.2007, Acc: 0.7135, mIoU: 0.6251
+  Val   - Loss: 0.2092, Acc: 0.6526, mIoU: 0.5492
+  Time: 17.8s, LR: 6.39e-04
+
+Epoch 130/300
+  Batch 0/18, Loss: 0.1875
+  Batch 10/18, Loss: 0.2105
+  Train - Loss: 0.1986, Acc: 0.7306, mIoU: 0.6340
+  Val   - Loss: 0.1685, Acc: 0.7356, mIoU: 0.6183
+  Time: 17.8s, LR: 6.34e-04
+
+Epoch 131/300
+  Batch 0/18, Loss: 0.1704
+  Batch 10/18, Loss: 0.1929
+  Train - Loss: 0.2053, Acc: 0.7315, mIoU: 0.6282
+  Val   - Loss: 0.1739, Acc: 0.7331, mIoU: 0.6257
+  Time: 17.8s, LR: 6.29e-04
+
+Epoch 132/300
+  Batch 0/18, Loss: 0.1624
+  Batch 10/18, Loss: 0.1675
+  Train - Loss: 0.1961, Acc: 0.7364, mIoU: 0.6471
+  Val   - Loss: 0.1647, Acc: 0.6861, mIoU: 0.6006
+  Time: 18.7s, LR: 6.24e-04
+
+Epoch 133/300
+  Batch 0/18, Loss: 0.2002
+  Batch 10/18, Loss: 0.2261
+  Train - Loss: 0.1922, Acc: 0.7294, mIoU: 0.6431
+  Val   - Loss: 0.1552, Acc: 0.7129, mIoU: 0.6209
+  Time: 17.7s, LR: 6.18e-04
+
+Epoch 134/300
+  Batch 0/18, Loss: 0.1558
+  Batch 10/18, Loss: 0.1667
+  Train - Loss: 0.1857, Acc: 0.7300, mIoU: 0.6316
+  Val   - Loss: 0.1703, Acc: 0.7640, mIoU: 0.6685
+  New best mIoU: 0.6685
+  Time: 18.2s, LR: 6.13e-04
+
+Epoch 135/300
+  Batch 0/18, Loss: 0.1626
+  Batch 10/18, Loss: 0.2085
+  Train - Loss: 0.1971, Acc: 0.7324, mIoU: 0.6349
+  Val   - Loss: 0.1620, Acc: 0.7148, mIoU: 0.6180
+  Time: 17.8s, LR: 6.08e-04
+
+Epoch 136/300
+  Batch 0/18, Loss: 0.2088
+  Batch 10/18, Loss: 0.1855
+  Train - Loss: 0.1975, Acc: 0.7292, mIoU: 0.6379
+  Val   - Loss: 0.1382, Acc: 0.7539, mIoU: 0.6539
+  Time: 18.0s, LR: 6.03e-04
+
+Epoch 137/300
+  Batch 0/18, Loss: 0.2062
+  Batch 10/18, Loss: 0.1720
+  Train - Loss: 0.1891, Acc: 0.7352, mIoU: 0.6374
+  Val   - Loss: 0.1591, Acc: 0.7382, mIoU: 0.6458
+  Time: 17.6s, LR: 5.97e-04
+
+Epoch 138/300
+  Batch 0/18, Loss: 0.2390
+  Batch 10/18, Loss: 0.1667
+  Train - Loss: 0.1863, Acc: 0.7335, mIoU: 0.6338
+  Val   - Loss: 0.1576, Acc: 0.7261, mIoU: 0.6081
+  Time: 17.8s, LR: 5.92e-04
+
+Epoch 139/300
+  Batch 0/18, Loss: 0.1705
+  Batch 10/18, Loss: 0.1679
+  Train - Loss: 0.1964, Acc: 0.7337, mIoU: 0.6355
+  Val   - Loss: 0.1677, Acc: 0.7444, mIoU: 0.6446
+  Time: 17.8s, LR: 5.87e-04
+
+Epoch 140/300
+  Batch 0/18, Loss: 0.2061
+  Batch 10/18, Loss: 0.1561
+  Train - Loss: 0.1859, Acc: 0.7390, mIoU: 0.6511
+  Val   - Loss: 0.1586, Acc: 0.7510, mIoU: 0.5947
+  Time: 17.9s, LR: 5.81e-04
+
+Epoch 141/300
+  Batch 0/18, Loss: 0.1671
+  Batch 10/18, Loss: 0.1769
+  Train - Loss: 0.1803, Acc: 0.7471, mIoU: 0.6556
+  Val   - Loss: 0.1803, Acc: 0.7003, mIoU: 0.5426
+  Time: 18.0s, LR: 5.76e-04
+
+Epoch 142/300
+  Batch 0/18, Loss: 0.1978
+  Batch 10/18, Loss: 0.2093
+  Train - Loss: 0.1969, Acc: 0.7284, mIoU: 0.6210
+  Val   - Loss: 0.1950, Acc: 0.7131, mIoU: 0.5782
+  Time: 17.7s, LR: 5.71e-04
+
+Epoch 143/300
+  Batch 0/18, Loss: 0.2057
+  Batch 10/18, Loss: 0.1503
+  Train - Loss: 0.1922, Acc: 0.7343, mIoU: 0.6437
+  Val   - Loss: 0.1781, Acc: 0.7318, mIoU: 0.5683
+  Time: 18.8s, LR: 5.65e-04
+
+Epoch 144/300
+  Batch 0/18, Loss: 0.1617
+  Batch 10/18, Loss: 0.1789
+  Train - Loss: 0.1895, Acc: 0.7407, mIoU: 0.6501
+  Val   - Loss: 0.1643, Acc: 0.7214, mIoU: 0.6163
+  Time: 18.7s, LR: 5.60e-04
+
+Epoch 145/300
+  Batch 0/18, Loss: 0.1702
+  Batch 10/18, Loss: 0.1694
+  Train - Loss: 0.1831, Acc: 0.7518, mIoU: 0.6509
+  Val   - Loss: 0.1751, Acc: 0.7234, mIoU: 0.6047
+  Time: 17.8s, LR: 5.55e-04
+
+Epoch 146/300
+  Batch 0/18, Loss: 0.1634
+  Batch 10/18, Loss: 0.1518
+  Train - Loss: 0.1924, Acc: 0.7322, mIoU: 0.6398
+  Val   - Loss: 0.1520, Acc: 0.7266, mIoU: 0.6275
+  Time: 17.8s, LR: 5.49e-04
+
+Epoch 147/300
+  Batch 0/18, Loss: 0.1470
+  Batch 10/18, Loss: 0.2360
+  Train - Loss: 0.1881, Acc: 0.7348, mIoU: 0.6514
+  Val   - Loss: 0.1754, Acc: 0.7450, mIoU: 0.6223
+  Time: 19.2s, LR: 5.44e-04
+
+Epoch 148/300
+  Batch 0/18, Loss: 0.1794
+  Batch 10/18, Loss: 0.1625
+  Train - Loss: 0.1966, Acc: 0.7423, mIoU: 0.6463
+  Val   - Loss: 0.1768, Acc: 0.7151, mIoU: 0.6180
+  Time: 18.4s, LR: 5.38e-04
+
+Epoch 149/300
+  Batch 0/18, Loss: 0.1567
+  Batch 10/18, Loss: 0.1743
+  Train - Loss: 0.1825, Acc: 0.7437, mIoU: 0.6547
+  Val   - Loss: 0.1383, Acc: 0.7695, mIoU: 0.6708
+  New best mIoU: 0.6708
+  Time: 18.1s, LR: 5.33e-04
+
+Epoch 150/300
+  Batch 0/18, Loss: 0.1866
+  Batch 10/18, Loss: 0.2318
+  Train - Loss: 0.1734, Acc: 0.7544, mIoU: 0.6675
+  Val   - Loss: 0.1403, Acc: 0.7643, mIoU: 0.6783
+  New best mIoU: 0.6783
+  Time: 17.7s, LR: 5.28e-04
+
+Epoch 151/300
+  Batch 0/18, Loss: 0.1852
+  Batch 10/18, Loss: 0.2131
+  Train - Loss: 0.1755, Acc: 0.7515, mIoU: 0.6665
+  Val   - Loss: 0.1407, Acc: 0.7535, mIoU: 0.6671
+  Time: 17.7s, LR: 5.22e-04
+
+Epoch 152/300
+  Batch 0/18, Loss: 0.1617
+  Batch 10/18, Loss: 0.2089
+  Train - Loss: 0.1918, Acc: 0.7541, mIoU: 0.6535
+  Val   - Loss: 0.1501, Acc: 0.7326, mIoU: 0.6300
+  Time: 18.8s, LR: 5.17e-04
+
+Epoch 153/300
+  Batch 0/18, Loss: 0.1799
+  Batch 10/18, Loss: 0.1945
+  Train - Loss: 0.1860, Acc: 0.7427, mIoU: 0.6496
+  Val   - Loss: 0.1620, Acc: 0.7509, mIoU: 0.6487
+  Time: 18.8s, LR: 5.11e-04
+
+Epoch 154/300
+  Batch 0/18, Loss: 0.1436
+  Batch 10/18, Loss: 0.1763
+  Train - Loss: 0.1910, Acc: 0.7574, mIoU: 0.6552
+  Val   - Loss: 0.1788, Acc: 0.6980, mIoU: 0.5539
+  Time: 18.4s, LR: 5.06e-04
+
+Epoch 155/300
+  Batch 0/18, Loss: 0.1758
+  Batch 10/18, Loss: 0.1682
+  Train - Loss: 0.1784, Acc: 0.7474, mIoU: 0.6629
+  Val   - Loss: 0.1735, Acc: 0.7318, mIoU: 0.5801
+  Time: 18.0s, LR: 5.01e-04
+
+Epoch 156/300
+  Batch 0/18, Loss: 0.1395
+  Batch 10/18, Loss: 0.1844
+  Train - Loss: 0.1703, Acc: 0.7577, mIoU: 0.6681
+  Val   - Loss: 0.1756, Acc: 0.7354, mIoU: 0.6276
+  Time: 21.4s, LR: 4.95e-04
+
+Epoch 157/300
+  Batch 0/18, Loss: 0.1886
+  Batch 10/18, Loss: 0.1486
+  Train - Loss: 0.1775, Acc: 0.7450, mIoU: 0.6606
+  Val   - Loss: 0.1526, Acc: 0.7389, mIoU: 0.6460
+  Time: 17.6s, LR: 4.90e-04
+
+Epoch 158/300
+  Batch 0/18, Loss: 0.1674
+  Batch 10/18, Loss: 0.1630
+  Train - Loss: 0.1881, Acc: 0.7478, mIoU: 0.6546
+  Val   - Loss: 0.1609, Acc: 0.7297, mIoU: 0.6171
+  Time: 20.9s, LR: 4.84e-04
+
+Epoch 159/300
+  Batch 0/18, Loss: 0.1564
+  Batch 10/18, Loss: 0.1590
+  Train - Loss: 0.1734, Acc: 0.7587, mIoU: 0.6647
+  Val   - Loss: 0.1911, Acc: 0.7173, mIoU: 0.5978
+  Time: 17.7s, LR: 4.79e-04
+
+Epoch 160/300
+  Batch 0/18, Loss: 0.1747
+  Batch 10/18, Loss: 0.2125
+  Train - Loss: 0.1761, Acc: 0.7528, mIoU: 0.6662
+  Val   - Loss: 0.1710, Acc: 0.7368, mIoU: 0.6317
+  Time: 17.7s, LR: 4.73e-04
+
+Epoch 161/300
+  Batch 0/18, Loss: 0.1571
+  Batch 10/18, Loss: 0.1448
+  Train - Loss: 0.1783, Acc: 0.7560, mIoU: 0.6706
+  Val   - Loss: 0.1569, Acc: 0.7405, mIoU: 0.6235
+  Time: 18.4s, LR: 4.68e-04
+
+Epoch 162/300
+  Batch 0/18, Loss: 0.1801
+  Batch 10/18, Loss: 0.1683
+  Train - Loss: 0.1901, Acc: 0.7498, mIoU: 0.6423
+  Val   - Loss: 0.1768, Acc: 0.7517, mIoU: 0.6171
+  Time: 18.2s, LR: 4.63e-04
+
+Epoch 163/300
+  Batch 0/18, Loss: 0.1815
+  Batch 10/18, Loss: 0.2462
+  Train - Loss: 0.1828, Acc: 0.7468, mIoU: 0.6577
+  Val   - Loss: 0.1934, Acc: 0.7451, mIoU: 0.5555
+  Time: 18.1s, LR: 4.57e-04
+
+Epoch 164/300
+  Batch 0/18, Loss: 0.1764
+  Batch 10/18, Loss: 0.1551
+  Train - Loss: 0.1803, Acc: 0.7539, mIoU: 0.6643
+  Val   - Loss: 0.1731, Acc: 0.7381, mIoU: 0.6036
+  Time: 18.2s, LR: 4.52e-04
+
+Epoch 165/300
+  Batch 0/18, Loss: 0.1782
+  Batch 10/18, Loss: 0.1798
+  Train - Loss: 0.1755, Acc: 0.7577, mIoU: 0.6626
+  Val   - Loss: 0.1376, Acc: 0.7460, mIoU: 0.6665
+  Time: 18.2s, LR: 4.46e-04
+
+Epoch 166/300
+  Batch 0/18, Loss: 0.2533
+  Batch 10/18, Loss: 0.1604
+  Train - Loss: 0.1730, Acc: 0.7472, mIoU: 0.6579
+  Val   - Loss: 0.1629, Acc: 0.7467, mIoU: 0.6417
+  Time: 18.0s, LR: 4.41e-04
+
+Epoch 167/300
+  Batch 0/18, Loss: 0.1607
+  Batch 10/18, Loss: 0.1613
+  Train - Loss: 0.1764, Acc: 0.7624, mIoU: 0.6680
+  Val   - Loss: 0.1529, Acc: 0.7554, mIoU: 0.6006
+  Time: 18.0s, LR: 4.36e-04
+
+Epoch 168/300
+  Batch 0/18, Loss: 0.1490
+  Batch 10/18, Loss: 0.1698
+  Train - Loss: 0.1754, Acc: 0.7568, mIoU: 0.6607
+  Val   - Loss: 0.1787, Acc: 0.7430, mIoU: 0.5811
+  Time: 18.1s, LR: 4.30e-04
+
+Epoch 169/300
+  Batch 0/18, Loss: 0.1920
+  Batch 10/18, Loss: 0.1522
+  Train - Loss: 0.1788, Acc: 0.7478, mIoU: 0.6600
+  Val   - Loss: 0.1769, Acc: 0.7055, mIoU: 0.6132
+  Time: 17.7s, LR: 4.25e-04
+
+Epoch 170/300
+  Batch 0/18, Loss: 0.1691
+  Batch 10/18, Loss: 0.1718
+  Train - Loss: 0.1811, Acc: 0.7591, mIoU: 0.6692
+  Val   - Loss: 0.1316, Acc: 0.7607, mIoU: 0.6996
+  New best mIoU: 0.6996
+  Time: 18.8s, LR: 4.20e-04
+
+Epoch 171/300
+  Batch 0/18, Loss: 0.1994
+  Batch 10/18, Loss: 0.1317
+  Train - Loss: 0.1868, Acc: 0.7681, mIoU: 0.6636
+  Val   - Loss: 0.1439, Acc: 0.7646, mIoU: 0.6520
+  Time: 17.8s, LR: 4.14e-04
+
+Epoch 172/300
+  Batch 0/18, Loss: 0.2399
+  Batch 10/18, Loss: 0.1584
+  Train - Loss: 0.1892, Acc: 0.7447, mIoU: 0.6395
+  Val   - Loss: 0.1386, Acc: 0.7490, mIoU: 0.6075
+  Time: 17.7s, LR: 4.09e-04
+
+Epoch 173/300
+  Batch 0/18, Loss: 0.1891
+  Batch 10/18, Loss: 0.1949
+  Train - Loss: 0.1749, Acc: 0.7487, mIoU: 0.6645
+  Val   - Loss: 0.1656, Acc: 0.7302, mIoU: 0.6008
+  Time: 17.7s, LR: 4.04e-04
+
+Epoch 174/300
+  Batch 0/18, Loss: 0.1729
+  Batch 10/18, Loss: 0.2439
+  Train - Loss: 0.1755, Acc: 0.7577, mIoU: 0.6723
+  Val   - Loss: 0.1795, Acc: 0.7294, mIoU: 0.5709
+  Time: 17.6s, LR: 3.98e-04
+
+Epoch 175/300
+  Batch 0/18, Loss: 0.2318
+  Batch 10/18, Loss: 0.1422
+  Train - Loss: 0.1691, Acc: 0.7702, mIoU: 0.6748
+  Val   - Loss: 0.1519, Acc: 0.7547, mIoU: 0.6423
+  Time: 17.8s, LR: 3.93e-04
+
+Epoch 176/300
+  Batch 0/18, Loss: 0.1684
+  Batch 10/18, Loss: 0.1664
+  Train - Loss: 0.1709, Acc: 0.7605, mIoU: 0.6737
+  Val   - Loss: 0.1488, Acc: 0.7499, mIoU: 0.6463
+  Time: 18.5s, LR: 3.88e-04
+
+Epoch 177/300
+  Batch 0/18, Loss: 0.1844
+  Batch 10/18, Loss: 0.1549
+  Train - Loss: 0.1675, Acc: 0.7588, mIoU: 0.6763
+  Val   - Loss: 0.1556, Acc: 0.7687, mIoU: 0.6656
+  Time: 17.8s, LR: 3.83e-04
+
+Epoch 178/300
+  Batch 0/18, Loss: 0.1733
+  Batch 10/18, Loss: 0.2056
+  Train - Loss: 0.1760, Acc: 0.7621, mIoU: 0.6676
+  Val   - Loss: 0.1621, Acc: 0.7315, mIoU: 0.6390
+  Time: 17.7s, LR: 3.77e-04
+
+Epoch 179/300
+  Batch 0/18, Loss: 0.1427
+  Batch 10/18, Loss: 0.2267
+  Train - Loss: 0.1688, Acc: 0.7745, mIoU: 0.6815
+  Val   - Loss: 0.1582, Acc: 0.7352, mIoU: 0.6218
+  Time: 18.2s, LR: 3.72e-04
+
+Epoch 180/300
+  Batch 0/18, Loss: 0.1730
+  Batch 10/18, Loss: 0.1801
+  Train - Loss: 0.1732, Acc: 0.7539, mIoU: 0.6605
+  Val   - Loss: 0.1562, Acc: 0.7288, mIoU: 0.6481
+  Time: 17.9s, LR: 3.67e-04
+
+Epoch 181/300
+  Batch 0/18, Loss: 0.1439
+  Batch 10/18, Loss: 0.2021
+  Train - Loss: 0.1692, Acc: 0.7582, mIoU: 0.6707
+  Val   - Loss: 0.1348, Acc: 0.7629, mIoU: 0.6478
+  Time: 18.0s, LR: 3.62e-04
+
+Epoch 182/300
+  Batch 0/18, Loss: 0.2040
+  Batch 10/18, Loss: 0.1756
+  Train - Loss: 0.1828, Acc: 0.7445, mIoU: 0.6590
+  Val   - Loss: 0.1439, Acc: 0.7524, mIoU: 0.6252
+  Time: 17.8s, LR: 3.56e-04
+
+Epoch 183/300
+  Batch 0/18, Loss: 0.1839
+  Batch 10/18, Loss: 0.1561
+  Train - Loss: 0.1668, Acc: 0.7685, mIoU: 0.6790
+  Val   - Loss: 0.1473, Acc: 0.7519, mIoU: 0.6435
+  Time: 17.9s, LR: 3.51e-04
+
+Epoch 184/300
+  Batch 0/18, Loss: 0.1739
+  Batch 10/18, Loss: 0.1864
+  Train - Loss: 0.1634, Acc: 0.7639, mIoU: 0.6827
+  Val   - Loss: 0.1354, Acc: 0.7600, mIoU: 0.6630
+  Time: 18.0s, LR: 3.46e-04
+
+Epoch 185/300
+  Batch 0/18, Loss: 0.1481
+  Batch 10/18, Loss: 0.1642
+  Train - Loss: 0.1602, Acc: 0.7702, mIoU: 0.6808
+  Val   - Loss: 0.1363, Acc: 0.7676, mIoU: 0.6776
+  Time: 17.8s, LR: 3.41e-04
+
+Epoch 186/300
+  Batch 0/18, Loss: 0.1526
+  Batch 10/18, Loss: 0.1656
+  Train - Loss: 0.1644, Acc: 0.7689, mIoU: 0.6790
+  Val   - Loss: 0.1522, Acc: 0.7763, mIoU: 0.6692
+  Time: 18.1s, LR: 3.36e-04
+
+Epoch 187/300
+  Batch 0/18, Loss: 0.1840
+  Batch 10/18, Loss: 0.1563
+  Train - Loss: 0.1680, Acc: 0.7629, mIoU: 0.6682
+  Val   - Loss: 0.1526, Acc: 0.7260, mIoU: 0.6091
+  Time: 17.9s, LR: 3.31e-04
+
+Epoch 188/300
+  Batch 0/18, Loss: 0.1955
+  Batch 10/18, Loss: 0.1545
+  Train - Loss: 0.1683, Acc: 0.7689, mIoU: 0.6793
+  Val   - Loss: 0.1404, Acc: 0.7417, mIoU: 0.6558
+  Time: 19.3s, LR: 3.26e-04
+
+Epoch 189/300
+  Batch 0/18, Loss: 0.1577
+  Batch 10/18, Loss: 0.1585
+  Train - Loss: 0.1626, Acc: 0.7706, mIoU: 0.6789
+  Val   - Loss: 0.1523, Acc: 0.7575, mIoU: 0.6535
+  Time: 18.4s, LR: 3.21e-04
+
+Epoch 190/300
+  Batch 0/18, Loss: 0.1915
+  Batch 10/18, Loss: 0.1684
+  Train - Loss: 0.1703, Acc: 0.7640, mIoU: 0.6771
+  Val   - Loss: 0.1864, Acc: 0.7527, mIoU: 0.6016
+  Time: 17.7s, LR: 3.16e-04
+
+Epoch 191/300
+  Batch 0/18, Loss: 0.1985
+  Batch 10/18, Loss: 0.1932
+  Train - Loss: 0.1812, Acc: 0.7609, mIoU: 0.6661
+  Val   - Loss: 0.1524, Acc: 0.7448, mIoU: 0.6548
+  Time: 17.8s, LR: 3.11e-04
+
+Epoch 192/300
+  Batch 0/18, Loss: 0.1627
+  Batch 10/18, Loss: 0.1830
+  Train - Loss: 0.1736, Acc: 0.7606, mIoU: 0.6716
+  Val   - Loss: 0.1777, Acc: 0.7276, mIoU: 0.6066
+  Time: 17.8s, LR: 3.06e-04
+
+Epoch 193/300
+  Batch 0/18, Loss: 0.1496
+  Batch 10/18, Loss: 0.2256
+  Train - Loss: 0.1754, Acc: 0.7710, mIoU: 0.6717
+  Val   - Loss: 0.1494, Acc: 0.7669, mIoU: 0.6417
+  Time: 17.8s, LR: 3.01e-04
+
+Epoch 194/300
+  Batch 0/18, Loss: 0.2173
+  Batch 10/18, Loss: 0.1916
+  Train - Loss: 0.1839, Acc: 0.7676, mIoU: 0.6683
+  Val   - Loss: 0.1584, Acc: 0.7371, mIoU: 0.6070
+  Time: 18.4s, LR: 2.96e-04
+
+Epoch 195/300
+  Batch 0/18, Loss: 0.1462
+  Batch 10/18, Loss: 0.1579
+  Train - Loss: 0.1678, Acc: 0.7736, mIoU: 0.6849
+  Val   - Loss: 0.1434, Acc: 0.7613, mIoU: 0.6508
+  Time: 19.1s, LR: 2.91e-04
+
+Epoch 196/300
+  Batch 0/18, Loss: 0.1455
+  Batch 10/18, Loss: 0.1484
+  Train - Loss: 0.1698, Acc: 0.7714, mIoU: 0.6828
+  Val   - Loss: 0.1466, Acc: 0.7544, mIoU: 0.6587
+  Time: 18.0s, LR: 2.86e-04
+
+Epoch 197/300
+  Batch 0/18, Loss: 0.1393
+  Batch 10/18, Loss: 0.2003
+  Train - Loss: 0.1628, Acc: 0.7637, mIoU: 0.6745
+  Val   - Loss: 0.1410, Acc: 0.7495, mIoU: 0.6639
+  Time: 18.1s, LR: 2.81e-04
+
+Epoch 198/300
+  Batch 0/18, Loss: 0.1325
+  Batch 10/18, Loss: 0.2625
+  Train - Loss: 0.1750, Acc: 0.7684, mIoU: 0.6803
+  Val   - Loss: 0.1476, Acc: 0.7438, mIoU: 0.6379
+  Time: 20.1s, LR: 2.76e-04
+
+Epoch 199/300
+  Batch 0/18, Loss: 0.1949
+  Batch 10/18, Loss: 0.1467
+  Train - Loss: 0.1684, Acc: 0.7685, mIoU: 0.6688
+  Val   - Loss: 0.1331, Acc: 0.7638, mIoU: 0.6856
+  Time: 17.7s, LR: 2.71e-04
+
+Epoch 200/300
+  Batch 0/18, Loss: 0.1513
+  Batch 10/18, Loss: 0.1850
+  Train - Loss: 0.1656, Acc: 0.7704, mIoU: 0.6759
+  Val   - Loss: 0.1474, Acc: 0.7452, mIoU: 0.6608
+  Time: 21.1s, LR: 2.67e-04
+
+Epoch 201/300
+  Batch 0/18, Loss: 0.1355
+  Batch 10/18, Loss: 0.2147
+  Train - Loss: 0.1697, Acc: 0.7745, mIoU: 0.6892
+  Val   - Loss: 0.1496, Acc: 0.7651, mIoU: 0.6648
+  Time: 21.4s, LR: 2.62e-04
+
+Epoch 202/300
+  Batch 0/18, Loss: 0.1743
+  Batch 10/18, Loss: 0.1592
+  Train - Loss: 0.1686, Acc: 0.7632, mIoU: 0.6738
+  Val   - Loss: 0.1448, Acc: 0.7551, mIoU: 0.6518
+  Time: 21.2s, LR: 2.57e-04
+
+Epoch 203/300
+  Batch 0/18, Loss: 0.1544
+  Batch 10/18, Loss: 0.1947
+  Train - Loss: 0.1617, Acc: 0.7702, mIoU: 0.6894
+  Val   - Loss: 0.1335, Acc: 0.7570, mIoU: 0.6696
+  Time: 17.5s, LR: 2.52e-04
+
+Epoch 204/300
+  Batch 0/18, Loss: 0.2154
+  Batch 10/18, Loss: 0.1284
+  Train - Loss: 0.1642, Acc: 0.7749, mIoU: 0.6823
+  Val   - Loss: 0.1447, Acc: 0.7653, mIoU: 0.6759
+  Time: 17.9s, LR: 2.48e-04
+
+Epoch 205/300
+  Batch 0/18, Loss: 0.1490
+  Batch 10/18, Loss: 0.1836
+  Train - Loss: 0.1683, Acc: 0.7782, mIoU: 0.6861
+  Val   - Loss: 0.1439, Acc: 0.7339, mIoU: 0.6300
+  Time: 17.8s, LR: 2.43e-04
+
+Epoch 206/300
+  Batch 0/18, Loss: 0.1474
+  Batch 10/18, Loss: 0.1305
+  Train - Loss: 0.1652, Acc: 0.7741, mIoU: 0.6814
+  Val   - Loss: 0.1403, Acc: 0.7725, mIoU: 0.6615
+  Time: 17.7s, LR: 2.38e-04
+
+Epoch 207/300
+  Batch 0/18, Loss: 0.1446
+  Batch 10/18, Loss: 0.1950
+  Train - Loss: 0.1648, Acc: 0.7765, mIoU: 0.6884
+  Val   - Loss: 0.1467, Acc: 0.7628, mIoU: 0.6627
+  Time: 18.0s, LR: 2.34e-04
+
+Epoch 208/300
+  Batch 0/18, Loss: 0.1912
+  Batch 10/18, Loss: 0.1799
+  Train - Loss: 0.1670, Acc: 0.7733, mIoU: 0.6798
+  Val   - Loss: 0.1620, Acc: 0.7484, mIoU: 0.6108
+  Time: 18.8s, LR: 2.29e-04
+
+Epoch 209/300
+  Batch 0/18, Loss: 0.1797
+  Batch 10/18, Loss: 0.1700
+  Train - Loss: 0.1649, Acc: 0.7767, mIoU: 0.6827
+  Val   - Loss: 0.1423, Acc: 0.7793, mIoU: 0.6451
+  Time: 20.4s, LR: 2.25e-04
+
+Epoch 210/300
+  Batch 0/18, Loss: 0.1484
+  Batch 10/18, Loss: 0.1375
+  Train - Loss: 0.1621, Acc: 0.7806, mIoU: 0.6941
+  Val   - Loss: 0.1353, Acc: 0.7732, mIoU: 0.6709
+  Time: 20.9s, LR: 2.20e-04
+
+Epoch 211/300
+  Batch 0/18, Loss: 0.1702
+  Batch 10/18, Loss: 0.2009
+  Train - Loss: 0.1733, Acc: 0.7733, mIoU: 0.6785
+  Val   - Loss: 0.1399, Acc: 0.7785, mIoU: 0.6894
+  Time: 17.7s, LR: 2.16e-04
+
+Epoch 212/300
+  Batch 0/18, Loss: 0.1614
+  Batch 10/18, Loss: 0.1576
+  Train - Loss: 0.1626, Acc: 0.7740, mIoU: 0.6775
+  Val   - Loss: 0.1358, Acc: 0.7767, mIoU: 0.6732
+  Time: 17.8s, LR: 2.11e-04
+
+Epoch 213/300
+  Batch 0/18, Loss: 0.1445
+  Batch 10/18, Loss: 0.1809
+  Train - Loss: 0.1533, Acc: 0.7815, mIoU: 0.6922
+  Val   - Loss: 0.1383, Acc: 0.7832, mIoU: 0.6910
+  Time: 17.8s, LR: 2.07e-04
+
+Epoch 214/300
+  Batch 0/18, Loss: 0.1859
+  Batch 10/18, Loss: 0.1369
+  Train - Loss: 0.1590, Acc: 0.7739, mIoU: 0.6909
+  Val   - Loss: 0.1519, Acc: 0.7599, mIoU: 0.6474
+  Time: 20.7s, LR: 2.03e-04
+
+Epoch 215/300
+  Batch 0/18, Loss: 0.1839
+  Batch 10/18, Loss: 0.1510
+  Train - Loss: 0.1599, Acc: 0.7722, mIoU: 0.6879
+  Val   - Loss: 0.1418, Acc: 0.7647, mIoU: 0.6639
+  Time: 17.6s, LR: 1.98e-04
+
+Epoch 216/300
+  Batch 0/18, Loss: 0.1951
+  Batch 10/18, Loss: 0.1763
+  Train - Loss: 0.1707, Acc: 0.7716, mIoU: 0.6887
+  Val   - Loss: 0.1435, Acc: 0.7528, mIoU: 0.6575
+  Time: 17.7s, LR: 1.94e-04
+
+Epoch 217/300
+  Batch 0/18, Loss: 0.1629
+  Batch 10/18, Loss: 0.1445
+  Train - Loss: 0.1643, Acc: 0.7758, mIoU: 0.6799
+  Val   - Loss: 0.1484, Acc: 0.7632, mIoU: 0.6571
+  Time: 18.5s, LR: 1.90e-04
+
+Epoch 218/300
+  Batch 0/18, Loss: 0.1423
+  Batch 10/18, Loss: 0.1697
+  Train - Loss: 0.1718, Acc: 0.7743, mIoU: 0.6838
+  Val   - Loss: 0.1662, Acc: 0.7672, mIoU: 0.6275
+  Time: 18.3s, LR: 1.85e-04
+
+Epoch 219/300
+  Batch 0/18, Loss: 0.1468
+  Batch 10/18, Loss: 0.1608
+  Train - Loss: 0.1609, Acc: 0.7729, mIoU: 0.6849
+  Val   - Loss: 0.1396, Acc: 0.7582, mIoU: 0.6725
+  Time: 18.0s, LR: 1.81e-04
+
+Epoch 220/300
+  Batch 0/18, Loss: 0.2036
+  Batch 10/18, Loss: 0.1594
+  Train - Loss: 0.1680, Acc: 0.7772, mIoU: 0.6853
+  Val   - Loss: 0.1582, Acc: 0.7699, mIoU: 0.6537
+  Time: 17.9s, LR: 1.77e-04
+
+Epoch 221/300
+  Batch 0/18, Loss: 0.1875
+  Batch 10/18, Loss: 0.2180
+  Train - Loss: 0.1727, Acc: 0.7759, mIoU: 0.6880
+  Val   - Loss: 0.1431, Acc: 0.7682, mIoU: 0.6665
+  Time: 17.9s, LR: 1.73e-04
+
+Epoch 222/300
+  Batch 0/18, Loss: 0.1986
+  Batch 10/18, Loss: 0.1799
+  Train - Loss: 0.1665, Acc: 0.7817, mIoU: 0.6903
+  Val   - Loss: 0.1554, Acc: 0.7637, mIoU: 0.6286
+  Time: 18.7s, LR: 1.69e-04
+
+Epoch 223/300
+  Batch 0/18, Loss: 0.1730
+  Batch 10/18, Loss: 0.1510
+  Train - Loss: 0.1633, Acc: 0.7761, mIoU: 0.6918
+  Val   - Loss: 0.1485, Acc: 0.7553, mIoU: 0.6590
+  Time: 18.1s, LR: 1.65e-04
+
+Epoch 224/300
+  Batch 0/18, Loss: 0.1536
+  Batch 10/18, Loss: 0.1514
+  Train - Loss: 0.1720, Acc: 0.7769, mIoU: 0.6905
+  Val   - Loss: 0.1473, Acc: 0.7611, mIoU: 0.6632
+  Time: 17.8s, LR: 1.61e-04
+
+Epoch 225/300
+  Batch 0/18, Loss: 0.1497
+  Batch 10/18, Loss: 0.1506
+  Train - Loss: 0.1718, Acc: 0.7728, mIoU: 0.6868
+  Val   - Loss: 0.1466, Acc: 0.7577, mIoU: 0.6387
+  Time: 18.2s, LR: 1.57e-04
+
+Epoch 226/300
+  Batch 0/18, Loss: 0.2146
+  Batch 10/18, Loss: 0.1567
+  Train - Loss: 0.1693, Acc: 0.7786, mIoU: 0.6946
+  Val   - Loss: 0.1404, Acc: 0.7769, mIoU: 0.6939
+  Time: 17.9s, LR: 1.53e-04
+
+Epoch 227/300
+  Batch 0/18, Loss: 0.1355
+  Batch 10/18, Loss: 0.1504
+  Train - Loss: 0.1659, Acc: 0.7797, mIoU: 0.6945
+  Val   - Loss: 0.1505, Acc: 0.7797, mIoU: 0.7007
+  New best mIoU: 0.7007
+  Time: 18.0s, LR: 1.49e-04
+
+Epoch 228/300
+  Batch 0/18, Loss: 0.1542
+  Batch 10/18, Loss: 0.1954
+  Train - Loss: 0.1640, Acc: 0.7756, mIoU: 0.6940
+  Val   - Loss: 0.1420, Acc: 0.7649, mIoU: 0.6748
+  Time: 17.9s, LR: 1.45e-04
+
+Epoch 229/300
+  Batch 0/18, Loss: 0.1182
+  Batch 10/18, Loss: 0.1478
+  Train - Loss: 0.1549, Acc: 0.7866, mIoU: 0.7023
+  Val   - Loss: 0.1425, Acc: 0.7801, mIoU: 0.6920
+  Time: 18.1s, LR: 1.42e-04
+
+Epoch 230/300
+  Batch 0/18, Loss: 0.1398
+  Batch 10/18, Loss: 0.1642
+  Train - Loss: 0.1581, Acc: 0.7823, mIoU: 0.6925
+  Val   - Loss: 0.1478, Acc: 0.7807, mIoU: 0.6875
+  Time: 18.0s, LR: 1.38e-04
+
+Epoch 231/300
+  Batch 0/18, Loss: 0.1226
+  Batch 10/18, Loss: 0.1756
+  Train - Loss: 0.1632, Acc: 0.7855, mIoU: 0.7025
+  Val   - Loss: 0.1532, Acc: 0.7701, mIoU: 0.6601
+  Time: 17.9s, LR: 1.34e-04
+
+Epoch 232/300
+  Batch 0/18, Loss: 0.1435
+  Batch 10/18, Loss: 0.2165
+  Train - Loss: 0.1602, Acc: 0.7827, mIoU: 0.6914
+  Val   - Loss: 0.1451, Acc: 0.7749, mIoU: 0.6817
+  Time: 17.8s, LR: 1.31e-04
+
+Epoch 233/300
+  Batch 0/18, Loss: 0.1486
+  Batch 10/18, Loss: 0.1472
+  Train - Loss: 0.1527, Acc: 0.7828, mIoU: 0.7069
+  Val   - Loss: 0.1391, Acc: 0.7737, mIoU: 0.6724
+  Time: 17.7s, LR: 1.27e-04
+
+Epoch 234/300
+  Batch 0/18, Loss: 0.1656
+  Batch 10/18, Loss: 0.1593
+  Train - Loss: 0.1624, Acc: 0.7865, mIoU: 0.6996
+  Val   - Loss: 0.1461, Acc: 0.7751, mIoU: 0.6586
+  Time: 17.9s, LR: 1.23e-04
+
+Epoch 235/300
+  Batch 0/18, Loss: 0.1219
+  Batch 10/18, Loss: 0.1373
+  Train - Loss: 0.1581, Acc: 0.7860, mIoU: 0.6950
+  Val   - Loss: 0.1386, Acc: 0.7784, mIoU: 0.6816
+  Time: 17.7s, LR: 1.20e-04
+
+Epoch 236/300
+  Batch 0/18, Loss: 0.1610
+  Batch 10/18, Loss: 0.1436
+  Train - Loss: 0.1536, Acc: 0.7887, mIoU: 0.6944
+  Val   - Loss: 0.1558, Acc: 0.7579, mIoU: 0.6192
+  Time: 17.9s, LR: 1.16e-04
+
+Epoch 237/300
+  Batch 0/18, Loss: 0.1958
+  Batch 10/18, Loss: 0.1501
+  Train - Loss: 0.1604, Acc: 0.7870, mIoU: 0.6904
+  Val   - Loss: 0.1370, Acc: 0.7733, mIoU: 0.6603
+  Time: 17.8s, LR: 1.13e-04
+
+Epoch 238/300
+  Batch 0/18, Loss: 0.1737
+  Batch 10/18, Loss: 0.1524
+  Train - Loss: 0.1481, Acc: 0.7844, mIoU: 0.6982
+  Val   - Loss: 0.1406, Acc: 0.7868, mIoU: 0.6797
+  Time: 17.8s, LR: 1.09e-04
+
+Epoch 239/300
+  Batch 0/18, Loss: 0.2004
+  Batch 10/18, Loss: 0.1368
+  Train - Loss: 0.1593, Acc: 0.7800, mIoU: 0.6870
+  Val   - Loss: 0.1349, Acc: 0.7879, mIoU: 0.6916
+  Time: 17.9s, LR: 1.06e-04
+
+Epoch 240/300
+  Batch 0/18, Loss: 0.1414
+  Batch 10/18, Loss: 0.1681
+  Train - Loss: 0.1641, Acc: 0.7807, mIoU: 0.6900
+  Val   - Loss: 0.1543, Acc: 0.7852, mIoU: 0.6634
+  Time: 17.9s, LR: 1.03e-04
+
+Epoch 241/300
+  Batch 0/18, Loss: 0.1869
+  Batch 10/18, Loss: 0.1413
+  Train - Loss: 0.1540, Acc: 0.7833, mIoU: 0.6936
+  Val   - Loss: 0.1430, Acc: 0.7757, mIoU: 0.6841
+  Time: 18.7s, LR: 9.96e-05
+
+Epoch 242/300
+  Batch 0/18, Loss: 0.1299
+  Batch 10/18, Loss: 0.1925
+  Train - Loss: 0.1559, Acc: 0.7866, mIoU: 0.7023
+  Val   - Loss: 0.1483, Acc: 0.7658, mIoU: 0.6532
+  Time: 18.6s, LR: 9.64e-05
+
+Epoch 243/300
+  Batch 0/18, Loss: 0.1849
+  Batch 10/18, Loss: 0.1463
+  Train - Loss: 0.1591, Acc: 0.7893, mIoU: 0.7017
+  Val   - Loss: 0.1376, Acc: 0.7806, mIoU: 0.6617
+  Time: 18.5s, LR: 9.32e-05
+
+Epoch 244/300
+  Batch 0/18, Loss: 0.1379
+  Batch 10/18, Loss: 0.1671
+  Train - Loss: 0.1629, Acc: 0.7843, mIoU: 0.6938
+  Val   - Loss: 0.1417, Acc: 0.7751, mIoU: 0.6736
+  Time: 17.7s, LR: 9.01e-05
+
+Epoch 245/300
+  Batch 0/18, Loss: 0.2084
+  Batch 10/18, Loss: 0.1334
+  Train - Loss: 0.1616, Acc: 0.7762, mIoU: 0.6893
+  Val   - Loss: 0.1311, Acc: 0.7758, mIoU: 0.6989
+  Time: 18.0s, LR: 8.71e-05
+
+Epoch 246/300
+  Batch 0/18, Loss: 0.1413
+  Batch 10/18, Loss: 0.2105
+  Train - Loss: 0.1645, Acc: 0.7833, mIoU: 0.6956
+  Val   - Loss: 0.1321, Acc: 0.7772, mIoU: 0.6989
+  Time: 17.8s, LR: 8.41e-05
+
+Epoch 247/300
+  Batch 0/18, Loss: 0.1425
+  Batch 10/18, Loss: 0.1438
+  Train - Loss: 0.1508, Acc: 0.7913, mIoU: 0.7087
+  Val   - Loss: 0.1434, Acc: 0.7837, mIoU: 0.6861
+  Time: 17.9s, LR: 8.11e-05
+
+Epoch 248/300
+  Batch 0/18, Loss: 0.1580
+  Batch 10/18, Loss: 0.1274
+  Train - Loss: 0.1481, Acc: 0.7886, mIoU: 0.7045
+  Val   - Loss: 0.1475, Acc: 0.7693, mIoU: 0.6709
+  Time: 17.7s, LR: 7.82e-05
+
+Epoch 249/300
+  Batch 0/18, Loss: 0.1334
+  Batch 10/18, Loss: 0.1545
+  Train - Loss: 0.1533, Acc: 0.7841, mIoU: 0.6954
+  Val   - Loss: 0.1335, Acc: 0.7651, mIoU: 0.6844
+  Time: 18.5s, LR: 7.53e-05
+
+Epoch 250/300
+  Batch 0/18, Loss: 0.1975
+  Batch 10/18, Loss: 0.1207
+  Train - Loss: 0.1508, Acc: 0.7873, mIoU: 0.6928
+  Val   - Loss: 0.1406, Acc: 0.7708, mIoU: 0.6817
+  Time: 19.0s, LR: 7.25e-05
+
+Epoch 251/300
+  Batch 0/18, Loss: 0.1690
+  Batch 10/18, Loss: 0.1658
+  Train - Loss: 0.1591, Acc: 0.7929, mIoU: 0.6944
+  Val   - Loss: 0.1439, Acc: 0.7698, mIoU: 0.6857
+  Time: 18.4s, LR: 6.97e-05
+
+Epoch 252/300
+  Batch 0/18, Loss: 0.1928
+  Batch 10/18, Loss: 0.1366
+  Train - Loss: 0.1550, Acc: 0.7913, mIoU: 0.7084
+  Val   - Loss: 0.1380, Acc: 0.7696, mIoU: 0.6824
+  Time: 17.8s, LR: 6.70e-05
+
+Epoch 253/300
+  Batch 0/18, Loss: 0.1628
+  Batch 10/18, Loss: 0.1583
+  Train - Loss: 0.1577, Acc: 0.7889, mIoU: 0.6969
+  Val   - Loss: 0.1476, Acc: 0.7782, mIoU: 0.6734
+  Time: 17.9s, LR: 6.44e-05
+
+Epoch 254/300
+  Batch 0/18, Loss: 0.1474
+  Batch 10/18, Loss: 0.1743
+  Train - Loss: 0.1620, Acc: 0.7902, mIoU: 0.6970
+  Val   - Loss: 0.1505, Acc: 0.7729, mIoU: 0.6704
+  Time: 17.7s, LR: 6.17e-05
+
+Epoch 255/300
+  Batch 0/18, Loss: 0.1568
+  Batch 10/18, Loss: 0.1834
+  Train - Loss: 0.1514, Acc: 0.7798, mIoU: 0.6976
+  Val   - Loss: 0.1384, Acc: 0.7763, mIoU: 0.6945
+  Time: 17.8s, LR: 5.92e-05
+
+Epoch 256/300
+  Batch 0/18, Loss: 0.2276
+  Batch 10/18, Loss: 0.1399
+  Train - Loss: 0.1566, Acc: 0.7914, mIoU: 0.7056
+  Val   - Loss: 0.1424, Acc: 0.7791, mIoU: 0.7036
+  New best mIoU: 0.7036
+  Time: 18.9s, LR: 5.67e-05
+
+Epoch 257/300
+  Batch 0/18, Loss: 0.1779
+  Batch 10/18, Loss: 0.1416
+  Train - Loss: 0.1582, Acc: 0.7898, mIoU: 0.6997
+  Val   - Loss: 0.1336, Acc: 0.7805, mIoU: 0.6955
+  Time: 18.0s, LR: 5.42e-05
+
+Epoch 258/300
+  Batch 0/18, Loss: 0.1815
+  Batch 10/18, Loss: 0.1458
+  Train - Loss: 0.1455, Acc: 0.7918, mIoU: 0.7065
+  Val   - Loss: 0.1389, Acc: 0.7775, mIoU: 0.6905
+  Time: 17.8s, LR: 5.18e-05
+
+Epoch 259/300
+  Batch 0/18, Loss: 0.1266
+  Batch 10/18, Loss: 0.1237
+  Train - Loss: 0.1486, Acc: 0.7874, mIoU: 0.7052
+  Val   - Loss: 0.1353, Acc: 0.7794, mIoU: 0.6896
+  Time: 18.3s, LR: 4.95e-05
+
+Epoch 260/300
+  Batch 0/18, Loss: 0.1696
+  Batch 10/18, Loss: 0.1431
+  Train - Loss: 0.1598, Acc: 0.7824, mIoU: 0.6974
+  Val   - Loss: 0.1426, Acc: 0.7737, mIoU: 0.6903
+  Time: 18.1s, LR: 4.72e-05
+
+Epoch 261/300
+  Batch 0/18, Loss: 0.1831
+  Batch 10/18, Loss: 0.1308
+  Train - Loss: 0.1498, Acc: 0.7890, mIoU: 0.7047
+  Val   - Loss: 0.1318, Acc: 0.7669, mIoU: 0.6892
+  Time: 17.8s, LR: 4.49e-05
+
+Epoch 262/300
+  Batch 0/18, Loss: 0.1814
+  Batch 10/18, Loss: 0.1209
+  Train - Loss: 0.1525, Acc: 0.7866, mIoU: 0.7036
+  Val   - Loss: 0.1433, Acc: 0.7725, mIoU: 0.6700
+  Time: 18.0s, LR: 4.27e-05
+
+Epoch 263/300
+  Batch 0/18, Loss: 0.1281
+  Batch 10/18, Loss: 0.1262
+  Train - Loss: 0.1519, Acc: 0.7913, mIoU: 0.7084
+  Val   - Loss: 0.1499, Acc: 0.7705, mIoU: 0.6792
+  Time: 18.3s, LR: 4.06e-05
+
+Epoch 264/300
+  Batch 0/18, Loss: 0.1445
+  Batch 10/18, Loss: 0.1414
+  Train - Loss: 0.1521, Acc: 0.7861, mIoU: 0.6975
+  Val   - Loss: 0.1453, Acc: 0.7717, mIoU: 0.6720
+  Time: 18.9s, LR: 3.85e-05
+
+Epoch 265/300
+  Batch 0/18, Loss: 0.1496
+  Batch 10/18, Loss: 0.1507
+  Train - Loss: 0.1668, Acc: 0.7844, mIoU: 0.6931
+  Val   - Loss: 0.1404, Acc: 0.7775, mIoU: 0.6924
+  Time: 18.0s, LR: 3.65e-05
+
+Epoch 266/300
+  Batch 0/18, Loss: 0.1283
+  Batch 10/18, Loss: 0.1618
+  Train - Loss: 0.1557, Acc: 0.7900, mIoU: 0.7031
+  Val   - Loss: 0.1463, Acc: 0.7720, mIoU: 0.6751
+  Time: 18.4s, LR: 3.45e-05
+
+Epoch 267/300
+  Batch 0/18, Loss: 0.1453
+  Batch 10/18, Loss: 0.1577
+  Train - Loss: 0.1496, Acc: 0.7865, mIoU: 0.6959
+  Val   - Loss: 0.1430, Acc: 0.7741, mIoU: 0.6844
+  Time: 18.7s, LR: 3.26e-05
+
+Epoch 268/300
+  Batch 0/18, Loss: 0.1482
+  Batch 10/18, Loss: 0.1384
+  Train - Loss: 0.1561, Acc: 0.7870, mIoU: 0.6982
+  Val   - Loss: 0.1287, Acc: 0.7703, mIoU: 0.6924
+  Time: 17.8s, LR: 3.07e-05
+
+Epoch 269/300
+  Batch 0/18, Loss: 0.1402
+  Batch 10/18, Loss: 0.1293
+  Train - Loss: 0.1467, Acc: 0.7912, mIoU: 0.7116
+  Val   - Loss: 0.1404, Acc: 0.7655, mIoU: 0.6785
+  Time: 18.5s, LR: 2.89e-05
+
+Epoch 270/300
+  Batch 0/18, Loss: 0.1471
+  Batch 10/18, Loss: 0.1107
+  Train - Loss: 0.1515, Acc: 0.7920, mIoU: 0.7001
+  Val   - Loss: 0.1432, Acc: 0.7689, mIoU: 0.6801
+  Time: 19.1s, LR: 2.71e-05
+
+Epoch 271/300
+  Batch 0/18, Loss: 0.1649
+  Batch 10/18, Loss: 0.1453
+  Train - Loss: 0.1480, Acc: 0.7866, mIoU: 0.7022
+  Val   - Loss: 0.1419, Acc: 0.7691, mIoU: 0.6838
+  Time: 18.2s, LR: 2.54e-05
+
+Epoch 272/300
+  Batch 0/18, Loss: 0.1230
+  Batch 10/18, Loss: 0.1776
+  Train - Loss: 0.1557, Acc: 0.7876, mIoU: 0.7052
+  Val   - Loss: 0.1355, Acc: 0.7801, mIoU: 0.6928
+  Time: 18.6s, LR: 2.38e-05
+
+Epoch 273/300
+  Batch 0/18, Loss: 0.1418
+  Batch 10/18, Loss: 0.1155
+  Train - Loss: 0.1470, Acc: 0.7917, mIoU: 0.7087
+  Val   - Loss: 0.1336, Acc: 0.7742, mIoU: 0.6978
+  Time: 20.6s, LR: 2.22e-05
+
+Epoch 274/300
+  Batch 0/18, Loss: 0.1708
+  Batch 10/18, Loss: 0.2155
+  Train - Loss: 0.1476, Acc: 0.7796, mIoU: 0.7011
+  Val   - Loss: 0.1370, Acc: 0.7750, mIoU: 0.6962
+  Time: 21.3s, LR: 2.07e-05
+
+Epoch 275/300
+  Batch 0/18, Loss: 0.1558
+  Batch 10/18, Loss: 0.1828
+  Train - Loss: 0.1496, Acc: 0.7887, mIoU: 0.7047
+  Val   - Loss: 0.1421, Acc: 0.7769, mIoU: 0.7030
+  Time: 18.1s, LR: 1.92e-05
+
+Epoch 276/300
+  Batch 0/18, Loss: 0.1316
+  Batch 10/18, Loss: 0.1376
+  Train - Loss: 0.1501, Acc: 0.7856, mIoU: 0.7025
+  Val   - Loss: 0.1393, Acc: 0.7701, mIoU: 0.6949
+  Time: 18.4s, LR: 1.78e-05
+
+Epoch 277/300
+  Batch 0/18, Loss: 0.1614
+  Batch 10/18, Loss: 0.1941
+  Train - Loss: 0.1480, Acc: 0.7870, mIoU: 0.7070
+  Val   - Loss: 0.1325, Acc: 0.7777, mIoU: 0.7033
+  Time: 20.9s, LR: 1.64e-05
+
+Epoch 278/300
+  Batch 0/18, Loss: 0.1480
+  Batch 10/18, Loss: 0.1649
+  Train - Loss: 0.1523, Acc: 0.7874, mIoU: 0.6997
+  Val   - Loss: 0.1383, Acc: 0.7741, mIoU: 0.6903
+  Time: 20.9s, LR: 1.51e-05
+
+Epoch 279/300
+  Batch 0/18, Loss: 0.1303
+  Batch 10/18, Loss: 0.1521
+  Train - Loss: 0.1472, Acc: 0.7944, mIoU: 0.6980
+  Val   - Loss: 0.1502, Acc: 0.7750, mIoU: 0.6856
+  Time: 18.4s, LR: 1.39e-05
+
+Epoch 280/300
+  Batch 0/18, Loss: 0.1479
+  Batch 10/18, Loss: 0.1771
+  Train - Loss: 0.1466, Acc: 0.7944, mIoU: 0.7056
+  Val   - Loss: 0.1405, Acc: 0.7723, mIoU: 0.6810
+  Time: 20.9s, LR: 1.27e-05
+
+Epoch 281/300
+  Batch 0/18, Loss: 0.1551
+  Batch 10/18, Loss: 0.1757
+  Train - Loss: 0.1549, Acc: 0.7891, mIoU: 0.6966
+  Val   - Loss: 0.1342, Acc: 0.7744, mIoU: 0.7010
+  Time: 20.4s, LR: 1.15e-05
+
+Epoch 282/300
+  Batch 0/18, Loss: 0.1408
+  Batch 10/18, Loss: 0.2003
+  Train - Loss: 0.1470, Acc: 0.7855, mIoU: 0.7067
+  Val   - Loss: 0.1354, Acc: 0.7762, mIoU: 0.6907
+  Time: 19.5s, LR: 1.05e-05
+
+Epoch 283/300
+  Batch 0/18, Loss: 0.1585
+  Batch 10/18, Loss: 0.1362
+  Train - Loss: 0.1590, Acc: 0.7890, mIoU: 0.7094
+  Val   - Loss: 0.1361, Acc: 0.7744, mIoU: 0.7001
+  Time: 18.0s, LR: 9.45e-06
+
+Epoch 284/300
+  Batch 0/18, Loss: 0.2032
+  Batch 10/18, Loss: 0.2213
+  Train - Loss: 0.1562, Acc: 0.7897, mIoU: 0.7064
+  Val   - Loss: 0.1287, Acc: 0.7791, mIoU: 0.6944
+  Time: 18.7s, LR: 8.48e-06
+
+Epoch 285/300
+  Batch 0/18, Loss: 0.1340
+  Batch 10/18, Loss: 0.1192
+  Train - Loss: 0.1432, Acc: 0.7950, mIoU: 0.7091
+  Val   - Loss: 0.1413, Acc: 0.7736, mIoU: 0.6871
+  Time: 20.6s, LR: 7.58e-06
+
+Epoch 286/300
+  Batch 0/18, Loss: 0.1832
+  Batch 10/18, Loss: 0.1412
+  Train - Loss: 0.1503, Acc: 0.7955, mIoU: 0.7114
+  Val   - Loss: 0.1327, Acc: 0.7731, mIoU: 0.6833
+  Time: 18.5s, LR: 6.73e-06
+
+Epoch 287/300
+  Batch 0/18, Loss: 0.1532
+  Batch 10/18, Loss: 0.1261
+  Train - Loss: 0.1533, Acc: 0.7921, mIoU: 0.7112
+  Val   - Loss: 0.1443, Acc: 0.7733, mIoU: 0.6923
+  Time: 20.5s, LR: 5.95e-06
+
+Epoch 288/300
+  Batch 0/18, Loss: 0.1339
+  Batch 10/18, Loss: 0.1630
+  Train - Loss: 0.1476, Acc: 0.7903, mIoU: 0.7038
+  Val   - Loss: 0.1446, Acc: 0.7656, mIoU: 0.6808
+  Time: 21.1s, LR: 5.21e-06
+
+Epoch 289/300
+  Batch 0/18, Loss: 0.1283
+  Batch 10/18, Loss: 0.1352
+  Train - Loss: 0.1454, Acc: 0.7973, mIoU: 0.7117
+  Val   - Loss: 0.1361, Acc: 0.7751, mIoU: 0.6849
+  Time: 18.0s, LR: 4.54e-06
+
+Epoch 290/300
+  Batch 0/18, Loss: 0.1590
+  Batch 10/18, Loss: 0.1494
+  Train - Loss: 0.1551, Acc: 0.7876, mIoU: 0.6997
+  Val   - Loss: 0.1383, Acc: 0.7721, mIoU: 0.6870
+  Time: 18.5s, LR: 3.93e-06
+
+Epoch 291/300
+  Batch 0/18, Loss: 0.1550
+  Batch 10/18, Loss: 0.1505
+  Train - Loss: 0.1538, Acc: 0.7907, mIoU: 0.7030
+  Val   - Loss: 0.1445, Acc: 0.7764, mIoU: 0.6865
+  Time: 19.2s, LR: 3.37e-06
+
+Epoch 292/300
+  Batch 0/18, Loss: 0.1382
+  Batch 10/18, Loss: 0.1577
+  Train - Loss: 0.1537, Acc: 0.7848, mIoU: 0.7049
+  Val   - Loss: 0.1409, Acc: 0.7732, mIoU: 0.6844
+  Time: 17.9s, LR: 2.87e-06
+
+Epoch 293/300
+  Batch 0/18, Loss: 0.1323
+  Batch 10/18, Loss: 0.1406
+  Train - Loss: 0.1471, Acc: 0.7930, mIoU: 0.7090
+  Val   - Loss: 0.1400, Acc: 0.7734, mIoU: 0.6913
+  Time: 20.4s, LR: 2.44e-06
+
+Epoch 294/300
+  Batch 0/18, Loss: 0.1595
+  Batch 10/18, Loss: 0.1832
+  Train - Loss: 0.1561, Acc: 0.7906, mIoU: 0.7018
+  Val   - Loss: 0.1356, Acc: 0.7815, mIoU: 0.6906
+  Time: 20.3s, LR: 2.05e-06
+
+Epoch 295/300
+  Batch 0/18, Loss: 0.1811
+  Batch 10/18, Loss: 0.1582
+  Train - Loss: 0.1561, Acc: 0.7845, mIoU: 0.6970
+  Val   - Loss: 0.1347, Acc: 0.7768, mIoU: 0.6804
+  Time: 20.4s, LR: 1.73e-06
+
+Epoch 296/300
+  Batch 0/18, Loss: 0.1449
+  Batch 10/18, Loss: 0.1570
+  Train - Loss: 0.1505, Acc: 0.7936, mIoU: 0.7024
+  Val   - Loss: 0.1412, Acc: 0.7766, mIoU: 0.6920
+  Time: 21.0s, LR: 1.47e-06
+
+Epoch 297/300
+  Batch 0/18, Loss: 0.1454
+  Batch 10/18, Loss: 0.1577
+  Train - Loss: 0.1597, Acc: 0.7911, mIoU: 0.7055
+  Val   - Loss: 0.1368, Acc: 0.7786, mIoU: 0.6964
+  Time: 18.4s, LR: 1.26e-06
+
+Epoch 298/300
+  Batch 0/18, Loss: 0.1338
+  Batch 10/18, Loss: 0.1440
+  Train - Loss: 0.1501, Acc: 0.7936, mIoU: 0.7091
+  Val   - Loss: 0.1352, Acc: 0.7782, mIoU: 0.6961
+  Time: 18.2s, LR: 1.12e-06
+
+Epoch 299/300
+  Batch 0/18, Loss: 0.1717
+  Batch 10/18, Loss: 0.1511
+  Train - Loss: 0.1506, Acc: 0.7904, mIoU: 0.7005
+  Val   - Loss: 0.1391, Acc: 0.7775, mIoU: 0.6875
+  Time: 18.1s, LR: 1.03e-06
+
+Epoch 300/300
+  Batch 0/18, Loss: 0.1517
+  Batch 10/18, Loss: 0.1602
+  Train - Loss: 0.1502, Acc: 0.7917, mIoU: 0.7018
+  Val   - Loss: 0.1349, Acc: 0.7790, mIoU: 0.6920
+  Time: 17.8s, LR: 1.00e-06
+
+
+Training complete!
+Best mIoU: 0.7036 at epoch 256
+Model saved to: checkpoints/best.pth

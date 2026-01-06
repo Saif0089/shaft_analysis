@@ -1,0 +1,13 @@
+{
+  "num_classes": 3,
+  "class_names": [
+    "wall_copy",
+    "wall",
+    "background"
+  ],
+  "label_map": {
+    "wall_copy": 1,
+    "wall": 2,
+    "background": 0
+  }
+}

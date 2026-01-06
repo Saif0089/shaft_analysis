@@ -1,0 +1,10 @@
+{
+  "label_to_id": {
+    "wall": 0,
+    "pipe": 1
+  },
+  "id_to_label": {
+    "0": "wall",
+    "1": "pipe"
+  }
+}

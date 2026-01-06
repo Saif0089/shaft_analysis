@@ -1,0 +1,25 @@
+{
+  "num_points": 1443488,
+  "num_classes": 8,
+  "class_names": [
+    "column",
+    "guard2",
+    "guard",
+    "wall",
+    "wire",
+    "column2",
+    "pipe",
+    "background"
+  ],
+  "class_distribution": {
+    "column": 233494,
+    "guard2": 0,
+    "guard": 0,
+    "wall": 215128,
+    "wire": 994866,
+    "column2": 0,
+    "pipe": 0,
+    "background": 0
+  },
+  "mean_confidence": 0.7313966155052185
+}

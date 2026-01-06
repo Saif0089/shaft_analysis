@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Annotation Tool</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/TransformControls.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            overflow: hidden;
+        }
+        .container { display: flex; height: 100vh; }
+        .sidebar {
+            width: 340px;
+            background: #16213e;
+            padding: 12px;
+            overflow-y: auto;
+            border-right: 1px solid #0f3460;
+        }
+        .viewer { flex: 1; position: relative; }
+        #canvas { width: 100%; height: 100%; display: block; }
+
+        h1 { font-size: 1.2em; margin-bottom: 12px; color: #e94560; }
+        h2 {
+            font-size: 0.85em;
+            margin: 12px 0 8px;
+            color: white;
+            background: #e94560;
+            padding: 6px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .section {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #0f3460;
+            border-radius: 6px;
+        }
+        label {
+            display: block;
+            margin: 6px 0 3px;
+            font-size: 0.8em;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #1a1a2e;
+            border-radius: 4px;
+            background: #1a1a2e;
+            color: #eee;
+            font-size: 0.9em;
+        }
+        input[type="number"] { font-family: monospace; }
+        input:focus { outline: none; border-color: #e94560; }
+
+        button {
+            padding: 8px 12px;
+            margin: 4px 2px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: all 0.15s;
+        }
+        .btn-primary { background: #e94560; color: white; }
+        .btn-primary:hover { background: #ff6b6b; }
+        .btn-secondary { background: #0f3460; color: #eee; border: 1px solid #e94560; }
+        .btn-danger { background: #c0392b; color: white; }
+        .btn-success { background: #27ae60; color: white; }
+        .btn-full { width: 100%; margin: 5px 0; }
+
+        .transform-group {
+            background: #1a1a2e;
+            border-radius: 4px;
+            padding: 8px;
+            margin: 8px 0;
+        }
+        .transform-group h3 {
+            font-size: 0.75em;
+            color: #e94560;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .transform-row {
+            display: grid;
+            grid-template-columns: 20px 1fr 20px 1fr 20px 1fr;
+            gap: 4px;
+            align-items: center;
+            margin: 4px 0;
+        }
+        .transform-row .axis { font-size: 0.75em; font-weight: bold; text-align: center; }
+        .transform-row .axis.x { color: #e74c3c; }
+        .transform-row .axis.y { color: #2ecc71; }
+        .transform-row .axis.z { color: #3498db; }
+        .transform-row input { padding: 4px 6px; font-size: 0.8em; text-align: right; }
+
+        .bbox-list-item {
+            background: #1a1a2e;
+            padding: 8px;
+            margin: 6px 0;
+            border-radius: 4px;
+            border-left: 3px solid;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .bbox-list-item:hover { background: #252550; }
+        .bbox-list-item.selected { background: #2a2a5a; box-shadow: 0 0 0 1px #e94560; }
+        .bbox-list-item .name { font-weight: 600; font-size: 0.9em; }
+        .bbox-list-item .info { font-size: 0.75em; color: #666; margin-top: 2px; }
+
+        .color-picker { display: flex; gap: 4px; flex-wrap: wrap; margin: 6px 0; }
+        .color-option {
+            width: 22px; height: 22px; border-radius: 3px;
+            cursor: pointer; border: 2px solid transparent;
+        }
+        .color-option:hover { transform: scale(1.1); }
+        .color-option.selected { border-color: white; }
+
+        .quick-labels { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0; }
+        .quick-label {
+            padding: 4px 8px;
+            background: #1a1a2e;
+            border: 1px solid #444;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.75em;
+        }
+        .quick-label:hover { border-color: #e94560; background: #252550; }
+
+        .status { padding: 8px; border-radius: 4px; font-size: 0.8em; margin: 8px 0; border-left: 3px solid; }
+        .status.info { background: #1a3a5c; border-color: #3498db; }
+        .status.success { background: #1a4a3a; border-color: #27ae60; }
+        .status.error { background: #4a1a1a; border-color: #c0392b; }
+
+        .toolbar {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 5px;
+            z-index: 100;
+        }
+        .toolbar button { background: rgba(22, 33, 62, 0.9); border: 1px solid #0f3460; padding: 8px 12px; }
+        .toolbar button.active { background: #e94560; border-color: #e94560; }
+        .toolbar button:hover { background: #e94560; }
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 8px 0;
+            padding: 8px;
+            background: #1a1a2e;
+            border-radius: 4px;
+        }
+        .toggle-row label { margin: 0; flex: 1; }
+        .toggle {
+            width: 40px; height: 22px;
+            background: #333;
+            border-radius: 11px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .toggle.active { background: #e94560; }
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 18px; height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 2px; left: 2px;
+            transition: left 0.2s;
+        }
+        .toggle.active::after { left: 20px; }
+
+        #loadingOverlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        #loadingOverlay.show { display: flex; }
+        .loader {
+            border: 4px solid #0f3460;
+            border-top: 4px solid #e94560;
+            border-radius: 50%;
+            width: 50px; height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .help-text { font-size: 0.7em; color: #666; margin: 4px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>3D Annotation Tool</h1>
+
+            <div class="section">
+                <h2>Load Point Cloud</h2>
+                <input type="text" id="filePath" value="/home/administrator/shaft_segmentation/segmented_shaft_refined.las">
+                <button class="btn-primary btn-full" onclick="loadFromPath()">Load File</button>
+                <div class="status info" id="fileStatus">No file loaded</div>
+            </div>
+
+            <div class="section">
+                <h2>New Bounding Box</h2>
+                <label>Label</label>
+                <input type="text" id="newLabel" placeholder="Enter label name">
+                <div class="quick-labels">
+                    <span class="quick-label" onclick="setNewLabel('pipe')">pipe</span>
+                    <span class="quick-label" onclick="setNewLabel('guard')">guard</span>
+                    <span class="quick-label" onclick="setNewLabel('platform')">platform</span>
+                    <span class="quick-label" onclick="setNewLabel('wall')">wall</span>
+                    <span class="quick-label" onclick="setNewLabel('column')">column</span>
+                </div>
+                <label>Color</label>
+                <div class="color-picker" id="newColorPicker"></div>
+                <button class="btn-primary btn-full" onclick="createNewBBox()">+ Create BBox</button>
+            </div>
+
+            <div class="section" id="inspectorSection" style="display:none;">
+                <h2>Inspector</h2>
+
+                <div class="transform-group">
+                    <h3>📦 <span id="selectedName">BBox</span></h3>
+                    <label>Label</label>
+                    <input type="text" id="inspLabel" onchange="updateSelectedLabel()">
+                </div>
+
+                <div class="transform-group">
+                    <h3>📍 Position</h3>
+                    <div class="transform-row">
+                        <span class="axis x">X</span>
+                        <input type="number" id="posX" step="0.1" onchange="updateFromInspector()">
+                        <span class="axis y">Y</span>
+                        <input type="number" id="posY" step="0.1" onchange="updateFromInspector()">
+                        <span class="axis z">Z</span>
+                        <input type="number" id="posZ" step="0.1" onchange="updateFromInspector()">
+                    </div>
+                </div>
+
+                <div class="transform-group">
+                    <h3>🔄 Rotation</h3>
+                    <div class="transform-row">
+                        <span class="axis x">X</span>
+                        <input type="number" id="rotX" step="1" onchange="updateFromInspector()">
+                        <span class="axis y">Y</span>
+                        <input type="number" id="rotY" step="1" onchange="updateFromInspector()">
+                        <span class="axis z">Z</span>
+                        <input type="number" id="rotZ" step="1" onchange="updateFromInspector()">
+                    </div>
+                </div>
+
+                <div class="transform-group">
+                    <h3>📐 Size</h3>
+                    <div class="transform-row">
+                        <span class="axis x">W</span>
+                        <input type="number" id="sizeX" step="0.1" min="0.1" onchange="updateFromInspector()">
+                        <span class="axis y">D</span>
+                        <input type="number" id="sizeY" step="0.1" min="0.1" onchange="updateFromInspector()">
+                        <span class="axis z">H</span>
+                        <input type="number" id="sizeZ" step="0.1" min="0.1" onchange="updateFromInspector()">
+                    </div>
+                    <div class="toggle-row">
+                        <label>Edit Collider</label>
+                        <div class="toggle" id="editColliderToggle" onclick="toggleEditCollider()"></div>
+                    </div>
+                    <p class="help-text">When on, drag faces to resize from one side</p>
+                </div>
+
+                <div class="transform-group">
+                    <h3>🎨 Color</h3>
+                    <div class="color-picker" id="inspColorPicker"></div>
+                </div>
+
+                <button class="btn-danger btn-full" onclick="deleteSelected()">🗑️ Delete</button>
+                <button class="btn-secondary btn-full" onclick="duplicateSelected()">📋 Duplicate</button>
+                <button class="btn-secondary btn-full" onclick="focusSelected()">🎯 Focus</button>
+            </div>
+
+            <div class="section">
+                <h2>Bounding Boxes (<span id="bboxCount">0</span>)</h2>
+                <div id="bboxList"></div>
+            </div>
+
+            <div class="section">
+                <h2>Export</h2>
+                <button class="btn-primary btn-full" onclick="forceSave()">Save Annotations</button>
+                <button class="btn-success btn-full" onclick="exportPointNet()">Export for PointNet++</button>
+                <div id="exportStatus"></div>
+            </div>
+
+            <div class="section">
+                <h2>Import Previous Labels</h2>
+                <button class="btn-secondary btn-full" onclick="loadExportsList()">Load Previous Export</button>
+                <select id="exportSelect" style="display:none; margin-top:8px;" onchange="onExportSelected()">
+                    <option value="">-- Select Export --</option>
+                </select>
+                <div id="importStatus"></div>
+            </div>
+
+            <div class="section">
+                <h2>Keyboard Shortcuts</h2>
+                <p class="help-text">
+                    <strong>W / G</strong> - Move mode<br>
+                    <strong>E / R</strong> - Rotate mode<br>
+                    <strong>S</strong> - Scale mode<br>
+                    <strong>X</strong> - Toggle Local/World space<br>
+                    <strong>F</strong> - Focus on selected<br>
+                    <strong>Shift+Alt+A</strong> - Toggle visibility<br>
+                    <strong>O</strong> - Toggle selectability<br>
+                    <strong>Ctrl+D</strong> - Duplicate<br>
+                    <strong>Delete</strong> - Delete selected<br>
+                    <strong>Escape</strong> - Deselect<br>
+                    <strong>Ctrl+Z</strong> - Undo<br>
+                    <strong>Ctrl+Y</strong> - Redo
+                </p>
+                <p class="help-text" style="margin-top: 8px; border-top: 1px solid #333; padding-top: 8px;">
+                    <strong>Camera:</strong><br>
+                    <strong>Left Mouse</strong> - Orbit<br>
+                    <strong>Middle/Right Mouse</strong> - Pan<br>
+                    <strong>Scroll</strong> - Zoom<br>
+                    <strong>Right + WASD/QE</strong> - FPS fly
+                </p>
+            </div>
+        </div>
+
+        <div class="viewer">
+            <div class="toolbar">
+                <button id="btnUndo" onclick="undo()" title="Undo (Ctrl+Z)">↩ Undo</button>
+                <button id="btnRedo" onclick="redo()" title="Redo (Ctrl+Y)">↪ Redo</button>
+                <span style="border-left: 1px solid #444; margin: 0 5px;"></span>
+                <button id="btnTranslate" class="active" onclick="setMode('translate')" title="Move (W/G)">↔ Move</button>
+                <button id="btnRotate" onclick="setMode('rotate')" title="Rotate (E/R)">🔄 Rotate</button>
+                <button id="btnScale" onclick="setMode('scale')" title="Scale (S)">⤢ Scale</button>
+                <span style="border-left: 1px solid #444; margin: 0 5px;"></span>
+                <button id="btnSpace" onclick="toggleSpace()" title="Toggle Local/World (X)">🌍 World</button>
+            </div>
+            <canvas id="canvas"></canvas>
+            <div id="loadingOverlay"><div class="loader"></div></div>
+        </div>
+    </div>
+
+    <script>
+        let scene, camera, renderer, controls, transformControls;
+        let pointCloud = null;
+        let boundingBoxes = [];
+        let selectedBox = null;
+        let raycaster, mouse;
+        let editColliderMode = false;
+        let faceHandles = [];
+        let isLocalSpace = false;  // Unity-style local/world toggle
+
+        // Unity-style camera control state
+        let altKeyDown = false;
+        let rightMouseDown = false;
+        let middleMouseDown = false;
+        let fpsMode = false;
+        let lastMouseX = 0, lastMouseY = 0;
+        let keysPressed = { w: false, a: false, s: false, d: false, q: false, e: false };
+        const FPS_MOVE_SPEED = 0.15;
+        const FPS_LOOK_SPEED = 0.003;
+
+        // Undo/Redo system
+        let undoStack = [];
+        let redoStack = [];
+        const MAX_HISTORY = 50;
+        let isUndoRedoAction = false;
+
+        const COLORS = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c', '#e91e63', '#00bcd4'];
+        let selectedNewColor = COLORS[0];
+
+        function init() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1a1a2e);
+
+            camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
+            camera.position.set(10, 10, 10);
+
+            const canvas = document.getElementById('canvas');
+            renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+            updateRendererSize();
+
+            // Standard orbit controls - simple and reliable
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.1;
+            controls.screenSpacePanning = true;
+            controls.mouseButtons = {
+                LEFT: THREE.MOUSE.ROTATE,
+                MIDDLE: THREE.MOUSE.PAN,
+                RIGHT: THREE.MOUSE.PAN
+            };
+            controls.zoomSpeed = 1.2;
+            controls.rotateSpeed = 0.8;
+            controls.panSpeed = 1.0;
+
+            transformControls = new THREE.TransformControls(camera, renderer.domElement);
+            transformControls.setSpace('world');
+            transformControls.setSize(1.0);
+            transformControls.addEventListener('dragging-changed', e => {
+                controls.enabled = !e.value;
+                if (e.value && selectedBox) {
+                    saveStateForUndo();
+                }
+            });
+            transformControls.addEventListener('objectChange', onTransformChange);
+            scene.add(transformControls);
+
+            // Track WASD keys for FPS movement
+            window.addEventListener('keydown', e => {
+                const key = e.key.toLowerCase();
+                if (key in keysPressed) keysPressed[key] = true;
+            });
+            window.addEventListener('keyup', e => {
+                const key = e.key.toLowerCase();
+                if (key in keysPressed) keysPressed[key] = false;
+            });
+
+            // Right-click context menu prevention
+            renderer.domElement.addEventListener('contextmenu', e => e.preventDefault());
+
+            // FPS mode: Right mouse button + drag to look, + WASD to move
+            renderer.domElement.addEventListener('mousedown', e => {
+                if (e.button === 2) {  // Right mouse button
+                    e.preventDefault();
+                    fpsMode = true;
+                    rightMouseDown = true;
+                    lastMouseX = e.clientX;
+                    lastMouseY = e.clientY;
+                    controls.enabled = false;
+                    renderer.domElement.style.cursor = 'crosshair';
+                }
+            });
+
+            renderer.domElement.addEventListener('mouseup', e => {
+                if (e.button === 2) {
+                    fpsMode = false;
+                    rightMouseDown = false;
+                    controls.enabled = true;
+                    renderer.domElement.style.cursor = 'default';
+                }
+            });
+
+            renderer.domElement.addEventListener('mousemove', e => {
+                if (fpsMode && rightMouseDown) {
+                    const deltaX = e.clientX - lastMouseX;
+                    const deltaY = e.clientY - lastMouseY;
+                    lastMouseX = e.clientX;
+                    lastMouseY = e.clientY;
+
+                    // Rotate camera (FPS look)
+                    // Horizontal rotation around world Y axis
+                    const quaternionY = new THREE.Quaternion();
+                    quaternionY.setFromAxisAngle(new THREE.Vector3(0, 1, 0), -deltaX * FPS_LOOK_SPEED);
+
+                    // Vertical rotation around camera's local X axis
+                    const quaternionX = new THREE.Quaternion();
+                    const right = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion);
+                    quaternionX.setFromAxisAngle(right, -deltaY * FPS_LOOK_SPEED);
+
+                    // Apply rotations
+                    camera.quaternion.premultiply(quaternionY);
+                    camera.quaternion.premultiply(quaternionX);
+
+                    // Update orbit controls target to be in front of camera
+                    const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
+                    controls.target.copy(camera.position).add(forward.multiplyScalar(10));
+                }
+            });
+
+            // Also handle mouseup on window in case mouse leaves canvas
+            window.addEventListener('mouseup', e => {
+                if (e.button === 2 && fpsMode) {
+                    fpsMode = false;
+                    rightMouseDown = false;
+                    controls.enabled = true;
+                    renderer.domElement.style.cursor = 'default';
+                }
+            });
+
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+
+            // Grid and axes
+            const grid = new THREE.GridHelper(50, 50, 0x444444, 0x222222);
+            grid.rotation.x = Math.PI / 2;
+            scene.add(grid);
+            scene.add(new THREE.AxesHelper(5));
+
+            // Lights
+            scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+            const dir = new THREE.DirectionalLight(0xffffff, 0.4);
+            dir.position.set(10, 10, 10);
+            scene.add(dir);
+
+            canvas.addEventListener('click', onCanvasClick);
+            canvas.addEventListener('dblclick', () => deselectAll());
+            window.addEventListener('resize', updateRendererSize);
+            window.addEventListener('keydown', onKeyDown);
+
+            initColorPickers();
+            animate();
+        }
+
+        function updateRendererSize() {
+            const container = document.querySelector('.viewer');
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+
+        function initColorPickers() {
+            ['newColorPicker', 'inspColorPicker'].forEach((id, idx) => {
+                const picker = document.getElementById(id);
+                COLORS.forEach((color, i) => {
+                    const div = document.createElement('div');
+                    div.className = 'color-option' + (i === 0 && idx === 0 ? ' selected' : '');
+                    div.style.background = color;
+                    div.dataset.color = color;
+                    div.onclick = () => idx === 0 ? selectNewColor(color, div) : updateSelectedColor(color);
+                    picker.appendChild(div);
+                });
+            });
+        }
+
+        function selectNewColor(color, el) {
+            document.querySelectorAll('#newColorPicker .color-option').forEach(e => e.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedNewColor = color;
+        }
+
+        function setNewLabel(label) { document.getElementById('newLabel').value = label; }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Unity FPS mode: WASD + Q/E movement while right mouse is held
+            if (fpsMode && rightMouseDown) {
+                const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
+                const right = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion);
+                const up = new THREE.Vector3(0, 1, 0);
+
+                const movement = new THREE.Vector3();
+
+                if (keysPressed.w) movement.add(forward);
+                if (keysPressed.s) movement.sub(forward);
+                if (keysPressed.d) movement.add(right);
+                if (keysPressed.a) movement.sub(right);
+                if (keysPressed.e) movement.add(up);
+                if (keysPressed.q) movement.sub(up);
+
+                if (movement.lengthSq() > 0) {
+                    movement.normalize().multiplyScalar(FPS_MOVE_SPEED);
+                    camera.position.add(movement);
+                    controls.target.add(movement);
+                }
+            }
+
+            controls.update();
+
+            // Sync edges with mesh for ALL boxes (fixes axis bug after rotation)
+            boundingBoxes.forEach(box => {
+                box.edges.position.copy(box.mesh.position);
+                box.edges.rotation.copy(box.mesh.rotation);
+                box.edges.scale.copy(box.mesh.scale);
+            });
+
+            // Update face handles position if in edit collider mode
+            if (editColliderMode && selectedBox && faceHandles.length > 0) {
+                updateFaceHandlePositions();
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        function onCanvasClick(event) {
+            const rect = renderer.domElement.getBoundingClientRect();
+            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+
+            // Check face handles first
+            if (editColliderMode && faceHandles.length > 0) {
+                const handleIntersects = raycaster.intersectObjects(faceHandles);
+                if (handleIntersects.length > 0) {
+                    return; // Handle drag will be managed by TransformControls
+                }
+            }
+
+            // Then check boxes - only include selectable ones in raycast
+            const selectableBoxes = boundingBoxes.filter(b => b.selectable !== false);
+            const boxMeshes = selectableBoxes.map(b => b.mesh);
+            const intersects = raycaster.intersectObjects(boxMeshes);
+
+            if (intersects.length > 0) {
+                // Find the first selectable box from intersections
+                for (const intersect of intersects) {
+                    const box = boundingBoxes.find(b => b.mesh === intersect.object && b.selectable !== false);
+                    if (box) {
+                        selectBBox(box);
+                        return;
+                    }
+                }
+            }
+        }
+
+        function onKeyDown(e) {
+            // Ignore if typing in an input
+            if (e.target.tagName === 'INPUT') return;
+
+            const ctrlOrCmd = e.ctrlKey || e.metaKey;  // Support both Ctrl and Cmd (Mac)
+
+            // Undo/Redo - these should work even in FPS mode
+            if (e.key === 'z' && ctrlOrCmd && !e.shiftKey) {
+                e.preventDefault();
+                undo();
+                return;
+            }
+            if (e.key === 'y' && ctrlOrCmd) {
+                e.preventDefault();
+                redo();
+                return;
+            }
+            if (e.key === 'z' && ctrlOrCmd && e.shiftKey) {
+                e.preventDefault();
+                redo();
+                return;
+            }
+
+            // Don't trigger tool shortcuts while in FPS mode (WASD reserved for movement)
+            if (fpsMode) return;
+
+            // Shift+Alt+A: Toggle visibility of selected bounding box
+            if (e.shiftKey && e.altKey && (e.key === 'a' || e.key === 'A')) {
+                e.preventDefault();
+                toggleSelectedVisibility();
+                return;
+            }
+
+            // O: Toggle selectability of selected bounding box
+            if (e.key === 'o' || e.key === 'O') {
+                e.preventDefault();
+                toggleSelectedSelectability();
+                return;
+            }
+
+            if (e.key === 'Delete' && selectedBox) deleteSelected();
+            if (e.key === 'Escape') deselectAll();
+            if (e.key === 'w' || e.key === 'W' || e.key === 'g' || e.key === 'G') setMode('translate');
+            if (e.key === 'e' || e.key === 'E' || e.key === 'r' || e.key === 'R') setMode('rotate');
+            if (e.key === 's' || e.key === 'S') {
+                if (!ctrlOrCmd) setMode('scale');
+            }
+            if (e.key === 'd' && ctrlOrCmd) { e.preventDefault(); duplicateSelected(); }
+
+            // Unity-style: F to focus on selected
+            if (e.key === 'f' || e.key === 'F') {
+                e.preventDefault();
+                focusSelected();
+            }
+
+            // Unity-style: X to toggle local/world space
+            if (e.key === 'x' || e.key === 'X') {
+                if (!ctrlOrCmd) {
+                    toggleSpace();
+                }
+            }
+        }
+
+        function toggleSelectedVisibility() {
+            if (!selectedBox) return;
+
+            saveStateForUndo();
+
+            // Toggle visibility state
+            selectedBox.visible = selectedBox.visible === false ? true : false;
+
+            // Update mesh and edges visibility
+            selectedBox.mesh.visible = selectedBox.visible;
+            selectedBox.edges.visible = selectedBox.visible;
+
+            // Update list to show visibility indicator
+            updateBBoxList();
+            saveAnnotations();
+
+            // Show toast
+            showToast(selectedBox.visible ? 'Box visible' : 'Box hidden (still included in export)');
+        }
+
+        function toggleSelectedSelectability() {
+            if (!selectedBox) return;
+
+            saveStateForUndo();
+
+            // Toggle selectability state
+            selectedBox.selectable = selectedBox.selectable === false ? true : false;
+
+            // Update list to show selectability indicator
+            updateBBoxList();
+            saveAnnotations();
+
+            // Show toast
+            showToast(selectedBox.selectable ? 'Box selectable' : 'Box locked (click passes through)');
+        }
+
+        function toggleSpace() {
+            isLocalSpace = !isLocalSpace;
+            transformControls.setSpace(isLocalSpace ? 'local' : 'world');
+
+            // Update button text
+            const btn = document.getElementById('btnSpace');
+            btn.textContent = isLocalSpace ? '📍 Local' : '🌍 World';
+            btn.classList.toggle('active', isLocalSpace);
+
+            // Visual feedback
+            const msg = isLocalSpace ? 'Local Space' : 'World Space';
+            showToast(msg);
+        }
+
+        function showToast(message) {
+            // Remove existing toast
+            const existing = document.getElementById('toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.id = 'toast';
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 10px 20px;
+                border-radius: 4px;
+                z-index: 1000;
+                font-size: 14px;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => toast.remove(), 1500);
+        }
+
+        function setMode(mode) {
+            transformControls.setMode(mode);
+            document.getElementById('btnTranslate').classList.toggle('active', mode === 'translate');
+            document.getElementById('btnRotate').classList.toggle('active', mode === 'rotate');
+            document.getElementById('btnScale').classList.toggle('active', mode === 'scale');
+
+            if (editColliderMode && mode !== 'translate') {
+                // Disable edit collider when switching to rotate/scale
+                toggleEditCollider();
+            }
+        }
+
+        function onTransformChange() {
+            if (selectedBox) {
+                updateInspectorFromBox();
+                saveAnnotations();
+            }
+        }
+
+        // === Point Cloud Loading ===
+        async function loadFromPath() {
+            const filepath = document.getElementById('filePath').value;
+            if (!filepath) return alert('Enter a file path');
+
+            showLoading(true);
+            document.getElementById('fileStatus').textContent = 'Loading...';
+
+            try {
+                const res = await fetch('/load_file', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ filepath })
+                });
+                const data = await res.json();
+                if (data.error) throw new Error(data.error);
+
+                document.getElementById('fileStatus').textContent = `Loaded: ${data.filename} (${data.num_points.toLocaleString()} pts)`;
+                document.getElementById('fileStatus').className = 'status success';
+                await loadPointsToScene();
+            } catch (err) {
+                document.getElementById('fileStatus').textContent = 'Error: ' + err.message;
+                document.getElementById('fileStatus').className = 'status error';
+            }
+            showLoading(false);
+        }
+
+        async function loadPointsToScene() {
+            const res = await fetch('/get_points');
+            const data = await res.json();
+
+            if (pointCloud) scene.remove(pointCloud);
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(data.points.flat()), 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(data.colors.flat()), 3));
+
+            pointCloud = new THREE.Points(geometry, new THREE.PointsMaterial({
+                size: 0.05,
+                vertexColors: true,
+                sizeAttenuation: true
+            }));
+            scene.add(pointCloud);
+
+            geometry.computeBoundingSphere();
+            const { center, radius } = geometry.boundingSphere;
+            camera.position.set(center.x + radius * 1.5, center.y + radius * 1.5, center.z + radius * 1.5);
+            controls.target.copy(center);
+
+            loadAnnotationsFromData(data.annotations || []);
+        }
+
+        // === Bounding Box Management ===
+        function loadAnnotationsFromData(annotations) {
+            boundingBoxes.forEach(b => { scene.remove(b.mesh); scene.remove(b.edges); });
+            boundingBoxes = [];
+            annotations.forEach(ann => createBBoxFromData(ann));
+            updateBBoxList();
+        }
+
+        function createBBoxFromData(data) {
+            const min = new THREE.Vector3(...data.bbox.min);
+            const max = new THREE.Vector3(...data.bbox.max);
+            const center = new THREE.Vector3().addVectors(min, max).multiplyScalar(0.5);
+            const size = new THREE.Vector3().subVectors(max, min);
+            const color = new THREE.Color(data.color || '#e74c3c');
+
+            const geometry = new THREE.BoxGeometry(size.x, size.y, size.z);
+            const material = new THREE.MeshBasicMaterial({
+                color, transparent: true, opacity: 0.15, depthWrite: false
+            });
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.position.copy(center);
+
+            // Apply rotation if exists
+            if (data.rotation) {
+                mesh.rotation.set(
+                    THREE.MathUtils.degToRad(data.rotation[0] || 0),
+                    THREE.MathUtils.degToRad(data.rotation[1] || 0),
+                    THREE.MathUtils.degToRad(data.rotation[2] || 0)
+                );
+            }
+            scene.add(mesh);
+
+            const edges = new THREE.LineSegments(
+                new THREE.EdgesGeometry(geometry),
+                new THREE.LineBasicMaterial({ color })
+            );
+            edges.position.copy(center);
+            edges.rotation.copy(mesh.rotation);
+            scene.add(edges);
+
+            const box = {
+                id: data.id || generateId(),
+                label: data.label,
+                color: data.color || '#e74c3c',
+                visible: data.visible !== false,  // Default to visible
+                selectable: data.selectable !== false,  // Default to selectable
+                mesh, edges
+            };
+            boundingBoxes.push(box);
+            return box;
+        }
+
+        function createNewBBox() {
+            saveStateForUndo();
+
+            const label = document.getElementById('newLabel').value || 'unlabeled';
+            const center = controls.target.clone();
+
+            const data = {
+                id: generateId(),
+                label,
+                color: selectedNewColor,
+                bbox: {
+                    min: [center.x - 0.5, center.y - 0.5, center.z - 0.5],
+                    max: [center.x + 0.5, center.y + 0.5, center.z + 0.5]
+                }
+            };
+
+            const box = createBBoxFromData(data);
+            selectBBox(box);
+            updateBBoxList();
+            saveAnnotations();
+        }
+
+        function selectBBox(box) {
+            deselectAll();
+            selectedBox = box;
+            box.edges.material.color.set(0xffffff);
+            box.mesh.material.opacity = 0.3;
+
+            transformControls.attach(box.mesh);
+
+            document.getElementById('inspectorSection').style.display = 'block';
+            updateInspectorFromBox();
+            updateBBoxList();
+        }
+
+        function deselectAll() {
+            if (selectedBox) {
+                selectedBox.edges.material.color.set(selectedBox.color);
+                selectedBox.mesh.material.opacity = 0.15;
+            }
+            selectedBox = null;
+            transformControls.detach();
+            clearFaceHandles();
+            editColliderMode = false;
+            document.getElementById('editColliderToggle').classList.remove('active');
+            document.getElementById('inspectorSection').style.display = 'none';
+            document.querySelectorAll('.bbox-list-item').forEach(el => el.classList.remove('selected'));
+        }
+
+        function updateInspectorFromBox() {
+            if (!selectedBox) return;
+
+            document.getElementById('selectedName').textContent = selectedBox.label;
+            document.getElementById('inspLabel').value = selectedBox.label;
+
+            const pos = selectedBox.mesh.position;
+            document.getElementById('posX').value = pos.x.toFixed(3);
+            document.getElementById('posY').value = pos.y.toFixed(3);
+            document.getElementById('posZ').value = pos.z.toFixed(3);
+
+            const rot = selectedBox.mesh.rotation;
+            document.getElementById('rotX').value = THREE.MathUtils.radToDeg(rot.x).toFixed(1);
+            document.getElementById('rotY').value = THREE.MathUtils.radToDeg(rot.y).toFixed(1);
+            document.getElementById('rotZ').value = THREE.MathUtils.radToDeg(rot.z).toFixed(1);
+
+            const scale = selectedBox.mesh.scale;
+            const geom = selectedBox.mesh.geometry;
+            geom.computeBoundingBox();
+            const baseSize = new THREE.Vector3();
+            geom.boundingBox.getSize(baseSize);
+
+            document.getElementById('sizeX').value = (baseSize.x * scale.x).toFixed(3);
+            document.getElementById('sizeY').value = (baseSize.y * scale.y).toFixed(3);
+            document.getElementById('sizeZ').value = (baseSize.z * scale.z).toFixed(3);
+
+            document.querySelectorAll('#inspColorPicker .color-option').forEach(el => {
+                el.classList.toggle('selected', el.dataset.color === selectedBox.color);
+            });
+        }
+
+        function updateFromInspector() {
+            if (!selectedBox) return;
+            saveStateForUndo();
+
+            const pos = new THREE.Vector3(
+                parseFloat(document.getElementById('posX').value) || 0,
+                parseFloat(document.getElementById('posY').value) || 0,
+                parseFloat(document.getElementById('posZ').value) || 0
+            );
+            selectedBox.mesh.position.copy(pos);
+
+            const rot = new THREE.Euler(
+                THREE.MathUtils.degToRad(parseFloat(document.getElementById('rotX').value) || 0),
+                THREE.MathUtils.degToRad(parseFloat(document.getElementById('rotY').value) || 0),
+                THREE.MathUtils.degToRad(parseFloat(document.getElementById('rotZ').value) || 0)
+            );
+            selectedBox.mesh.rotation.copy(rot);
+
+            const sizeX = parseFloat(document.getElementById('sizeX').value) || 1;
+            const sizeY = parseFloat(document.getElementById('sizeY').value) || 1;
+            const sizeZ = parseFloat(document.getElementById('sizeZ').value) || 1;
+
+            // Recreate geometry
+            const newGeom = new THREE.BoxGeometry(sizeX, sizeY, sizeZ);
+            selectedBox.mesh.geometry.dispose();
+            selectedBox.mesh.geometry = newGeom;
+            selectedBox.edges.geometry.dispose();
+            selectedBox.edges.geometry = new THREE.EdgesGeometry(newGeom);
+            selectedBox.mesh.scale.set(1, 1, 1);
+
+            if (editColliderMode) createFaceHandles();
+            saveAnnotations();
+        }
+
+        function updateSelectedLabel() {
+            if (!selectedBox) return;
+            saveStateForUndo();
+
+            selectedBox.label = document.getElementById('inspLabel').value;
+            document.getElementById('selectedName').textContent = selectedBox.label;
+            updateBBoxList();
+            saveAnnotations();
+        }
+
+        function updateSelectedColor(color) {
+            if (!selectedBox) return;
+            saveStateForUndo();
+
+            selectedBox.color = color;
+            selectedBox.mesh.material.color.set(color);
+            document.querySelectorAll('#inspColorPicker .color-option').forEach(el => {
+                el.classList.toggle('selected', el.dataset.color === color);
+            });
+            updateBBoxList();
+            saveAnnotations();
+        }
+
+        function deleteSelected() {
+            if (!selectedBox) return;
+            saveStateForUndo();
+
+            scene.remove(selectedBox.mesh);
+            scene.remove(selectedBox.edges);
+            boundingBoxes = boundingBoxes.filter(b => b !== selectedBox);
+            deselectAll();
+            updateBBoxList();
+            saveAnnotations();
+        }
+
+        function duplicateSelected() {
+            if (!selectedBox) return;
+            saveStateForUndo();
+
+            const pos = selectedBox.mesh.position;
+            const geom = selectedBox.mesh.geometry;
+            geom.computeBoundingBox();
+            const size = new THREE.Vector3();
+            geom.boundingBox.getSize(size);
+            size.multiply(selectedBox.mesh.scale);
+            const halfSize = size.clone().multiplyScalar(0.5);
+
+            const data = {
+                id: generateId(),
+                label: selectedBox.label + '_copy',
+                color: selectedBox.color,
+                rotation: [
+                    THREE.MathUtils.radToDeg(selectedBox.mesh.rotation.x),
+                    THREE.MathUtils.radToDeg(selectedBox.mesh.rotation.y),
+                    THREE.MathUtils.radToDeg(selectedBox.mesh.rotation.z)
+                ],
+                bbox: {
+                    min: [pos.x - halfSize.x + 1, pos.y - halfSize.y, pos.z - halfSize.z],
+                    max: [pos.x + halfSize.x + 1, pos.y + halfSize.y, pos.z + halfSize.z]
+                }
+            };
+
+            const newBox = createBBoxFromData(data);
+            selectBBox(newBox);
+            updateBBoxList();
+            saveAnnotations();
+        }
+
+        function focusSelected() {
+            if (!selectedBox) return;
+
+            // Get bounding box size for proper framing
+            selectedBox.mesh.geometry.computeBoundingBox();
+            const size = new THREE.Vector3();
+            selectedBox.mesh.geometry.boundingBox.getSize(size);
+            size.multiply(selectedBox.mesh.scale);
+
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const fov = camera.fov * (Math.PI / 180);
+            const cameraDistance = maxDim / (2 * Math.tan(fov / 2)) * 2.5;  // 2.5x for padding
+
+            // Calculate camera position
+            const direction = camera.position.clone().sub(controls.target).normalize();
+            const newPos = selectedBox.mesh.position.clone().add(direction.multiplyScalar(cameraDistance));
+
+            // Animate to new position
+            const startPos = camera.position.clone();
+            const startTarget = controls.target.clone();
+            const endTarget = selectedBox.mesh.position.clone();
+            const duration = 300;
+            const startTime = Date.now();
+
+            function animateFocus() {
+                const elapsed = Date.now() - startTime;
+                const t = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - t, 3);  // Ease out cubic
+
+                camera.position.lerpVectors(startPos, newPos, eased);
+                controls.target.lerpVectors(startTarget, endTarget, eased);
+
+                if (t < 1) {
+                    requestAnimationFrame(animateFocus);
+                }
+            }
+            animateFocus();
+        }
+
+        // === Edit Collider Mode (Face Handles) ===
+        function toggleEditCollider() {
+            editColliderMode = !editColliderMode;
+            document.getElementById('editColliderToggle').classList.toggle('active', editColliderMode);
+
+            if (editColliderMode && selectedBox) {
+                setMode('translate');
+                createFaceHandles();
+            } else {
+                clearFaceHandles();
+                if (selectedBox) transformControls.attach(selectedBox.mesh);
+            }
+        }
+
+        function createFaceHandles() {
+            clearFaceHandles();
+            if (!selectedBox) return;
+
+            const mesh = selectedBox.mesh;
+            mesh.geometry.computeBoundingBox();
+            const size = new THREE.Vector3();
+            mesh.geometry.boundingBox.getSize(size);
+            size.multiply(mesh.scale);
+
+            // 6 faces: +X, -X, +Y, -Y, +Z, -Z (in local coordinates)
+            const faces = [
+                { axis: 'x', sign: 1, color: 0xe74c3c },
+                { axis: 'x', sign: -1, color: 0xe74c3c },
+                { axis: 'y', sign: 1, color: 0x2ecc71 },
+                { axis: 'y', sign: -1, color: 0x2ecc71 },
+                { axis: 'z', sign: 1, color: 0x3498db },
+                { axis: 'z', sign: -1, color: 0x3498db }
+            ];
+
+            faces.forEach(face => {
+                const handleGeom = new THREE.SphereGeometry(0.15);
+                const handleMat = new THREE.MeshBasicMaterial({ color: face.color });
+                const handle = new THREE.Mesh(handleGeom, handleMat);
+
+                // Create local offset vector
+                const localOffset = new THREE.Vector3();
+                localOffset[face.axis] = size[face.axis] / 2 * face.sign;
+
+                // Apply mesh rotation to the offset
+                localOffset.applyQuaternion(mesh.quaternion);
+
+                // Position handle at mesh center + rotated offset
+                const pos = mesh.position.clone().add(localOffset);
+                handle.position.copy(pos);
+
+                // Store face data for drag handling
+                handle.userData = { face, originalPos: pos.clone() };
+                scene.add(handle);
+                faceHandles.push(handle);
+            });
+
+            // Detach main transform and use custom drag
+            transformControls.detach();
+            setupFaceHandleDrag();
+        }
+
+        function setupFaceHandleDrag() {
+            let draggedHandle = null;
+            let dragPlane = new THREE.Plane();
+            let dragStartPos = new THREE.Vector3();
+            let dragAxis = new THREE.Vector3();  // World-space axis for this face
+
+            const onMouseDown = (e) => {
+                if (!editColliderMode) return;
+                const rect = renderer.domElement.getBoundingClientRect();
+                mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+                mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+                raycaster.setFromCamera(mouse, camera);
+                const intersects = raycaster.intersectObjects(faceHandles);
+
+                if (intersects.length > 0) {
+                    // Save state for undo when starting face drag
+                    saveStateForUndo();
+
+                    controls.enabled = false;
+                    draggedHandle = intersects[0].object;
+                    dragStartPos.copy(draggedHandle.position);
+
+                    // Calculate the world-space axis for this face (accounting for rotation)
+                    const face = draggedHandle.userData.face;
+                    dragAxis.set(0, 0, 0);
+                    dragAxis[face.axis] = face.sign;
+                    dragAxis.applyQuaternion(selectedBox.mesh.quaternion);
+                    dragAxis.normalize();
+
+                    // Create drag plane perpendicular to camera but constrained to the drag axis
+                    const cameraDir = camera.getWorldDirection(new THREE.Vector3());
+                    const planeNormal = new THREE.Vector3().crossVectors(dragAxis, cameraDir).cross(dragAxis).normalize();
+                    if (planeNormal.lengthSq() < 0.001) {
+                        planeNormal.copy(cameraDir);
+                    }
+                    dragPlane.setFromNormalAndCoplanarPoint(planeNormal, draggedHandle.position);
+                }
+            };
+
+            const onMouseMove = (e) => {
+                if (!draggedHandle || !selectedBox) return;
+
+                const rect = renderer.domElement.getBoundingClientRect();
+                mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+                mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+                raycaster.setFromCamera(mouse, camera);
+                const intersection = new THREE.Vector3();
+                if (!raycaster.ray.intersectPlane(dragPlane, intersection)) return;
+
+                // Project the movement onto the drag axis
+                const movement = intersection.clone().sub(dragStartPos);
+                const axisDelta = movement.dot(dragAxis);
+
+                const face = draggedHandle.userData.face;
+                const mesh = selectedBox.mesh;
+
+                // Get current size from geometry
+                mesh.geometry.computeBoundingBox();
+                const size = new THREE.Vector3();
+                mesh.geometry.boundingBox.getSize(size);
+                size.multiply(mesh.scale);
+
+                // Calculate new size along the local axis
+                const newSize = size.clone();
+                newSize[face.axis] = Math.max(0.1, size[face.axis] + axisDelta * face.sign);
+
+                // Calculate center shift in world space
+                const centerShift = dragAxis.clone().multiplyScalar((newSize[face.axis] - size[face.axis]) / 2);
+                mesh.position.add(centerShift);
+
+                // Recreate geometry with new size
+                const newGeom = new THREE.BoxGeometry(newSize.x, newSize.y, newSize.z);
+                mesh.geometry.dispose();
+                mesh.geometry = newGeom;
+                mesh.scale.set(1, 1, 1);  // Reset scale since we baked it into geometry
+                selectedBox.edges.geometry.dispose();
+                selectedBox.edges.geometry = new THREE.EdgesGeometry(newGeom);
+
+                // Update drag start position for next frame
+                dragStartPos.copy(draggedHandle.position);
+                updateFaceHandlePositions();
+                updateInspectorFromBox();
+            };
+
+            const onMouseUp = () => {
+                if (draggedHandle) {
+                    controls.enabled = true;
+                    draggedHandle = null;
+                    saveAnnotations();
+                }
+            };
+
+            renderer.domElement.addEventListener('mousedown', onMouseDown);
+            renderer.domElement.addEventListener('mousemove', onMouseMove);
+            renderer.domElement.addEventListener('mouseup', onMouseUp);
+        }
+
+        function updateFaceHandlePositions() {
+            if (!selectedBox || faceHandles.length === 0) return;
+
+            const mesh = selectedBox.mesh;
+            mesh.geometry.computeBoundingBox();
+            const size = new THREE.Vector3();
+            mesh.geometry.boundingBox.getSize(size);
+            size.multiply(mesh.scale);
+
+            faceHandles.forEach(handle => {
+                const face = handle.userData.face;
+                // Create local offset vector
+                const localOffset = new THREE.Vector3();
+                localOffset[face.axis] = size[face.axis] / 2 * face.sign;
+
+                // Apply mesh rotation to the offset
+                localOffset.applyQuaternion(mesh.quaternion);
+
+                // Position handle at mesh center + rotated offset
+                const pos = mesh.position.clone().add(localOffset);
+                handle.position.copy(pos);
+
+                // Also rotate the handle's orientation to match face normal
+                handle.quaternion.copy(mesh.quaternion);
+            });
+        }
+
+        function clearFaceHandles() {
+            faceHandles.forEach(h => scene.remove(h));
+            faceHandles = [];
+        }
+
+        // === Undo/Redo System ===
+        function captureState() {
+            // Capture current state of all bounding boxes
+            return boundingBoxes.map(box => {
+                const pos = box.mesh.position;
+                const rot = box.mesh.rotation;
+                box.mesh.geometry.computeBoundingBox();
+                const size = new THREE.Vector3();
+                box.mesh.geometry.boundingBox.getSize(size);
+                size.multiply(box.mesh.scale);
+                const halfSize = size.clone().multiplyScalar(0.5);
+
+                return {
+                    id: box.id,
+                    label: box.label,
+                    color: box.color,
+                    visible: box.visible !== false,
+                    selectable: box.selectable !== false,
+                    position: { x: pos.x, y: pos.y, z: pos.z },
+                    rotation: { x: rot.x, y: rot.y, z: rot.z },
+                    size: { x: size.x, y: size.y, z: size.z },
+                    bbox: {
+                        min: [pos.x - halfSize.x, pos.y - halfSize.y, pos.z - halfSize.z],
+                        max: [pos.x + halfSize.x, pos.y + halfSize.y, pos.z + halfSize.z]
+                    }
+                };
+            });
+        }
+
+        function saveStateForUndo() {
+            if (isUndoRedoAction) return;
+
+            const state = captureState();
+            undoStack.push(state);
+
+            // Limit history size
+            if (undoStack.length > MAX_HISTORY) {
+                undoStack.shift();
+            }
+
+            // Clear redo stack when new action is performed
+            redoStack = [];
+
+            console.log('State saved for undo, stack size:', undoStack.length);
+        }
+
+        function undo() {
+            if (undoStack.length === 0) {
+                showToast('Nothing to undo');
+                return;
+            }
+
+            // Save current state to redo stack
+            redoStack.push(captureState());
+
+            // Get previous state
+            const prevState = undoStack.pop();
+
+            // Restore state
+            isUndoRedoAction = true;
+            restoreState(prevState);
+            isUndoRedoAction = false;
+
+            showToast('Undo');
+            console.log('Undo performed, remaining:', undoStack.length);
+        }
+
+        function redo() {
+            if (redoStack.length === 0) {
+                showToast('Nothing to redo');
+                return;
+            }
+
+            // Save current state to undo stack
+            undoStack.push(captureState());
+
+            // Get next state
+            const nextState = redoStack.pop();
+
+            // Restore state
+            isUndoRedoAction = true;
+            restoreState(nextState);
+            isUndoRedoAction = false;
+
+            showToast('Redo');
+            console.log('Redo performed');
+        }
+
+        function restoreState(state) {
+            // Remove all current boxes
+            boundingBoxes.forEach(box => {
+                scene.remove(box.mesh);
+                scene.remove(box.edges);
+            });
+            boundingBoxes = [];
+
+            // Deselect
+            selectedBox = null;
+            transformControls.detach();
+            clearFaceHandles();
+            editColliderMode = false;
+            document.getElementById('editColliderToggle').classList.remove('active');
+            document.getElementById('inspectorSection').style.display = 'none';
+
+            // Recreate boxes from state
+            state.forEach(boxState => {
+                const data = {
+                    id: boxState.id,
+                    label: boxState.label,
+                    color: boxState.color,
+                    visible: boxState.visible,
+                    selectable: boxState.selectable,
+                    rotation: [
+                        THREE.MathUtils.radToDeg(boxState.rotation.x),
+                        THREE.MathUtils.radToDeg(boxState.rotation.y),
+                        THREE.MathUtils.radToDeg(boxState.rotation.z)
+                    ],
+                    bbox: boxState.bbox
+                };
+                const box = createBBoxFromData(data);
+                // Apply visibility to mesh
+                if (box.visible === false) {
+                    box.mesh.visible = false;
+                    box.edges.visible = false;
+                }
+            });
+
+            updateBBoxList();
+            saveAnnotations();
+        }
+
+        // === Utilities ===
+        function updateBBoxList() {
+            const list = document.getElementById('bboxList');
+            document.getElementById('bboxCount').textContent = boundingBoxes.length;
+
+            list.innerHTML = boundingBoxes.map(box => {
+                const isHidden = box.visible === false;
+                const isLocked = box.selectable === false;
+                const icons = (isHidden ? '👁️‍🗨️' : '') + (isLocked ? '🔒' : '');
+                const statusParts = [];
+                if (isHidden) statusParts.push('hidden');
+                if (isLocked) statusParts.push('locked');
+                const status = statusParts.length > 0 ? ` (${statusParts.join(', ')})` : '';
+
+                return `
+                <div class="bbox-list-item ${selectedBox === box ? 'selected' : ''}"
+                     style="border-color: ${box.color}; ${isHidden ? 'opacity: 0.5;' : ''}" data-id="${box.id}"
+                     onclick="selectBBoxById('${box.id}')">
+                    <div class="name">${icons ? icons + ' ' : ''}${box.label}</div>
+                    <div class="info">ID: ${box.id}${status}</div>
+                </div>
+            `}).join('');
+        }
+
+        function selectBBoxById(id) {
+            const box = boundingBoxes.find(b => b.id === id);
+            if (box) selectBBox(box);
+        }
+
+        function generateId() { return Math.random().toString(36).substr(2, 8); }
+
+        function forceSave() {
+            saveAnnotations();
+            const status = document.getElementById('exportStatus');
+            status.innerHTML = '<div class="status success">Annotations saved!</div>';
+            setTimeout(() => { status.innerHTML = ''; }, 2000);
+        }
+
+        async function saveAnnotations() {
+            const annotations = boundingBoxes.map(box => {
+                const pos = box.mesh.position;
+                const rot = box.mesh.rotation;
+                box.mesh.geometry.computeBoundingBox();
+                const size = new THREE.Vector3();
+                box.mesh.geometry.boundingBox.getSize(size);
+                size.multiply(box.mesh.scale);
+                const halfSize = size.clone().multiplyScalar(0.5);
+
+                const rotDeg = [
+                    THREE.MathUtils.radToDeg(rot.x),
+                    THREE.MathUtils.radToDeg(rot.y),
+                    THREE.MathUtils.radToDeg(rot.z)
+                ];
+
+                // Log if any rotation is non-zero
+                if (rotDeg.some(r => Math.abs(r) > 0.1)) {
+                    console.log(`Saving ${box.label} with rotation:`, rotDeg);
+                }
+
+                return {
+                    id: box.id,
+                    label: box.label,
+                    color: box.color,
+                    rotation: rotDeg,
+                    bbox: {
+                        min: [pos.x - halfSize.x, pos.y - halfSize.y, pos.z - halfSize.z],
+                        max: [pos.x + halfSize.x, pos.y + halfSize.y, pos.z + halfSize.z]
+                    }
+                };
+            });
+
+            fetch('/save_all_annotations', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ annotations })
+            }).catch(console.error);
+        }
+
+        async function exportPointNet() {
+            const status = document.getElementById('exportStatus');
+            status.innerHTML = '<div class="status info">Exporting...</div>';
+
+            try {
+                const res = await fetch('/export_pointnet');
+                const data = await res.json();
+                if (data.error) throw new Error(data.error);
+
+                status.innerHTML = `
+                    <div class="status success">
+                        <strong>Export Complete!</strong><br>
+                        <small>${data.export_name}</small><br>
+                        ${data.stats.labeled_points.toLocaleString()} / ${data.stats.total_points.toLocaleString()} points<br>
+                        Classes: ${data.stats.classes.join(', ') || 'none'}
+                    </div>
+                `;
+            } catch (err) {
+                status.innerHTML = `<div class="status error">Error: ${err.message}</div>`;
+            }
+        }
+
+        function showLoading(show) {
+            document.getElementById('loadingOverlay').classList.toggle('show', show);
+        }
+
+        // Import previous exports
+        let exportsList = [];
+
+        async function loadExportsList() {
+            const status = document.getElementById('importStatus');
+            const select = document.getElementById('exportSelect');
+            status.innerHTML = '<div class="status info">Loading exports...</div>';
+
+            try {
+                const res = await fetch('/list_exports');
+                const data = await res.json();
+                exportsList = data.exports || [];
+
+                if (exportsList.length === 0) {
+                    status.innerHTML = '<div class="status info">No previous exports found</div>';
+                    select.style.display = 'none';
+                    return;
+                }
+
+                // Populate dropdown
+                select.innerHTML = '<option value="">-- Select Export --</option>';
+                exportsList.forEach((exp, i) => {
+                    select.innerHTML += `<option value="${i}">${exp.name} (${exp.num_boxes} boxes)</option>`;
+                });
+                select.style.display = 'block';
+                status.innerHTML = `<div class="status success">Found ${exportsList.length} exports</div>`;
+            } catch (err) {
+                status.innerHTML = `<div class="status error">Error: ${err.message}</div>`;
+            }
+        }
+
+        async function onExportSelected() {
+            const select = document.getElementById('exportSelect');
+            const status = document.getElementById('importStatus');
+            const idx = select.value;
+
+            if (idx === '') return;
+
+            const exp = exportsList[idx];
+            status.innerHTML = '<div class="status info">Loading bounding boxes...</div>';
+
+            try {
+                const res = await fetch('/load_export', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ path: exp.path })
+                });
+                const data = await res.json();
+                if (data.error) throw new Error(data.error);
+
+                // Clear existing boxes
+                boundingBoxes.forEach(box => {
+                    scene.remove(box.mesh);
+                    scene.remove(box.edges);
+                });
+                boundingBoxes = [];
+
+                // Add loaded boxes using createBBoxFromData for consistent handling
+                data.annotations.forEach(ann => {
+                    createBBoxFromData(ann);
+                });
+
+                updateBBoxList();
+                status.innerHTML = `<div class="status success">Loaded ${data.num_boxes} bounding boxes</div>`;
+            } catch (err) {
+                status.innerHTML = `<div class="status error">Error: ${err.message}</div>`;
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>

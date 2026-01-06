@@ -1,0 +1,14 @@
+{
+  "label_to_id": {
+    "wire_copy": 0,
+    "wall": 1,
+    "wire": 2,
+    "pipe": 3
+  },
+  "id_to_label": {
+    "0": "wire_copy",
+    "1": "wall",
+    "2": "wire",
+    "3": "pipe"
+  }
+}

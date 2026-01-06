@@ -1,0 +1,15 @@
+{
+  "num_points": 1443488,
+  "num_classes": 3,
+  "class_names": [
+    "wall_copy",
+    "wall",
+    "background"
+  ],
+  "class_distribution": {
+    "wall_copy": 1443165,
+    "wall": 0,
+    "background": 323
+  },
+  "mean_confidence": 0.33411726355552673
+}

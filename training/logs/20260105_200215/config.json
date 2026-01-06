@@ -1,0 +1,21 @@
+{
+  "epochs": 300,
+  "batch_size": 32,
+  "num_points": 8192,
+  "lr": 0.001,
+  "min_lr": 1e-06,
+  "weight_decay": 0.0001,
+  "block_size": 1.0,
+  "stride": 0.3,
+  "use_msg": false,
+  "use_light": false,
+  "checkpoint_dir": "checkpoints",
+  "log_dir": "logs",
+  "loss_type": "focal_dice",
+  "focal_gamma": 2.5,
+  "ce_weight": 0.5,
+  "dice_weight": 0.5,
+  "use_class_weights": true,
+  "warmup_epochs": 10,
+  "save_every": 10
+}

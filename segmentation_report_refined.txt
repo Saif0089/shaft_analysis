@@ -1,0 +1,17 @@
+REFINED SHAFT SEGMENTATION REPORT
+============================================================
+
+SEGMENTATION RESULTS:
+  1. Outer Wall: 852,382 points (59.1%)
+  2. Platform Zones: 188,355 points (13.0%)
+  3. Central Column: 16,572 points (1.1%)
+  4. Bottom Structure: 77,470 points (5.4%)
+  5. Pipes/Wires: 222,609 points (15.4%)
+  6. Vertical Guards: 82,093 points (5.7%)
+  7. Horizontal Surfaces: 4,007 points (0.3%)
+  8. Other: 0 points (0.0%)
+
+Key parameters:
+  - Pipes/Wires: r > 2.8m (near wall)
+  - Vertical Guards: r <= 2.8m (central)
+  - Bottom Structure: Z < -524.5m
