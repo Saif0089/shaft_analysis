@@ -8,7 +8,8 @@ on:
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
-  build-windows:
+  build-cpu:
+    name: Build CPU Version
     runs-on: windows-latest
 
     steps:
@@ -19,7 +20,7 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Install dependencies (CPU version for smaller size)
+    - name: Install dependencies (CPU)
       run: |
         python -m pip install --upgrade pip
         pip install pyinstaller
@@ -33,7 +34,7 @@ jobs:
     - name: Build executable
       working-directory: gui_tool
       run: |
-        pyinstaller --clean --onefile --noconsole --name ShaftSegmentation `
+        pyinstaller --clean --onefile --noconsole --name ShaftSegmentation_CPU `
           --add-data "checkpoints;checkpoints" `
           --add-data "models;models" `
           --hidden-import torch `
@@ -50,17 +51,59 @@ jobs:
           --hidden-import matplotlib.pyplot `
           shaft_segmentation_gui.py
 
-    - name: Upload artifact
+    - name: Upload CPU artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ShaftSegmentation-Windows
-        path: gui_tool/dist/ShaftSegmentation.exe
+        name: ShaftSegmentation-CPU
+        path: gui_tool/dist/ShaftSegmentation_CPU.exe
         retention-days: 90
 
-    - name: Create Release (on tag)
-      if: startsWith(github.ref, 'refs/tags/')
-      uses: softprops/action-gh-release@v1
+  build-gpu:
+    name: Build GPU Version (CUDA)
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
       with:
-        files: gui_tool/dist/ShaftSegmentation.exe
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        python-version: '3.11'
+
+    - name: Install dependencies (GPU/CUDA)
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller
+        pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+        pip install PyQt5>=5.15.0
+        pip install numpy>=1.21.0
+        pip install laspy>=2.0.0
+        pip install plyfile>=0.7.0
+        pip install matplotlib>=3.5.0
+
+    - name: Build executable
+      working-directory: gui_tool
+      run: |
+        pyinstaller --clean --onefile --noconsole --name ShaftSegmentation_GPU `
+          --add-data "checkpoints;checkpoints" `
+          --add-data "models;models" `
+          --hidden-import torch `
+          --hidden-import torch.nn `
+          --hidden-import torch.nn.functional `
+          --hidden-import PyQt5 `
+          --hidden-import PyQt5.QtWidgets `
+          --hidden-import PyQt5.QtCore `
+          --hidden-import PyQt5.QtGui `
+          --hidden-import numpy `
+          --hidden-import laspy `
+          --hidden-import plyfile `
+          --hidden-import matplotlib `
+          --hidden-import matplotlib.pyplot `
+          shaft_segmentation_gui.py
+
+    - name: Upload GPU artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ShaftSegmentation-GPU
+        path: gui_tool/dist/ShaftSegmentation_GPU.exe
+        retention-days: 90
