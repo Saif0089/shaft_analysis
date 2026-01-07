@@ -1,0 +1,194 @@
+name: Integration Test - Full Shaft
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_file_url:
+        description: 'URL to test LAS file (or use sample_data)'
+        required: false
+        default: 'use_sample'
+
+jobs:
+  test-cpu:
+    name: Integration Test (CPU)
+    runs-on: windows-latest
+    timeout-minutes: 120
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies (CPU)
+      run: |
+        python -m pip install --upgrade pip
+        pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+        pip install PyQt5>=5.15.0
+        pip install numpy>=1.21.0
+        pip install laspy>=2.0.0
+        pip install plyfile>=0.7.0
+        pip install matplotlib>=3.5.0
+
+    - name: Run Integration Test
+      working-directory: gui_tool
+      run: |
+        Write-Host "=========================================="
+        Write-Host "INTEGRATION TEST - SHAFT SEGMENTATION"
+        Write-Host "=========================================="
+
+        # Create output directory
+        $outputDir = "integration_test_output"
+        New-Item -ItemType Directory -Force -Path $outputDir
+
+        # Use sample data
+        $inputFile = "../sample_data/slice_054.las"
+
+        Write-Host ""
+        Write-Host "Input file: $inputFile"
+        Write-Host "Output dir: $outputDir"
+        Write-Host ""
+
+        # Run the CLI tool
+        Write-Host "Starting segmentation..."
+        python shaft_segmentation_cli.py `
+          --input $inputFile `
+          --output $outputDir `
+          --checkpoint checkpoints/latest.pth `
+          --slice-height 10.0
+
+        Write-Host ""
+        Write-Host "=========================================="
+        Write-Host "VERIFYING OUTPUTS"
+        Write-Host "=========================================="
+
+        # Check combined PLY
+        $combinedPly = "$outputDir/combined_classified.ply"
+        if (Test-Path $combinedPly) {
+          $size = (Get-Item $combinedPly).Length / 1MB
+          Write-Host "✓ combined_classified.ply exists ($([math]::Round($size, 2)) MB)"
+        } else {
+          Write-Host "✗ FAILED: combined_classified.ply not found"
+          exit 1
+        }
+
+        # Check metadata
+        $metadata = "$outputDir/processing_metadata.json"
+        if (Test-Path $metadata) {
+          Write-Host "✓ processing_metadata.json exists"
+          Get-Content $metadata | Write-Host
+        } else {
+          Write-Host "✗ FAILED: processing_metadata.json not found"
+          exit 1
+        }
+
+        # Check classified families
+        $familiesDir = "$outputDir/classified_families"
+        if (Test-Path $familiesDir) {
+          Write-Host ""
+          Write-Host "Classified Families:"
+          Get-ChildItem $familiesDir | ForEach-Object {
+            $size = $_.Length / 1MB
+            Write-Host "  ✓ $($_.Name) ($([math]::Round($size, 2)) MB)"
+          }
+        } else {
+          Write-Host "✗ FAILED: classified_families directory not found"
+          exit 1
+        }
+
+        # Check visualizations
+        $visDir = "$outputDir/visualizations"
+        if (Test-Path $visDir) {
+          $visCount = (Get-ChildItem $visDir -Filter "*.png").Count
+          Write-Host ""
+          Write-Host "✓ Visualizations: $visCount PNG files"
+          Get-ChildItem $visDir | ForEach-Object {
+            Write-Host "  - $($_.Name)"
+          }
+        } else {
+          Write-Host "✗ FAILED: visualizations directory not found"
+          exit 1
+        }
+
+        # Verify expected class files exist
+        $expectedClasses = @("walls.ply", "pipes.ply", "guards.ply", "buntons.ply", "wires.ply", "columns.ply", "sheets.ply", "columns_secondary.ply")
+        $missingClasses = @()
+
+        Write-Host ""
+        Write-Host "Checking all 8 class files..."
+        foreach ($class in $expectedClasses) {
+          $classFile = "$familiesDir/$class"
+          if (Test-Path $classFile) {
+            $size = (Get-Item $classFile).Length / 1KB
+            Write-Host "  ✓ $class ($([math]::Round($size, 2)) KB)"
+          } else {
+            Write-Host "  ✗ $class MISSING"
+            $missingClasses += $class
+          }
+        }
+
+        if ($missingClasses.Count -gt 0) {
+          Write-Host ""
+          Write-Host "WARNING: Some class files are missing (may be expected if no points of that class)"
+        }
+
+        Write-Host ""
+        Write-Host "=========================================="
+        Write-Host "INTEGRATION TEST PASSED"
+        Write-Host "=========================================="
+
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: integration-test-results
+        path: |
+          gui_tool/integration_test_output/
+        retention-days: 30
+
+  test-gpu:
+    name: Integration Test (GPU Build Verification)
+    runs-on: windows-latest
+    timeout-minutes: 60
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies (GPU - will use CPU on runner)
+      run: |
+        python -m pip install --upgrade pip
+        pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+        pip install PyQt5>=5.15.0
+        pip install numpy>=1.21.0
+        pip install laspy>=2.0.0
+        pip install plyfile>=0.7.0
+        pip install matplotlib>=3.5.0
+
+    - name: Verify GPU Build Works (Falls back to CPU)
+      working-directory: gui_tool
+      run: |
+        Write-Host "Testing GPU build (will use CPU on GitHub runner)..."
+
+        $outputDir = "gpu_test_output"
+        New-Item -ItemType Directory -Force -Path $outputDir
+
+        python shaft_segmentation_cli.py `
+          --input ../sample_data/slice_054.las `
+          --output $outputDir `
+          --checkpoint checkpoints/latest.pth `
+          --slice-height 10.0 `
+          --device cpu
+
+        if (Test-Path "$outputDir/combined_classified.ply") {
+          Write-Host "✓ GPU build verification PASSED (ran on CPU)"
+        } else {
+          Write-Host "✗ GPU build verification FAILED"
+          exit 1
+        }
