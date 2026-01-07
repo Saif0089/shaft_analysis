@@ -61,35 +61,6 @@ jobs:
 
         Move-Item dist/ShaftSegmentation_CPU.exe ../ShaftSegmentation_CPU.exe
 
-    # Build GPU Version
-    - name: Install PyTorch CUDA
-      run: |
-        pip uninstall -y torch torchvision
-        pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
-
-    - name: Build GPU executable
-      working-directory: gui_tool
-      run: |
-        Remove-Item -Recurse -Force build, dist, *.spec -ErrorAction SilentlyContinue
-        pyinstaller --clean --onefile --noconsole --name ShaftSegmentation_GPU `
-          --add-data "checkpoints;checkpoints" `
-          --add-data "models;models" `
-          --hidden-import torch `
-          --hidden-import torch.nn `
-          --hidden-import torch.nn.functional `
-          --hidden-import PyQt5 `
-          --hidden-import PyQt5.QtWidgets `
-          --hidden-import PyQt5.QtCore `
-          --hidden-import PyQt5.QtGui `
-          --hidden-import numpy `
-          --hidden-import laspy `
-          --hidden-import plyfile `
-          --hidden-import matplotlib `
-          --hidden-import matplotlib.pyplot `
-          shaft_segmentation_gui.py
-
-        Move-Item dist/ShaftSegmentation_GPU.exe ../ShaftSegmentation_GPU.exe
-
     - name: Get version info
       id: version
       run: |
@@ -109,8 +80,9 @@ jobs:
           **Model:** Epoch 341 (93.4% accuracy, 84.3% mIoU)
 
           ### Downloads
-          - **ShaftSegmentation_CPU.exe** - For PCs without GPU (~400-600MB)
-          - **ShaftSegmentation_GPU.exe** - For PCs with NVIDIA GPU (~800MB-1.2GB, faster processing)
+          - **ShaftSegmentation_CPU.exe** - Works on any PC (~400-600MB)
+
+          Note: CPU version works on both CPU-only and GPU systems. PyTorch will automatically use GPU if available.
 
           ### Features
           - Accepts LAS, E57, PLY, PCD point cloud files
@@ -127,7 +99,6 @@ jobs:
           Built from commit: ${{ github.sha }}
         files: |
           ShaftSegmentation_CPU.exe
-          ShaftSegmentation_GPU.exe
         draft: false
         prerelease: false
       env:
@@ -136,13 +107,9 @@ jobs:
     - name: Output download links
       run: |
         Write-Host "============================================"
-        Write-Host "PUBLIC DOWNLOAD LINKS"
+        Write-Host "PUBLIC DOWNLOAD LINK"
         Write-Host "============================================"
         Write-Host ""
-        Write-Host "CPU Version:"
         Write-Host "https://github.com/${{ github.repository }}/releases/latest/download/ShaftSegmentation_CPU.exe"
-        Write-Host ""
-        Write-Host "GPU Version:"
-        Write-Host "https://github.com/${{ github.repository }}/releases/latest/download/ShaftSegmentation_GPU.exe"
         Write-Host ""
         Write-Host "============================================"
