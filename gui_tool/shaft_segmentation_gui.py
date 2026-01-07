@@ -758,10 +758,11 @@ if USE_PYQT:
 
             settings_layout.addWidget(QLabel("Device:"))
             self.device_combo = QComboBox()
-            self.device_combo.addItem("Auto (GPU if available)")
-            self.device_combo.addItem("CPU")
             if torch.cuda.is_available():
-                self.device_combo.addItem("CUDA")
+                self.device_combo.addItem("CUDA (GPU) - Faster")
+                self.device_combo.addItem("CPU - Slower")
+            else:
+                self.device_combo.addItem("CPU (No GPU detected)")
             settings_layout.addWidget(self.device_combo)
 
             layout.addWidget(settings_group)
