@@ -22,6 +22,19 @@ from typing import Dict, List, Tuple, Optional
 import threading
 import queue
 
+# CRITICAL: Set up DLL search path BEFORE importing torch
+# This fixes PyInstaller bundled torch DLL loading on Windows
+if getattr(sys, 'frozen', False):
+    # Running as compiled exe
+    bundle_dir = Path(sys._MEIPASS)
+    torch_lib = bundle_dir / 'torch' / 'lib'
+    if torch_lib.exists():
+        # Add to PATH environment variable
+        os.environ['PATH'] = str(torch_lib) + os.pathsep + os.environ.get('PATH', '')
+        # Python 3.8+ needs explicit add_dll_directory
+        if hasattr(os, 'add_dll_directory'):
+            os.add_dll_directory(str(torch_lib))
+
 
 def get_resource_path(relative_path):
     """Get absolute path to resource, works for dev and for PyInstaller"""

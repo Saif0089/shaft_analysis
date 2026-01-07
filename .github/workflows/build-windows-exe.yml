@@ -43,11 +43,10 @@ jobs:
       working-directory: gui_tool
       run: |
         # Use --onedir for better PyTorch compatibility
-        # Key fix: use runtime hook to set DLL search path before torch loads
+        # DLL path setup is now in shaft_segmentation_gui.py itself (before torch import)
         pyinstaller --clean --onedir --noconsole --name ShaftSegmentation `
           --add-data "checkpoints;checkpoints" `
           --add-data "models;models" `
-          --runtime-hook "hook-torch.py" `
           --collect-all torch `
           --collect-binaries torch `
           --copy-metadata torch `
