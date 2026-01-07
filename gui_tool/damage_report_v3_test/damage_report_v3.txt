@@ -1,0 +1,152 @@
+======================================================================
+SHAFT STEEL MEMBER DAMAGE DETECTION REPORT v3.0
+======================================================================
+
+Source: /home/administrator/shaft_segmentation/training/inference_slice054_latest/slice_054_predicted.las
+Timestamp: 2026-01-07T20:21:14.022810
+Damage threshold: 5.0cm
+Algorithm version: 3.0
+
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+Total instances analyzed: 41
+  Valid steel members: 24
+    Damaged: 18
+    Healthy: 6
+  Rejected (noise/fragments): 17
+
+Severity breakdown:
+  HIGH (>20cm): 0
+  MEDIUM (10-20cm): 3
+  LOW (5-10cm): 15
+
+----------------------------------------------------------------------
+DAMAGED MEMBERS (sorted by severity)
+----------------------------------------------------------------------
+
+COLUMN #19 - MEDIUM
+  Max deviation: 19.4cm
+  Mean deviation: 7.7cm
+  Damage percentage: 66.7%
+  Confidence: 0.86
+  Length: 3.96m
+  Centroid: (-9.10, 1.15, -526.49)
+
+GUARD #0 - MEDIUM
+  Max deviation: 19.0cm
+  Mean deviation: 11.7cm
+  Damage percentage: 86.7%
+  Confidence: 0.79
+  Length: 5.80m
+  Centroid: (-10.51, 2.61, -527.55)
+
+COLUMN #3 - MEDIUM
+  Max deviation: 12.3cm
+  Mean deviation: 2.4cm
+  Damage percentage: 13.3%
+  Confidence: 0.81
+  Length: 9.99m
+  Centroid: (-12.59, -0.11, -529.70)
+
+GUARD #2 - LOW
+  Max deviation: 8.9cm
+  Mean deviation: 5.1cm
+  Damage percentage: 66.7%
+  Confidence: 0.73
+  Length: 1.03m
+  Centroid: (-10.98, 2.66, -531.42)
+
+GUARD #13 - LOW
+  Max deviation: 7.4cm
+  Mean deviation: 3.1cm
+  Damage percentage: 20.0%
+  Confidence: 0.83
+  Length: 1.28m
+  Centroid: (-9.65, -1.39, -531.42)
+
+BUNTON #6 - LOW
+  Max deviation: 7.1cm
+  Mean deviation: 4.1cm
+  Damage percentage: 40.0%
+  Confidence: 0.76
+  Length: 0.72m
+  Centroid: (-12.07, -0.23, -531.38)
+
+GUARD #6 - LOW
+  Max deviation: 6.2cm
+  Mean deviation: 2.5cm
+  Damage percentage: 20.0%
+  Confidence: 0.92
+  Length: 3.53m
+  Centroid: (-11.53, -0.04, -526.42)
+
+BUNTON #3 - LOW
+  Max deviation: 5.6cm
+  Mean deviation: 2.4cm
+  Damage percentage: 6.7%
+  Confidence: 0.70
+  Length: 0.91m
+  Centroid: (-11.63, 1.84, -531.38)
+
+BUNTON #11 - LOW
+  Max deviation: 5.5cm
+  Mean deviation: 2.6cm
+  Damage percentage: 13.3%
+  Confidence: 0.85
+  Length: 1.04m
+  Centroid: (-13.50, 0.06, -526.37)
+
+GUARD #4 - LOW
+  Max deviation: 4.5cm
+  Mean deviation: 1.3cm
+  Damage percentage: 0.0%
+  Confidence: 0.98
+  Length: 1.88m
+  Centroid: (-12.07, -2.74, -531.40)
+
+----------------------------------------------------------------------
+HEALTHY MEMBERS
+----------------------------------------------------------------------
+
+COLUMN #0
+  Max deviation: 1.8cm (below threshold)
+  Confidence: 0.97
+  Length: 10.00m
+
+COLUMN #2
+  Max deviation: 2.3cm (below threshold)
+  Confidence: 0.98
+  Length: 10.00m
+
+COLUMN #4
+  Max deviation: 1.3cm (below threshold)
+  Confidence: 0.93
+  Length: 10.00m
+
+COLUMN #10
+  Max deviation: 1.8cm (below threshold)
+  Confidence: 0.95
+  Length: 9.99m
+
+COLUMN #16
+  Max deviation: 3.5cm (below threshold)
+  Confidence: 0.86
+  Length: 10.00m
+
+COLUMN #22
+  Max deviation: 3.0cm (below threshold)
+  Confidence: 0.96
+  Length: 2.27m
+
+----------------------------------------------------------------------
+REJECTED INSTANCES (not valid steel members)
+----------------------------------------------------------------------
+  not_elongated: 9
+  cross_section_too_large: 6
+  too_few_points: 1
+  inconsistent_cross_section: 1
+
+======================================================================
+END OF REPORT
+======================================================================
