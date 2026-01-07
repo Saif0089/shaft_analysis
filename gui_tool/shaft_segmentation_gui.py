@@ -22,6 +22,34 @@ from typing import Dict, List, Tuple, Optional
 import threading
 import queue
 
+
+def get_resource_path(relative_path):
+    """Get absolute path to resource, works for dev and for PyInstaller"""
+    if hasattr(sys, '_MEIPASS'):
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        return Path(sys._MEIPASS) / relative_path
+    return Path(__file__).parent / relative_path
+
+
+def get_default_checkpoint():
+    """Find the default checkpoint path"""
+    # Check bundled checkpoint first (PyInstaller)
+    bundled = get_resource_path('checkpoints/latest.pth')
+    if bundled.exists():
+        return str(bundled)
+
+    # Check local checkpoints folder
+    local = Path(__file__).parent / 'checkpoints' / 'latest.pth'
+    if local.exists():
+        return str(local)
+
+    # Check training folder
+    training = Path(__file__).parent.parent / 'training' / 'checkpoints_best' / 'latest.pth'
+    if training.exists():
+        return str(training)
+
+    return ""
+
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -292,8 +320,12 @@ class ShaftSegmentationProcessor:
         if progress_callback:
             progress_callback("Loading model checkpoint...")
 
-        # Try local models first, then training directory
+        # Try bundled models first (PyInstaller), then local, then training directory
         try:
+            # Try bundled path first
+            models_path = get_resource_path('models')
+            if models_path.exists():
+                sys.path.insert(0, str(models_path.parent))
             from models.pointnet2 import PointNet2Segmentation, PointNet2SegmentationMSG, PointNet2SegmentationLight
         except ImportError:
             # Add training directory to path for imports
@@ -684,9 +716,9 @@ if USE_PYQT:
             ckpt_layout.addWidget(QLabel("Model Checkpoint:"))
             self.ckpt_path_edit = QLineEdit()
             # Default checkpoint path
-            default_ckpt = Path(__file__).parent.parent / "training" / "checkpoints_best" / "latest.pth"
-            if default_ckpt.exists():
-                self.ckpt_path_edit.setText(str(default_ckpt))
+            default_ckpt = get_default_checkpoint()
+            if default_ckpt:
+                self.ckpt_path_edit.setText(default_ckpt)
             ckpt_layout.addWidget(self.ckpt_path_edit)
             self.ckpt_browse_btn = QPushButton("Browse...")
             self.ckpt_browse_btn.clicked.connect(self.browse_checkpoint)
@@ -904,9 +936,9 @@ else:
             ckpt_frame.pack(fill=tk.X, pady=2)
             ttk.Label(ckpt_frame, text="Checkpoint:").pack(side=tk.LEFT)
             self.ckpt_path_var = tk.StringVar()
-            default_ckpt = Path(__file__).parent.parent / "training" / "checkpoints_best" / "latest.pth"
-            if default_ckpt.exists():
-                self.ckpt_path_var.set(str(default_ckpt))
+            default_ckpt = get_default_checkpoint()
+            if default_ckpt:
+                self.ckpt_path_var.set(default_ckpt)
             ttk.Entry(ckpt_frame, textvariable=self.ckpt_path_var, width=60).pack(side=tk.LEFT, padx=5)
             ttk.Button(ckpt_frame, text="Browse...", command=self.browse_checkpoint).pack(side=tk.LEFT)
 
