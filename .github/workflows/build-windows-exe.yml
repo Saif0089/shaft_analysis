@@ -1,0 +1,148 @@
+name: Build Windows Executable
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'gui_tool/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build CPU & GPU and Create Release
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install base dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller
+        pip install PyQt5>=5.15.0
+        pip install numpy>=1.21.0
+        pip install laspy>=2.0.0
+        pip install plyfile>=0.7.0
+        pip install matplotlib>=3.5.0
+
+    # Build CPU Version
+    - name: Install PyTorch CPU
+      run: |
+        pip uninstall -y torch torchvision 2>$null
+        pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+    - name: Build CPU executable
+      working-directory: gui_tool
+      run: |
+        pyinstaller --clean --onefile --noconsole --name ShaftSegmentation_CPU `
+          --add-data "checkpoints;checkpoints" `
+          --add-data "models;models" `
+          --hidden-import torch `
+          --hidden-import torch.nn `
+          --hidden-import torch.nn.functional `
+          --hidden-import PyQt5 `
+          --hidden-import PyQt5.QtWidgets `
+          --hidden-import PyQt5.QtCore `
+          --hidden-import PyQt5.QtGui `
+          --hidden-import numpy `
+          --hidden-import laspy `
+          --hidden-import plyfile `
+          --hidden-import matplotlib `
+          --hidden-import matplotlib.pyplot `
+          shaft_segmentation_gui.py
+
+        Move-Item dist/ShaftSegmentation_CPU.exe ../ShaftSegmentation_CPU.exe
+
+    # Build GPU Version
+    - name: Install PyTorch CUDA
+      run: |
+        pip uninstall -y torch torchvision
+        pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+
+    - name: Build GPU executable
+      working-directory: gui_tool
+      run: |
+        Remove-Item -Recurse -Force build, dist, *.spec -ErrorAction SilentlyContinue
+        pyinstaller --clean --onefile --noconsole --name ShaftSegmentation_GPU `
+          --add-data "checkpoints;checkpoints" `
+          --add-data "models;models" `
+          --hidden-import torch `
+          --hidden-import torch.nn `
+          --hidden-import torch.nn.functional `
+          --hidden-import PyQt5 `
+          --hidden-import PyQt5.QtWidgets `
+          --hidden-import PyQt5.QtCore `
+          --hidden-import PyQt5.QtGui `
+          --hidden-import numpy `
+          --hidden-import laspy `
+          --hidden-import plyfile `
+          --hidden-import matplotlib `
+          --hidden-import matplotlib.pyplot `
+          shaft_segmentation_gui.py
+
+        Move-Item dist/ShaftSegmentation_GPU.exe ../ShaftSegmentation_GPU.exe
+
+    - name: Get version info
+      id: version
+      run: |
+        $date = Get-Date -Format "yyyy.MM.dd"
+        $sha = "${{ github.sha }}".Substring(0, 7)
+        echo "version=v$date-$sha" >> $env:GITHUB_OUTPUT
+        echo "date=$date" >> $env:GITHUB_OUTPUT
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ steps.version.outputs.version }}
+        name: Shaft Segmentation Tool ${{ steps.version.outputs.date }}
+        body: |
+          ## Shaft Point Cloud Segmentation Tool
+
+          **Model:** Epoch 341 (93.4% accuracy, 84.3% mIoU)
+
+          ### Downloads
+          - **ShaftSegmentation_CPU.exe** - For PCs without GPU (~400-600MB)
+          - **ShaftSegmentation_GPU.exe** - For PCs with NVIDIA GPU (~800MB-1.2GB, faster processing)
+
+          ### Features
+          - Accepts LAS, E57, PLY, PCD point cloud files
+          - Automatic 10m vertical slicing
+          - 8-class segmentation: wall, pipe, guard, bunton, wire, column, sheet, column2
+          - Outputs combined PLY + per-class family PLYs + visualizations
+
+          ### Usage
+          1. Download the appropriate .exe for your system
+          2. Double-click to run (no installation needed)
+          3. Select your point cloud file and output directory
+          4. Click "Start Processing"
+
+          Built from commit: ${{ github.sha }}
+        files: |
+          ShaftSegmentation_CPU.exe
+          ShaftSegmentation_GPU.exe
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Output download links
+      run: |
+        Write-Host "============================================"
+        Write-Host "PUBLIC DOWNLOAD LINKS"
+        Write-Host "============================================"
+        Write-Host ""
+        Write-Host "CPU Version:"
+        Write-Host "https://github.com/${{ github.repository }}/releases/latest/download/ShaftSegmentation_CPU.exe"
+        Write-Host ""
+        Write-Host "GPU Version:"
+        Write-Host "https://github.com/${{ github.repository }}/releases/latest/download/ShaftSegmentation_GPU.exe"
+        Write-Host ""
+        Write-Host "============================================"
