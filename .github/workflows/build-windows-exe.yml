@@ -65,6 +65,39 @@ jobs:
           --hidden-import sklearn.decomposition `
           shaft_segmentation_gui.py
 
+    - name: Test EXE launches
+      working-directory: gui_tool/dist/ShaftSegmentation
+      run: |
+        Write-Host "Testing if EXE can start..."
+        $proc = Start-Process -FilePath ".\ShaftSegmentation.exe" -PassThru
+        Start-Sleep -Seconds 15
+        if ($proc.HasExited) {
+          Write-Host "Process exited with code: $($proc.ExitCode)"
+          if ($proc.ExitCode -ne 0) {
+            throw "EXE crashed on startup with code $($proc.ExitCode)!"
+          }
+          Write-Host "Process exited cleanly"
+        } else {
+          Write-Host "EXE is running successfully after 15 seconds!"
+          $proc.Kill()
+        }
+
+    - name: Take screenshot of running app
+      working-directory: gui_tool/dist/ShaftSegmentation
+      run: |
+        pip install pyautogui pillow
+        $proc = Start-Process -FilePath ".\ShaftSegmentation.exe" -PassThru
+        Start-Sleep -Seconds 10
+        python -c "import pyautogui; s=pyautogui.screenshot(); s.save('../../../screenshot.png'); print('Screenshot saved!')"
+        if (-not $proc.HasExited) { $proc.Kill() }
+
+    - name: Upload screenshot
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-screenshot
+        path: screenshot.png
+        if-no-files-found: warn
+
     - name: Create ZIP archive
       working-directory: gui_tool
       run: |
