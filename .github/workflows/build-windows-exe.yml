@@ -42,12 +42,16 @@ jobs:
     - name: Build CPU executable
       working-directory: gui_tool
       run: |
-        pyinstaller --clean --onefile --noconsole --name ShaftSegmentation_CPU `
+        # Use --onedir for better PyTorch compatibility
+        pyinstaller --clean --onedir --noconsole --name ShaftSegmentation `
           --add-data "checkpoints;checkpoints" `
           --add-data "models;models" `
           --hidden-import torch `
           --hidden-import torch.nn `
           --hidden-import torch.nn.functional `
+          --hidden-import torch.utils `
+          --hidden-import torch.utils.data `
+          --collect-all torch `
           --hidden-import PyQt5 `
           --hidden-import PyQt5.QtWidgets `
           --hidden-import PyQt5.QtCore `
@@ -57,9 +61,14 @@ jobs:
           --hidden-import plyfile `
           --hidden-import matplotlib `
           --hidden-import matplotlib.pyplot `
+          --hidden-import sklearn `
+          --hidden-import sklearn.decomposition `
           shaft_segmentation_gui.py
 
-        Move-Item dist/ShaftSegmentation_CPU.exe ../ShaftSegmentation_CPU.exe
+    - name: Create ZIP archive
+      working-directory: gui_tool
+      run: |
+        Compress-Archive -Path dist/ShaftSegmentation -DestinationPath ../ShaftSegmentation_CPU.zip
 
     - name: Get version info
       id: version
@@ -80,9 +89,9 @@ jobs:
           **Model:** Epoch 341 (93.4% accuracy, 84.3% mIoU)
 
           ### Downloads
-          - **ShaftSegmentation_CPU.exe** - Works on any PC (~400-600MB)
+          - **ShaftSegmentation_CPU.zip** - Works on any PC (~200MB compressed)
 
-          Note: CPU version works on both CPU-only and GPU systems. PyTorch will automatically use GPU if available.
+          **Installation:** Extract the ZIP and run `ShaftSegmentation.exe` from the extracted folder.
 
           ### Features
           - Accepts LAS, E57, PLY, PCD point cloud files
@@ -98,7 +107,7 @@ jobs:
 
           Built from commit: ${{ github.sha }}
         files: |
-          ShaftSegmentation_CPU.exe
+          ShaftSegmentation_CPU.zip
         draft: false
         prerelease: false
       env:
@@ -110,6 +119,6 @@ jobs:
         Write-Host "PUBLIC DOWNLOAD LINK"
         Write-Host "============================================"
         Write-Host ""
-        Write-Host "https://github.com/${{ github.repository }}/releases/latest/download/ShaftSegmentation_CPU.exe"
+        Write-Host "https://github.com/${{ github.repository }}/releases/latest/download/ShaftSegmentation_CPU.zip"
         Write-Host ""
         Write-Host "============================================"
