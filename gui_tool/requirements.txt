@@ -1,0 +1,22 @@
+# Shaft Segmentation GUI Tool Requirements
+# For Windows compatibility
+
+# Core
+numpy>=1.21.0
+torch>=1.10.0
+torchvision>=0.11.0
+
+# GUI (PyQt5 preferred, tkinter as fallback)
+PyQt5>=5.15.0
+
+# Point cloud formats
+laspy>=2.0.0
+# pye57>=0.3.0  # Optional: for E57 support
+open3d>=0.15.0  # For PLY/PCD support
+plyfile>=0.7.0  # Backup PLY support
+
+# Visualization
+matplotlib>=3.5.0
+
+# Utilities
+tqdm>=4.62.0
