@@ -1,0 +1,1608 @@
+{
+  "metadata": {
+    "timestamp": "2026-01-07T20:45:16.506490",
+    "source_directory": "integration_test_output/classified_families",
+    "algorithm_version": "4.0",
+    "damage_threshold_cm": 5.0
+  },
+  "summary": {
+    "total_instances": 71,
+    "valid_members": 53,
+    "damaged_members": 24,
+    "healthy_members": 29,
+    "rejected_instances": 18,
+    "severity_breakdown": {
+      "NONE": 29,
+      "LOW": 12,
+      "MEDIUM": 4,
+      "HIGH": 7,
+      "SEVERE": 1
+    }
+  },
+  "damaged_members": [
+    {
+      "member_id": 6,
+      "member_type": "guards",
+      "n_points": 3727,
+      "centroid": [
+        -12.073246955871582,
+        -2.7295920848846436,
+        -531.3920288085938
+      ],
+      "dimensions": {
+        "length_m": 0.3179999887943268,
+        "width_m": 0.5799999833106995,
+        "height_m": 0.33000001311302185
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 66.81,
+        "mean_deviation_cm": 23.82,
+        "severity": "SEVERE",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 4,
+      "member_type": "guards",
+      "n_points": 3659,
+      "centroid": [
+        -12.068150520324707,
+        -2.7184994220733643,
+        -526.3886108398438
+      ],
+      "dimensions": {
+        "length_m": 0.4650000035762787,
+        "width_m": 0.5899999737739563,
+        "height_m": 0.3499999940395355
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 46.43,
+        "mean_deviation_cm": 15.7,
+        "severity": "HIGH",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 14,
+      "member_type": "guards",
+      "n_points": 3976,
+      "centroid": [
+        -10.020574569702148,
+        -3.192850351333618,
+        -526.3943481445312
+      ],
+      "dimensions": {
+        "length_m": 0.33000001311302185,
+        "width_m": 0.46000000834465027,
+        "height_m": 0.3799999952316284
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 42.77,
+        "mean_deviation_cm": 16.04,
+        "severity": "HIGH",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 12,
+      "member_type": "guards",
+      "n_points": 4058,
+      "centroid": [
+        -10.01282787322998,
+        -3.1735198497772217,
+        -531.3997802734375
+      ],
+      "dimensions": {
+        "length_m": 0.7829999923706055,
+        "width_m": 0.6499999761581421,
+        "height_m": 0.38999998569488525
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 34.41,
+        "mean_deviation_cm": 11.8,
+        "severity": "HIGH",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 7,
+      "member_type": "guards",
+      "n_points": 9018,
+      "centroid": [
+        -11.525748252868652,
+        -0.02026432193815708,
+        -531.4149780273438
+      ],
+      "dimensions": {
+        "length_m": 1.8020000457763672,
+        "width_m": 0.8500000238418579,
+        "height_m": 0.5400000214576721
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 34.29,
+        "mean_deviation_cm": 12.93,
+        "severity": "HIGH",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 1,
+      "member_type": "guards",
+      "n_points": 306,
+      "centroid": [
+        -7.607772350311279,
+        0.04908495396375656,
+        -530.5951538085938
+      ],
+      "dimensions": {
+        "length_m": 1.5089999437332153,
+        "width_m": 0.8299999833106995,
+        "height_m": 1.4900000095367432
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 34.23,
+        "mean_deviation_cm": 17.33,
+        "severity": "HIGH",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 9,
+      "member_type": "guards",
+      "n_points": 412,
+      "centroid": [
+        -8.861394882202148,
+        2.514320135116577,
+        -526.477294921875
+      ],
+      "dimensions": {
+        "length_m": 0.2329999953508377,
+        "width_m": 0.3499999940395355,
+        "height_m": 0.3700000047683716
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 34.2,
+        "mean_deviation_cm": 14.84,
+        "severity": "HIGH",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 3,
+      "member_type": "columns",
+      "n_points": 348,
+      "centroid": [
+        -13.844446182250977,
+        -1.0974695682525635,
+        -527.9508056640625
+      ],
+      "dimensions": {
+        "length_m": 3.8450000286102295,
+        "width_m": 0.09000000357627869,
+        "height_m": 0.47999998927116394
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 31.9,
+        "mean_deviation_cm": 10.42,
+        "severity": "HIGH",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 17,
+      "member_type": "guards",
+      "n_points": 2955,
+      "centroid": [
+        -9.293956756591797,
+        0.45602717995643616,
+        -526.4227294921875
+      ],
+      "dimensions": {
+        "length_m": 1.1480000019073486,
+        "width_m": 0.6800000071525574,
+        "height_m": 0.8799999952316284
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 29.59,
+        "mean_deviation_cm": 9.46,
+        "severity": "MEDIUM",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 22,
+      "member_type": "columns",
+      "n_points": 9978,
+      "centroid": [
+        -9.414895057678223,
+        -0.7486706376075745,
+        -529.32080078125
+      ],
+      "dimensions": {
+        "length_m": 9.491000175476074,
+        "width_m": 0.6399999856948853,
+        "height_m": 1.8300000429153442
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 28.57,
+        "mean_deviation_cm": 8.56,
+        "severity": "MEDIUM",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 10,
+      "member_type": "guards",
+      "n_points": 2756,
+      "centroid": [
+        -9.289176940917969,
+        0.4831637442111969,
+        -531.4315795898438
+      ],
+      "dimensions": {
+        "length_m": 1.4010000228881836,
+        "width_m": 0.6499999761581421,
+        "height_m": 0.49000000953674316
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 26.01,
+        "mean_deviation_cm": 9.1,
+        "severity": "MEDIUM",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 5,
+      "member_type": "guards",
+      "n_points": 9039,
+      "centroid": [
+        -11.528105735778809,
+        -0.030429303646087646,
+        -526.4100341796875
+      ],
+      "dimensions": {
+        "length_m": 2.2869999408721924,
+        "width_m": 0.8500000238418579,
+        "height_m": 0.7200000286102295
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 24.7,
+        "mean_deviation_cm": 10.8,
+        "severity": "MEDIUM",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 8,
+      "member_type": "columns",
+      "n_points": 375,
+      "centroid": [
+        -12.754302978515625,
+        -2.531506061553955,
+        -527.4736328125
+      ],
+      "dimensions": {
+        "length_m": 1.9429999589920044,
+        "width_m": 0.10000000149011612,
+        "height_m": 0.4300000071525574
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 18.85,
+        "mean_deviation_cm": 9.93,
+        "severity": "LOW",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 15,
+      "member_type": "columns",
+      "n_points": 774,
+      "centroid": [
+        -7.599294662475586,
+        -2.7111237049102783,
+        -529.679443359375
+      ],
+      "dimensions": {
+        "length_m": 1.8009999990463257,
+        "width_m": 0.3799999952316284,
+        "height_m": 0.5199999809265137
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 15.34,
+        "mean_deviation_cm": 6.45,
+        "severity": "LOW",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 12,
+      "member_type": "columns",
+      "n_points": 836,
+      "centroid": [
+        -7.30732536315918,
+        -2.427290678024292,
+        -533.907958984375
+      ],
+      "dimensions": {
+        "length_m": 1.4490000009536743,
+        "width_m": 0.20000000298023224,
+        "height_m": 0.3100000023841858
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 14.27,
+        "mean_deviation_cm": 5.01,
+        "severity": "LOW",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 5,
+      "member_type": "columns_secondary",
+      "n_points": 588,
+      "centroid": [
+        -8.536968231201172,
+        -0.9757825136184692,
+        -524.9566040039062
+      ],
+      "dimensions": {
+        "length_m": 0.8389999866485596,
+        "width_m": 0.9900000095367432,
+        "height_m": 1.2899999618530273
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 13.97,
+        "mean_deviation_cm": 5.72,
+        "severity": "LOW",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 13,
+      "member_type": "columns",
+      "n_points": 2269,
+      "centroid": [
+        -7.543720245361328,
+        -1.1472235918045044,
+        -531.4655151367188
+      ],
+      "dimensions": {
+        "length_m": 4.933000087738037,
+        "width_m": 0.27000001072883606,
+        "height_m": 0.6399999856948853
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 13.79,
+        "mean_deviation_cm": 7.46,
+        "severity": "LOW",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 11,
+      "member_type": "buntons",
+      "n_points": 2344,
+      "centroid": [
+        -10.571569442749023,
+        0.12749165296554565,
+        -526.4989013671875
+      ],
+      "dimensions": {
+        "length_m": 1.774999976158142,
+        "width_m": 0.5299999713897705,
+        "height_m": 0.25999999046325684
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 12.73,
+        "mean_deviation_cm": 5.77,
+        "severity": "LOW",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 5,
+      "member_type": "columns",
+      "n_points": 18901,
+      "centroid": [
+        -12.588800430297852,
+        -0.11093320697546005,
+        -529.6453247070312
+      ],
+      "dimensions": {
+        "length_m": 9.489999771118164,
+        "width_m": 0.550000011920929,
+        "height_m": 1.2200000286102295
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 12.68,
+        "mean_deviation_cm": 2.02,
+        "severity": "LOW",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 16,
+      "member_type": "guards",
+      "n_points": 1551,
+      "centroid": [
+        -9.648008346557617,
+        -1.3140367269515991,
+        -526.4175415039062
+      ],
+      "dimensions": {
+        "length_m": 1.1670000553131104,
+        "width_m": 0.4000000059604645,
+        "height_m": 0.49000000953674316
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 11.2,
+        "mean_deviation_cm": 4.97,
+        "severity": "LOW",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 2,
+      "member_type": "buntons",
+      "n_points": 743,
+      "centroid": [
+        -11.63808822631836,
+        1.8472669124603271,
+        -526.3781127929688
+      ],
+      "dimensions": {
+        "length_m": 0.5550000071525574,
+        "width_m": 0.36000001430511475,
+        "height_m": 0.41999998688697815
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 10.97,
+        "mean_deviation_cm": 6.07,
+        "severity": "LOW",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 2,
+      "member_type": "guards",
+      "n_points": 875,
+      "centroid": [
+        -10.981266021728516,
+        2.667163610458374,
+        -526.41455078125
+      ],
+      "dimensions": {
+        "length_m": 0.5730000138282776,
+        "width_m": 0.25,
+        "height_m": 0.33000001311302185
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 10.89,
+        "mean_deviation_cm": 3.82,
+        "severity": "LOW",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 0,
+      "member_type": "buntons",
+      "n_points": 992,
+      "centroid": [
+        -12.534624099731445,
+        -2.265346050262451,
+        -526.3497924804688
+      ],
+      "dimensions": {
+        "length_m": 0.8190000057220459,
+        "width_m": 0.36000001430511475,
+        "height_m": 0.4699999988079071
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 10.21,
+        "mean_deviation_cm": 5.31,
+        "severity": "LOW",
+        "is_damaged": true
+      }
+    },
+    {
+      "member_id": 9,
+      "member_type": "buntons",
+      "n_points": 842,
+      "centroid": [
+        -11.622285842895508,
+        1.836221694946289,
+        -531.3766479492188
+      ],
+      "dimensions": {
+        "length_m": 0.7549999952316284,
+        "width_m": 0.36000001430511475,
+        "height_m": 0.3199999928474426
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 10.1,
+        "mean_deviation_cm": 2.88,
+        "severity": "LOW",
+        "is_damaged": true
+      }
+    }
+  ],
+  "healthy_members": [
+    {
+      "member_id": 1,
+      "member_type": "buntons",
+      "n_points": 1641,
+      "centroid": [
+        -13.506267547607422,
+        0.056496135890483856,
+        -526.3649291992188
+      ],
+      "dimensions": {
+        "length_m": 0.859000027179718,
+        "width_m": 0.4099999964237213,
+        "height_m": 0.25
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 7.39,
+        "mean_deviation_cm": 3.24,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 5,
+      "member_type": "buntons",
+      "n_points": 1697,
+      "centroid": [
+        -13.511940956115723,
+        0.05682966113090515,
+        -531.3706665039062
+      ],
+      "dimensions": {
+        "length_m": 0.871999979019165,
+        "width_m": 0.41999998688697815,
+        "height_m": 0.30000001192092896
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 6.59,
+        "mean_deviation_cm": 3.08,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 7,
+      "member_type": "buntons",
+      "n_points": 2464,
+      "centroid": [
+        -10.565202713012695,
+        0.10044657438993454,
+        -531.442138671875
+      ],
+      "dimensions": {
+        "length_m": 1.8220000267028809,
+        "width_m": 0.5699999928474426,
+        "height_m": 0.14000000059604645
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 3.18,
+        "mean_deviation_cm": 1.47,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 0,
+      "member_type": "columns",
+      "n_points": 11332,
+      "centroid": [
+        -11.74792766571045,
+        -1.7457412481307983,
+        -529.6915893554688
+      ],
+      "dimensions": {
+        "length_m": 9.5,
+        "width_m": 0.2199999988079071,
+        "height_m": 0.4699999988079071
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 3.04,
+        "mean_deviation_cm": 1.17,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 1,
+      "member_type": "columns",
+      "n_points": 557,
+      "centroid": [
+        -9.392976760864258,
+        2.969696521759033,
+        -529.720458984375
+      ],
+      "dimensions": {
+        "length_m": 3.9049999713897705,
+        "width_m": 0.07000000029802322,
+        "height_m": 0.11999999731779099
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 2.94,
+        "mean_deviation_cm": 1.25,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 4,
+      "member_type": "columns",
+      "n_points": 8593,
+      "centroid": [
+        -11.066411972045898,
+        1.6428401470184326,
+        -529.6589965820312
+      ],
+      "dimensions": {
+        "length_m": 9.5,
+        "width_m": 0.20000000298023224,
+        "height_m": 0.33000001311302185
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 2.12,
+        "mean_deviation_cm": 0.92,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 6,
+      "member_type": "columns",
+      "n_points": 10405,
+      "centroid": [
+        -12.187882423400879,
+        1.8302228450775146,
+        -529.6439819335938
+      ],
+      "dimensions": {
+        "length_m": 9.489999771118164,
+        "width_m": 0.6100000143051147,
+        "height_m": 1.5199999809265137
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 1.49,
+        "mean_deviation_cm": 0.68,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 7,
+      "member_type": "columns",
+      "n_points": 2819,
+      "centroid": [
+        -12.897311210632324,
+        -2.121438503265381,
+        -529.5795288085938
+      ],
+      "dimensions": {
+        "length_m": 9.470000267028809,
+        "width_m": 0.18000000715255737,
+        "height_m": 0.20000000298023224
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 3.0,
+        "mean_deviation_cm": 0.57,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 9,
+      "member_type": "columns",
+      "n_points": 410,
+      "centroid": [
+        -12.742308616638184,
+        -2.530160665512085,
+        -525.4110717773438
+      ],
+      "dimensions": {
+        "length_m": 1.4550000429153442,
+        "width_m": 0.05000000074505806,
+        "height_m": 0.23999999463558197
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 1.42,
+        "mean_deviation_cm": 0.67,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 10,
+      "member_type": "columns",
+      "n_points": 432,
+      "centroid": [
+        -6.886386394500732,
+        0.48219963908195496,
+        -533.5161743164062
+      ],
+      "dimensions": {
+        "length_m": 2.4549999237060547,
+        "width_m": 0.03999999910593033,
+        "height_m": 0.18000000715255737
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 0.5,
+        "mean_deviation_cm": 0.07,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 17,
+      "member_type": "columns",
+      "n_points": 11980,
+      "centroid": [
+        -9.930484771728516,
+        -2.114237070083618,
+        -529.6463012695312
+      ],
+      "dimensions": {
+        "length_m": 9.479999542236328,
+        "width_m": 0.33000001311302185,
+        "height_m": 0.7900000214576721
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 3.17,
+        "mean_deviation_cm": 1.24,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 18,
+      "member_type": "columns",
+      "n_points": 399,
+      "centroid": [
+        -8.54936695098877,
+        -3.516049385070801,
+        -533.7734985351562
+      ],
+      "dimensions": {
+        "length_m": 1.399999976158142,
+        "width_m": 0.05000000074505806,
+        "height_m": 0.05999999865889549
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 1.08,
+        "mean_deviation_cm": 0.5,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 19,
+      "member_type": "columns",
+      "n_points": 694,
+      "centroid": [
+        -8.354586601257324,
+        -3.559938669204712,
+        -531.8760375976562
+      ],
+      "dimensions": {
+        "length_m": 2.4100000858306885,
+        "width_m": 0.11999999731779099,
+        "height_m": 0.1599999964237213
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 3.69,
+        "mean_deviation_cm": 2.09,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 20,
+      "member_type": "columns",
+      "n_points": 493,
+      "centroid": [
+        -7.058134078979492,
+        -0.2641989290714264,
+        -532.293212890625
+      ],
+      "dimensions": {
+        "length_m": 1.1959999799728394,
+        "width_m": 0.1899999976158142,
+        "height_m": 0.20000000298023224
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 3.33,
+        "mean_deviation_cm": 1.87,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 23,
+      "member_type": "columns",
+      "n_points": 398,
+      "centroid": [
+        -8.546758651733398,
+        -3.514906883239746,
+        -528.8365478515625
+      ],
+      "dimensions": {
+        "length_m": 3.2100000381469727,
+        "width_m": 0.12999999523162842,
+        "height_m": 0.2800000011920929
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 2.83,
+        "mean_deviation_cm": 0.71,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 24,
+      "member_type": "columns",
+      "n_points": 338,
+      "centroid": [
+        -8.558958053588867,
+        -3.514237880706787,
+        -525.692138671875
+      ],
+      "dimensions": {
+        "length_m": 1.7649999856948853,
+        "width_m": 0.07000000029802322,
+        "height_m": 0.15000000596046448
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 1.86,
+        "mean_deviation_cm": 0.72,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 25,
+      "member_type": "columns",
+      "n_points": 363,
+      "centroid": [
+        -8.355040550231934,
+        -3.5666935443878174,
+        -525.2086791992188
+      ],
+      "dimensions": {
+        "length_m": 1.024999976158142,
+        "width_m": 0.09000000357627869,
+        "height_m": 0.11999999731779099
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 2.08,
+        "mean_deviation_cm": 0.9,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 26,
+      "member_type": "columns",
+      "n_points": 704,
+      "centroid": [
+        -9.239079475402832,
+        1.266365885734558,
+        -532.2293090820312
+      ],
+      "dimensions": {
+        "length_m": 1.3600000143051147,
+        "width_m": 0.10999999940395355,
+        "height_m": 0.23000000417232513
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 4.47,
+        "mean_deviation_cm": 2.9,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 28,
+      "member_type": "columns",
+      "n_points": 520,
+      "centroid": [
+        -8.921690940856934,
+        1.032230019569397,
+        -527.8153076171875
+      ],
+      "dimensions": {
+        "length_m": 2.2009999752044678,
+        "width_m": 0.11999999731779099,
+        "height_m": 0.3499999940395355
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 5.26,
+        "mean_deviation_cm": 2.66,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 29,
+      "member_type": "columns",
+      "n_points": 634,
+      "centroid": [
+        -9.227937698364258,
+        1.2451462745666504,
+        -525.738525390625
+      ],
+      "dimensions": {
+        "length_m": 1.309999942779541,
+        "width_m": 0.18000000715255737,
+        "height_m": 0.25
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 7.81,
+        "mean_deviation_cm": 1.44,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 30,
+      "member_type": "columns",
+      "n_points": 803,
+      "centroid": [
+        -9.235288619995117,
+        1.2595046758651733,
+        -530.4212646484375
+      ],
+      "dimensions": {
+        "length_m": 1.9500000476837158,
+        "width_m": 0.1899999976158142,
+        "height_m": 0.20999999344348907
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 2.93,
+        "mean_deviation_cm": 1.07,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 31,
+      "member_type": "columns",
+      "n_points": 1025,
+      "centroid": [
+        -9.24455738067627,
+        1.2572206258773804,
+        -527.718017578125
+      ],
+      "dimensions": {
+        "length_m": 2.299999952316284,
+        "width_m": 0.11999999731779099,
+        "height_m": 0.14000000059604645
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 3.42,
+        "mean_deviation_cm": 0.96,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 0,
+      "member_type": "guards",
+      "n_points": 922,
+      "centroid": [
+        -10.976190567016602,
+        2.6581132411956787,
+        -531.4157104492188
+      ],
+      "dimensions": {
+        "length_m": 0.6230000257492065,
+        "width_m": 0.20999999344348907,
+        "height_m": 0.33000001311302185
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 9.38,
+        "mean_deviation_cm": 5.1,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 11,
+      "member_type": "guards",
+      "n_points": 1583,
+      "centroid": [
+        -9.651446342468262,
+        -1.3737239837646484,
+        -531.4212646484375
+      ],
+      "dimensions": {
+        "length_m": 1.184000015258789,
+        "width_m": 0.4399999976158142,
+        "height_m": 0.4300000071525574
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 6.23,
+        "mean_deviation_cm": 3.05,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 15,
+      "member_type": "guards",
+      "n_points": 2630,
+      "centroid": [
+        -9.618583679199219,
+        -2.604443311691284,
+        -528.5507202148438
+      ],
+      "dimensions": {
+        "length_m": 3.4100000858306885,
+        "width_m": 0.10999999940395355,
+        "height_m": 0.25999999046325684
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 1.12,
+        "mean_deviation_cm": 0.66,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 0,
+      "member_type": "columns_secondary",
+      "n_points": 3360,
+      "centroid": [
+        -12.356310844421387,
+        0.919316291809082,
+        -529.656005859375
+      ],
+      "dimensions": {
+        "length_m": 9.449999809265137,
+        "width_m": 0.05999999865889549,
+        "height_m": 0.07999999821186066
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 0.98,
+        "mean_deviation_cm": 0.53,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 1,
+      "member_type": "columns_secondary",
+      "n_points": 835,
+      "centroid": [
+        -9.234585762023926,
+        1.2570329904556274,
+        -533.8068237304688
+      ],
+      "dimensions": {
+        "length_m": 1.656000018119812,
+        "width_m": 0.10000000149011612,
+        "height_m": 0.1899999976158142
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 4.13,
+        "mean_deviation_cm": 1.7,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 2,
+      "member_type": "columns_secondary",
+      "n_points": 3347,
+      "centroid": [
+        -10.841470718383789,
+        -1.9217487573623657,
+        -529.6557006835938
+      ],
+      "dimensions": {
+        "length_m": 9.460000038146973,
+        "width_m": 0.07999999821186066,
+        "height_m": 0.12999999523162842
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 1.11,
+        "mean_deviation_cm": 0.58,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    },
+    {
+      "member_id": 3,
+      "member_type": "columns_secondary",
+      "n_points": 678,
+      "centroid": [
+        -7.463171482086182,
+        -1.0038762092590332,
+        -533.0477905273438
+      ],
+      "dimensions": {
+        "length_m": 2.990000009536743,
+        "width_m": 0.27000001072883606,
+        "height_m": 0.3799999952316284
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 1.28,
+        "mean_deviation_cm": 0.58,
+        "severity": "NONE",
+        "is_damaged": false
+      }
+    }
+  ],
+  "rejected_instances": [
+    {
+      "member_id": 3,
+      "member_type": "buntons",
+      "n_points": 208,
+      "centroid": [
+        -12.61225414276123,
+        2.0378851890563965,
+        -526.3759155273438
+      ],
+      "dimensions": {
+        "length_m": 0.5299999713897705,
+        "width_m": 0.23000000417232513,
+        "height_m": 0.5299999713897705
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too few points (208 < 500)"
+    },
+    {
+      "member_id": 4,
+      "member_type": "buntons",
+      "n_points": 999,
+      "centroid": [
+        -12.578265190124512,
+        -2.2557408809661865,
+        -531.34716796875
+      ],
+      "dimensions": {
+        "length_m": 1.1299999952316284,
+        "width_m": 1.0199999809265137,
+        "height_m": 0.7099999785423279
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Not horizontal (Z=0.71m vs horiz=1.13m)"
+    },
+    {
+      "member_id": 6,
+      "member_type": "buntons",
+      "n_points": 1138,
+      "centroid": [
+        -12.078804969787598,
+        -0.23334790766239166,
+        -531.3814697265625
+      ],
+      "dimensions": {
+        "length_m": 0.6700000166893005,
+        "width_m": 0.33000001311302185,
+        "height_m": 0.2199999988079071
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too short (0.67m < 0.8m)"
+    },
+    {
+      "member_id": 8,
+      "member_type": "buntons",
+      "n_points": 318,
+      "centroid": [
+        -12.694846153259277,
+        2.053490161895752,
+        -531.3778686523438
+      ],
+      "dimensions": {
+        "length_m": 0.7300000190734863,
+        "width_m": 0.3400000035762787,
+        "height_m": 0.5
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too few points (318 < 500)"
+    },
+    {
+      "member_id": 10,
+      "member_type": "buntons",
+      "n_points": 561,
+      "centroid": [
+        -8.092141151428223,
+        -1.14657723903656,
+        -525.4360961914062
+      ],
+      "dimensions": {
+        "length_m": 1.340000033378601,
+        "width_m": 0.6499999761581421,
+        "height_m": 1.0299999713897705
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Not horizontal (Z=1.34m vs horiz=1.03m)"
+    },
+    {
+      "member_id": 12,
+      "member_type": "buntons",
+      "n_points": 1219,
+      "centroid": [
+        -12.054296493530273,
+        -0.2330600619316101,
+        -526.3732299804688
+      ],
+      "dimensions": {
+        "length_m": 0.7300000190734863,
+        "width_m": 0.3100000023841858,
+        "height_m": 0.20999999344348907
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too short (0.73m < 0.8m)"
+    },
+    {
+      "member_id": 2,
+      "member_type": "columns",
+      "n_points": 239,
+      "centroid": [
+        -9.395499229431152,
+        2.96773099899292,
+        -533.7528076171875
+      ],
+      "dimensions": {
+        "length_m": 1.9700000286102295,
+        "width_m": 0.03999999910593033,
+        "height_m": 0.20000000298023224
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too few points (239 < 300)"
+    },
+    {
+      "member_id": 11,
+      "member_type": "columns",
+      "n_points": 113,
+      "centroid": [
+        -7.585483074188232,
+        -2.666902780532837,
+        -532.4739379882812
+      ],
+      "dimensions": {
+        "length_m": 0.5400000214576721,
+        "width_m": 0.28999999165534973,
+        "height_m": 0.4099999964237213
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too few points (113 < 300)"
+    },
+    {
+      "member_id": 14,
+      "member_type": "columns",
+      "n_points": 177,
+      "centroid": [
+        -7.559277057647705,
+        -2.077571153640747,
+        -529.1717529296875
+      ],
+      "dimensions": {
+        "length_m": 1.190000057220459,
+        "width_m": 0.15000000596046448,
+        "height_m": 0.23000000417232513
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too few points (177 < 300)"
+    },
+    {
+      "member_id": 16,
+      "member_type": "columns",
+      "n_points": 174,
+      "centroid": [
+        -9.523059844970703,
+        -2.077759027481079,
+        -528.2470092773438
+      ],
+      "dimensions": {
+        "length_m": 1.7599999904632568,
+        "width_m": 0.07000000029802322,
+        "height_m": 0.07999999821186066
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too few points (174 < 300)"
+    },
+    {
+      "member_id": 21,
+      "member_type": "columns",
+      "n_points": 201,
+      "centroid": [
+        -7.0712890625,
+        -0.27348268032073975,
+        -530.9902954101562
+      ],
+      "dimensions": {
+        "length_m": 0.949999988079071,
+        "width_m": 0.11999999731779099,
+        "height_m": 0.17000000178813934
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too few points (201 < 300)"
+    },
+    {
+      "member_id": 27,
+      "member_type": "columns",
+      "n_points": 186,
+      "centroid": [
+        -8.91005802154541,
+        1.0621505975723267,
+        -530.393310546875
+      ],
+      "dimensions": {
+        "length_m": 1.690000057220459,
+        "width_m": 0.10000000149011612,
+        "height_m": 0.2199999988079071
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too few points (186 < 300)"
+    },
+    {
+      "member_id": 3,
+      "member_type": "guards",
+      "n_points": 126,
+      "centroid": [
+        -12.712386131286621,
+        2.515157699584961,
+        -531.762939453125
+      ],
+      "dimensions": {
+        "length_m": 0.6600000262260437,
+        "width_m": 0.41999998688697815,
+        "height_m": 0.5
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too few points (126 < 300)"
+    },
+    {
+      "member_id": 8,
+      "member_type": "guards",
+      "n_points": 269,
+      "centroid": [
+        -8.88316822052002,
+        2.3994805812835693,
+        -531.48388671875
+      ],
+      "dimensions": {
+        "length_m": 0.6700000166893005,
+        "width_m": 0.30000001192092896,
+        "height_m": 0.28999999165534973
+      },
+      "is_horizontal": true,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too few points (269 < 300)"
+    },
+    {
+      "member_id": 13,
+      "member_type": "guards",
+      "n_points": 147,
+      "centroid": [
+        -9.622037887573242,
+        -2.579455614089966,
+        -525.44384765625
+      ],
+      "dimensions": {
+        "length_m": 0.8600000143051147,
+        "width_m": 0.019999999552965164,
+        "height_m": 0.14000000059604645
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too few points (147 < 300)"
+    },
+    {
+      "member_id": 4,
+      "member_type": "columns_secondary",
+      "n_points": 104,
+      "centroid": [
+        -9.236050605773926,
+        1.2467303276062012,
+        -524.855224609375
+      ],
+      "dimensions": {
+        "length_m": 0.44999998807907104,
+        "width_m": 0.10000000149011612,
+        "height_m": 0.10999999940395355
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too few points (104 < 300)"
+    },
+    {
+      "member_id": 6,
+      "member_type": "columns_secondary",
+      "n_points": 197,
+      "centroid": [
+        -7.4294304847717285,
+        -1.0544158220291138,
+        -528.1077270507812
+      ],
+      "dimensions": {
+        "length_m": 2.690000057220459,
+        "width_m": 0.4399999976158142,
+        "height_m": 0.7900000214576721
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too few points (197 < 300)"
+    },
+    {
+      "member_id": 7,
+      "member_type": "columns_secondary",
+      "n_points": 251,
+      "centroid": [
+        -6.901889324188232,
+        0.48386484384536743,
+        -528.8309326171875
+      ],
+      "dimensions": {
+        "length_m": 2.740000009536743,
+        "width_m": 0.009999999776482582,
+        "height_m": 0.07000000029802322
+      },
+      "is_horizontal": false,
+      "damage": {
+        "max_deviation_cm": 0.0,
+        "mean_deviation_cm": 0.0,
+        "severity": "UNKNOWN",
+        "is_damaged": false
+      },
+      "rejection_reason": "Too few points (251 < 300)"
+    }
+  ]
+}
