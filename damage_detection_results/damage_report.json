@@ -1,0 +1,1041 @@
+{
+  "scan_info": {
+    "timestamp": "2026-01-07T20:00:08.098358",
+    "source_file": "/home/administrator/shaft_segmentation/training/inference_slice054_latest/slice_054_predicted.las",
+    "description": "",
+    "total_members_analyzed": 53,
+    "member_breakdown": {
+      "bunton": 12,
+      "guard": 12,
+      "column": 29
+    }
+  },
+  "summary": {
+    "damaged_members": 16,
+    "high_severity": 7,
+    "medium_severity": 5,
+    "low_severity": 4,
+    "healthy_members": 37
+  },
+  "damaged_members": [
+    {
+      "member": {
+        "member_id": 6,
+        "member_type": "bunton",
+        "orientation": "horizontal",
+        "num_points": 2377,
+        "centroid": [
+          -10.561960454354228,
+          0.1249684476230542,
+          -526.4981026504012
+        ],
+        "principal_axis": [
+          0.9822116242744694,
+          -0.18531171931532742,
+          -0.030329718503571027
+        ],
+        "length": 1.9394001522823614,
+        "cross_section": {
+          "width": 0.32036903647106635,
+          "height": 0.2918320521604941
+        },
+        "bounding_box": {
+          "min": [
+            -11.42,
+            -0.16,
+            -526.61
+          ],
+          "max": [
+            -9.51,
+            0.42,
+            -526.35
+          ]
+        },
+        "z_range": {
+          "min": -526.61,
+          "max": -526.35
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.9842384529907078,
+        "expected_linearity": 0.75,
+        "linearity_deviation": 0.0,
+        "axis_deviation_degrees": 1.7380502825469448,
+        "max_local_deviation_m": 0.0668857123566336,
+        "mean_local_deviation_m": 0.04175472176434364,
+        "bend_points": [
+          {
+            "location": [
+              -10.579848484848496,
+              0.1458712121212121,
+              -526.5428914141418
+            ],
+            "angle": 12.947331237951886,
+            "segment_idx": 1
+          }
+        ],
+        "max_bend_angle": 12.947331237951886
+      },
+      "severity": "low",
+      "description": "LOW severity: bend angle 12.9\u00b0 (threshold 12.0\u00b0)"
+    },
+    {
+      "member": {
+        "member_id": 10,
+        "member_type": "bunton",
+        "orientation": "horizontal",
+        "num_points": 261,
+        "centroid": [
+          -12.64249042145594,
+          2.0379693486590047,
+          -526.3674329501916
+        ],
+        "principal_axis": [
+          0.9868717001512185,
+          -0.15706370407442746,
+          -0.037619679731016854
+        ],
+        "length": 0.6635242216284487,
+        "cross_section": {
+          "width": 0.5193566971098594,
+          "height": 0.20853548755201037
+        },
+        "bounding_box": {
+          "min": [
+            -13.02,
+            1.92,
+            -526.6800000000001
+          ],
+          "max": [
+            -12.36,
+            2.16,
+            -526.16
+          ]
+        },
+        "z_range": {
+          "min": -526.6800000000001,
+          "max": -526.16
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.7881323048903526,
+        "expected_linearity": 0.75,
+        "linearity_deviation": 0.0,
+        "axis_deviation_degrees": 2.155972831733768,
+        "max_local_deviation_m": 0.03479266471356577,
+        "mean_local_deviation_m": 0.02040086686735001,
+        "bend_points": [
+          {
+            "location": [
+              -12.634597701149431,
+              2.0509195402298848,
+              -526.3542528735629
+            ],
+            "angle": 18.752209612040193,
+            "segment_idx": 1
+          }
+        ],
+        "max_bend_angle": 18.752209612040193
+      },
+      "severity": "medium",
+      "description": "MEDIUM severity: bend angle 18.8\u00b0 (threshold 18.0\u00b0)"
+    },
+    {
+      "member": {
+        "member_id": 11,
+        "member_type": "bunton",
+        "orientation": "vertical",
+        "num_points": 524,
+        "centroid": [
+          -8.104561068702282,
+          -1.1392557251908382,
+          -525.4291030534348
+        ],
+        "principal_axis": [
+          0.32011019231995747,
+          -0.002904373254847936,
+          0.9473758648967558
+        ],
+        "length": 1.2797369996861376,
+        "cross_section": {
+          "width": 0.8323843112833392,
+          "height": 0.5132303524197119
+        },
+        "bounding_box": {
+          "min": [
+            -8.52,
+            -1.43,
+            -526.1
+          ],
+          "max": [
+            -7.8,
+            -0.89,
+            -524.79
+          ]
+        },
+        "z_range": {
+          "min": -526.1,
+          "max": -524.79
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.6399115659040528,
+        "expected_linearity": 0.99,
+        "linearity_deviation": 0.35008843409594714,
+        "axis_deviation_degrees": 18.670385808319175,
+        "max_local_deviation_m": 0.012311972573434226,
+        "mean_local_deviation_m": 0.009165493189787297,
+        "bend_points": [
+          {
+            "location": [
+              -8.113448275862071,
+              -1.143333333333333,
+              -525.4378735632185
+            ],
+            "angle": 3.8392547701742985,
+            "segment_idx": 1
+          }
+        ],
+        "max_bend_angle": 3.8392547701742985
+      },
+      "severity": "high",
+      "description": "HIGH severity: linearity 0.64 (expected >0.89); axis deviation 18.7\u00b0 (threshold 8.0\u00b0)"
+    },
+    {
+      "member": {
+        "member_id": 3,
+        "member_type": "guard",
+        "orientation": "vertical",
+        "num_points": 6757,
+        "centroid": [
+          -9.854666272014269,
+          -2.9486636081101127,
+          -527.292671303825
+        ],
+        "principal_axis": [
+          -0.13242614721211016,
+          -0.20743880183647,
+          0.9692432403825193
+        ],
+        "length": 4.623946176804418,
+        "cross_section": {
+          "width": 1.7555895342593684,
+          "height": 0.40020551227852363
+        },
+        "bounding_box": {
+          "min": [
+            -10.27,
+            -4.03,
+            -530.63
+          ],
+          "max": [
+            -9.52,
+            -2.29,
+            -526.07
+          ]
+        },
+        "z_range": {
+          "min": -530.63,
+          "max": -526.07
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.9160648837879252,
+        "expected_linearity": 0.99,
+        "linearity_deviation": 0.07393511621207483,
+        "axis_deviation_degrees": 14.247129571735227,
+        "max_local_deviation_m": 0.6344146560682163,
+        "mean_local_deviation_m": 0.2489272892088218,
+        "bend_points": [
+          {
+            "location": [
+              -9.881576376554158,
+              -2.8182149200710467,
+              -526.6148134991166
+            ],
+            "angle": 60.05697732627002,
+            "segment_idx": 1
+          }
+        ],
+        "max_bend_angle": 60.05697732627002
+      },
+      "severity": "high",
+      "description": "HIGH severity: axis deviation 14.2\u00b0 (threshold 8.0\u00b0); curvature 63.4cm (threshold 15cm); bend angle 60.1\u00b0 (threshold 12.0\u00b0)"
+    },
+    {
+      "member": {
+        "member_id": 5,
+        "member_type": "guard",
+        "orientation": "vertical",
+        "num_points": 169,
+        "centroid": [
+          -12.712781065088787,
+          2.5211834319526614,
+          -531.7390532544376
+        ],
+        "principal_axis": [
+          0.011700991850225256,
+          0.1716786494172225,
+          0.9850835132738744
+        ],
+        "length": 0.3353964341870457,
+        "cross_section": {
+          "width": 0.2173435704893443,
+          "height": 0.1414783132958646
+        },
+        "bounding_box": {
+          "min": [
+            -12.81,
+            2.47,
+            -531.9
+          ],
+          "max": [
+            -12.620000000000001,
+            2.62,
+            -531.5600000000001
+          ]
+        },
+        "z_range": {
+          "min": -531.9,
+          "max": -531.5600000000001
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.5619332815755793,
+        "expected_linearity": 0.99,
+        "linearity_deviation": 0.4280667184244207,
+        "axis_deviation_degrees": 9.908598506852805,
+        "max_local_deviation_m": 0.025108420454874148,
+        "mean_local_deviation_m": 0.016604778810364828,
+        "bend_points": [
+          {
+            "location": [
+              -12.721071428571426,
+              2.529642857142857,
+              -531.7455357142859
+            ],
+            "angle": 28.18742101520407,
+            "segment_idx": 1
+          }
+        ],
+        "max_bend_angle": 28.18742101520407
+      },
+      "severity": "high",
+      "description": "HIGH severity: linearity 0.56 (expected >0.89); axis deviation 9.9\u00b0 (threshold 8.0\u00b0); bend angle 28.2\u00b0 (threshold 12.0\u00b0)"
+    },
+    {
+      "member": {
+        "member_id": 10,
+        "member_type": "guard",
+        "orientation": "horizontal",
+        "num_points": 256,
+        "centroid": [
+          -8.890507812500022,
+          2.3773046875000015,
+          -531.4816406249997
+        ],
+        "principal_axis": [
+          0.3147631023760041,
+          0.9484192512463216,
+          0.037750672152950485
+        ],
+        "length": 0.7032237323408009,
+        "cross_section": {
+          "width": 0.3222648750125087,
+          "height": 0.19628762904348168
+        },
+        "bounding_box": {
+          "min": [
+            -8.98,
+            2.09,
+            -531.58
+          ],
+          "max": [
+            -8.69,
+            2.75,
+            -531.27
+          ]
+        },
+        "z_range": {
+          "min": -531.58,
+          "max": -531.27
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.837942454405131,
+        "expected_linearity": 0.75,
+        "linearity_deviation": 0.0,
+        "axis_deviation_degrees": 2.1634834268819714,
+        "max_local_deviation_m": 0.02225354308954699,
+        "mean_local_deviation_m": 0.01217869983133633,
+        "bend_points": [
+          {
+            "location": [
+              -8.905647058823524,
+              2.3754117647058814,
+              -531.4611764705884
+            ],
+            "angle": 22.512759604545387,
+            "segment_idx": 1
+          }
+        ],
+        "max_bend_angle": 22.512759604545387
+      },
+      "severity": "medium",
+      "description": "MEDIUM severity: bend angle 22.5\u00b0 (threshold 18.0\u00b0)"
+    },
+    {
+      "member": {
+        "member_id": 13,
+        "member_type": "guard",
+        "orientation": "vertical",
+        "num_points": 245,
+        "centroid": [
+          -7.462163265306145,
+          -0.2623265306122449,
+          -530.6685306122446
+        ],
+        "principal_axis": [
+          -0.026043312847754366,
+          -0.10527625506170213,
+          0.9941019343991326
+        ],
+        "length": 1.247304624589813,
+        "cross_section": {
+          "width": 0.5591323666929462,
+          "height": 0.055418160650048426
+        },
+        "bounding_box": {
+          "min": [
+            -7.5200000000000005,
+            -0.53,
+            -531.28
+          ],
+          "max": [
+            -7.42,
+            -0.04,
+            -530.02
+          ]
+        },
+        "z_range": {
+          "min": -531.28,
+          "max": -530.02
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.8297836924474812,
+        "expected_linearity": 0.99,
+        "linearity_deviation": 0.1602163075525188,
+        "axis_deviation_degrees": 6.225957028668379,
+        "max_local_deviation_m": 0.034704492695564845,
+        "mean_local_deviation_m": 0.017004336144330404,
+        "bend_points": [
+          {
+            "location": [
+              -7.461111111111113,
+              -0.2565432098765431,
+              -530.6454320987655
+            ],
+            "angle": 4.164766708062873,
+            "segment_idx": 1
+          }
+        ],
+        "max_bend_angle": 4.164766708062873
+      },
+      "severity": "high",
+      "description": "HIGH severity: linearity 0.83 (expected >0.89)"
+    },
+    {
+      "member": {
+        "member_id": 2,
+        "member_type": "column",
+        "orientation": "vertical",
+        "num_points": 3241,
+        "centroid": [
+          -12.879105214440056,
+          -2.169253316877469,
+          -529.2231872878739
+        ],
+        "principal_axis": [
+          0.007054131706039682,
+          -0.018404947278942707,
+          0.9998057297002922
+        ],
+        "length": 9.996945553114443,
+        "cross_section": {
+          "width": 0.5246244358112281,
+          "height": 0.33876309993630627
+        },
+        "bounding_box": {
+          "min": [
+            -13.030000000000001,
+            -2.59,
+            -534.65
+          ],
+          "max": [
+            -12.68,
+            -2.08,
+            -524.66
+          ]
+        },
+        "z_range": {
+          "min": -534.65,
+          "max": -524.66
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.998192085446326,
+        "expected_linearity": 0.99,
+        "linearity_deviation": 0.0,
+        "axis_deviation_degrees": 1.1294002159911973,
+        "max_local_deviation_m": 0.1043545750024573,
+        "mean_local_deviation_m": 0.049307797664095425,
+        "bend_points": [
+          {
+            "location": [
+              -12.894925925925918,
+              -2.1188333333333316,
+              -528.1437037037033
+            ],
+            "angle": 3.33603937409749,
+            "segment_idx": 3
+          }
+        ],
+        "max_bend_angle": 3.33603937409749
+      },
+      "severity": "medium",
+      "description": "MEDIUM severity: curvature 10.4cm (threshold 10cm)"
+    },
+    {
+      "member": {
+        "member_id": 9,
+        "member_type": "column",
+        "orientation": "vertical",
+        "num_points": 318,
+        "centroid": [
+          -9.53150943396227,
+          -3.984056603773585,
+          -529.9036163522007
+        ],
+        "principal_axis": [
+          0.021079145987358057,
+          0.025739182322112808,
+          0.9994464288283955
+        ],
+        "length": 1.778546460031422,
+        "cross_section": {
+          "width": 0.4298437070944645,
+          "height": 0.12916562244129312
+        },
+        "bounding_box": {
+          "min": [
+            -9.790000000000001,
+            -4.03,
+            -530.67
+          ],
+          "max": [
+            -9.41,
+            -3.88,
+            -528.89
+          ]
+        },
+        "z_range": {
+          "min": -530.67,
+          "max": -528.89
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.942812972264406,
+        "expected_linearity": 0.99,
+        "linearity_deviation": 0.04718702773559402,
+        "axis_deviation_degrees": 1.906533318101003,
+        "max_local_deviation_m": 0.027912773107339264,
+        "mean_local_deviation_m": 0.014928770743599492,
+        "bend_points": [
+          {
+            "location": [
+              -9.553113207547176,
+              -3.9870754716981094,
+              -529.9398113207549
+            ],
+            "angle": 6.83175708367861,
+            "segment_idx": 1
+          }
+        ],
+        "max_bend_angle": 6.83175708367861
+      },
+      "severity": "low",
+      "description": "LOW severity: linearity 0.94 (expected >0.95); bend angle 6.8\u00b0 (threshold 5.0\u00b0)"
+    },
+    {
+      "member": {
+        "member_id": 11,
+        "member_type": "column",
+        "orientation": "vertical",
+        "num_points": 10687,
+        "centroid": [
+          -9.411306259942146,
+          -0.7520492186768858,
+          -529.3256152334568
+        ],
+        "principal_axis": [
+          -1.840083784779207e-05,
+          0.0004651167187172539,
+          0.9999998916639177
+        ],
+        "length": 10.000105341459346,
+        "cross_section": {
+          "width": 1.0399765522845568,
+          "height": 0.6095029930025857
+        },
+        "bounding_box": {
+          "min": [
+            -9.6,
+            -1.32,
+            -534.66
+          ],
+          "max": [
+            -8.99,
+            -0.24,
+            -524.66
+          ]
+        },
+        "z_range": {
+          "min": -534.66,
+          "max": -524.66
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.9969279641560582,
+        "expected_linearity": 0.99,
+        "linearity_deviation": 0.0,
+        "axis_deviation_degrees": 0.026670072569117843,
+        "max_local_deviation_m": 0.17687269678036124,
+        "mean_local_deviation_m": 0.0634248719177647,
+        "bend_points": [],
+        "max_bend_angle": 0.0
+      },
+      "severity": "high",
+      "description": "HIGH severity: curvature 17.7cm (threshold 15cm)"
+    },
+    {
+      "member": {
+        "member_id": 12,
+        "member_type": "column",
+        "orientation": "vertical",
+        "num_points": 4078,
+        "centroid": [
+          -9.180331044629742,
+          1.217569887199625,
+          -528.8961181951925
+        ],
+        "principal_axis": [
+          0.004707214438223737,
+          -0.006548879037741373,
+          0.9999674766289062
+        ],
+        "length": 8.360243837147085,
+        "cross_section": {
+          "width": 0.6759078558616984,
+          "height": 0.6382747064802636
+        },
+        "bounding_box": {
+          "min": [
+            -9.31,
+            0.65,
+            -533.08
+          ],
+          "max": [
+            -8.85,
+            1.48,
+            -524.72
+          ]
+        },
+        "z_range": {
+          "min": -533.08,
+          "max": -524.72
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.9950110025802146,
+        "expected_linearity": 0.99,
+        "linearity_deviation": 0.0,
+        "axis_deviation_degrees": 0.4621006554805838,
+        "max_local_deviation_m": 0.0946907422941637,
+        "mean_local_deviation_m": 0.047046309159066366,
+        "bend_points": [
+          {
+            "location": [
+              -9.139421000981354,
+              1.1850343473994065,
+              -527.8176447497538
+            ],
+            "angle": 3.4314122285328987,
+            "segment_idx": 2
+          }
+        ],
+        "max_bend_angle": 3.4314122285328987
+      },
+      "severity": "low",
+      "description": "LOW severity: curvature 9.5cm (threshold 6cm)"
+    },
+    {
+      "member": {
+        "member_id": 19,
+        "member_type": "column",
+        "orientation": "vertical",
+        "num_points": 2405,
+        "centroid": [
+          -8.46308939708944,
+          -3.535226611226669,
+          -529.7180207900213
+        ],
+        "principal_axis": [
+          -0.0016345648191290266,
+          0.00021917894579559505,
+          0.9999986400782959
+        ],
+        "length": 9.940223903065338,
+        "cross_section": {
+          "width": 0.4485628188100118,
+          "height": 0.20899841408746228
+        },
+        "bounding_box": {
+          "min": [
+            -8.65,
+            -3.6,
+            -534.6
+          ],
+          "max": [
+            -8.17,
+            -3.43,
+            -524.66
+          ]
+        },
+        "z_range": {
+          "min": -534.6,
+          "max": -524.66
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.9989768499736724,
+        "expected_linearity": 0.99,
+        "linearity_deviation": 0.0,
+        "axis_deviation_degrees": 0.09449191095242088,
+        "max_local_deviation_m": 0.11487594954349512,
+        "mean_local_deviation_m": 0.06002486562261522,
+        "bend_points": [
+          {
+            "location": [
+              -8.419650145772582,
+              -3.5468804664722926,
+              -533.0841982507292
+            ],
+            "angle": 4.362536318171386,
+            "segment_idx": 1
+          },
+          {
+            "location": [
+              -8.363381924198254,
+              -3.559154518950425,
+              -532.1142274052486
+            ],
+            "angle": 7.1593449382733185,
+            "segment_idx": 2
+          },
+          {
+            "location": [
+              -8.557376093294453,
+              -3.51259475218658,
+              -527.8269096209914
+            ],
+            "angle": 4.721087884009721,
+            "segment_idx": 4
+          }
+        ],
+        "max_bend_angle": 7.1593449382733185
+      },
+      "severity": "medium",
+      "description": "MEDIUM severity: curvature 11.5cm (threshold 10cm)"
+    },
+    {
+      "member": {
+        "member_id": 21,
+        "member_type": "column",
+        "orientation": "vertical",
+        "num_points": 1419,
+        "centroid": [
+          -7.4406272022551,
+          -2.567646229739248,
+          -533.9915715292462
+        ],
+        "principal_axis": [
+          0.02862598180189816,
+          0.013397831085866424,
+          0.999500400844378
+        ],
+        "length": 1.9027105688160106,
+        "cross_section": {
+          "width": 0.9085883714340127,
+          "height": 0.2261573448754976
+        },
+        "bounding_box": {
+          "min": [
+            -7.79,
+            -2.97,
+            -534.66
+          ],
+          "max": [
+            -7.19,
+            -2.23,
+            -532.77
+          ]
+        },
+        "z_range": {
+          "min": -534.66,
+          "max": -532.77
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.7402996082870402,
+        "expected_linearity": 0.99,
+        "linearity_deviation": 0.24970039171295977,
+        "axis_deviation_degrees": 1.8112006311303586,
+        "max_local_deviation_m": 0.05286456692650011,
+        "mean_local_deviation_m": 0.021359299006880716,
+        "bend_points": [],
+        "max_bend_angle": 0.0
+      },
+      "severity": "high",
+      "description": "HIGH severity: linearity 0.74 (expected >0.89)"
+    },
+    {
+      "member": {
+        "member_id": 23,
+        "member_type": "column",
+        "orientation": "vertical",
+        "num_points": 1060,
+        "centroid": [
+          -7.538867924528322,
+          -1.1109622641509431,
+          -530.1970943396226
+        ],
+        "principal_axis": [
+          -0.016512070775977314,
+          0.0003409020587089584,
+          0.9998636083508968
+        ],
+        "length": 2.420161885311935,
+        "cross_section": {
+          "width": 0.5347173999281554,
+          "height": 0.2896534991044298
+        },
+        "bounding_box": {
+          "min": [
+            -7.72,
+            -1.4000000000000001,
+            -531.1800000000001
+          ],
+          "max": [
+            -7.41,
+            -0.87,
+            -528.76
+          ]
+        },
+        "z_range": {
+          "min": -531.1800000000001,
+          "max": -528.76
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.9441236632822543,
+        "expected_linearity": 0.99,
+        "linearity_deviation": 0.045876336717745714,
+        "axis_deviation_degrees": 0.9463165963901813,
+        "max_local_deviation_m": 0.035129449129228114,
+        "mean_local_deviation_m": 0.017753778013456706,
+        "bend_points": [
+          {
+            "location": [
+              -7.5502832861189875,
+              -1.117677053824362,
+              -530.2360623229456
+            ],
+            "angle": 3.989410098951676,
+            "segment_idx": 1
+          }
+        ],
+        "max_bend_angle": 3.989410098951676
+      },
+      "severity": "low",
+      "description": "LOW severity: linearity 0.94 (expected >0.95)"
+    },
+    {
+      "member": {
+        "member_id": 2,
+        "member_type": "column",
+        "orientation": "vertical",
+        "num_points": 587,
+        "centroid": [
+          -8.53594548551962,
+          -0.9939522998296445,
+          -524.9395229982963
+        ],
+        "principal_axis": [
+          0.04116541333111366,
+          0.1115523940303711,
+          0.9929055706014399
+        ],
+        "length": 0.9169916597811132,
+        "cross_section": {
+          "width": 0.5669832168107227,
+          "height": 0.2791541345851656
+        },
+        "bounding_box": {
+          "min": [
+            -8.76,
+            -1.1300000000000001,
+            -525.55
+          ],
+          "max": [
+            -8.18,
+            -0.8,
+            -524.66
+          ]
+        },
+        "z_range": {
+          "min": -525.55,
+          "max": -524.66
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.7710589784433403,
+        "expected_linearity": 0.99,
+        "linearity_deviation": 0.21894102155665973,
+        "axis_deviation_degrees": 6.828942506367894,
+        "max_local_deviation_m": 0.035767592282478604,
+        "mean_local_deviation_m": 0.022272515446420275,
+        "bend_points": [
+          {
+            "location": [
+              -8.506769230769219,
+              -0.9990256410256413,
+              -524.9141025641034
+            ],
+            "angle": 24.296873364588873,
+            "segment_idx": 1
+          }
+        ],
+        "max_bend_angle": 24.296873364588873
+      },
+      "severity": "high",
+      "description": "HIGH severity: linearity 0.77 (expected >0.89); bend angle 24.3\u00b0 (threshold 12.0\u00b0)"
+    },
+    {
+      "member": {
+        "member_id": 4,
+        "member_type": "column",
+        "orientation": "vertical",
+        "num_points": 119,
+        "centroid": [
+          -9.23672268907564,
+          1.248319327731093,
+          -524.8447058823527
+        ],
+        "principal_axis": [
+          0.022963940464866245,
+          -0.02797132947142289,
+          0.999344916515778
+        ],
+        "length": 0.4808838308409005,
+        "cross_section": {
+          "width": 0.1469610891725488,
+          "height": 0.05567815405468031
+        },
+        "bounding_box": {
+          "min": [
+            -9.31,
+            1.19,
+            -525.14
+          ],
+          "max": [
+            -9.21,
+            1.3,
+            -524.66
+          ]
+        },
+        "z_range": {
+          "min": -525.14,
+          "max": -524.66
+        }
+      },
+      "metrics": {
+        "linearity_score": 0.9138093053099259,
+        "expected_linearity": 0.99,
+        "linearity_deviation": 0.07619069469007411,
+        "axis_deviation_degrees": 2.074004366914273,
+        "max_local_deviation_m": 0.005924064707182466,
+        "mean_local_deviation_m": 0.003738922724486282,
+        "bend_points": [
+          {
+            "location": [
+              -9.23076923076923,
+              1.2446153846153842,
+              -524.8374358974359
+            ],
+            "angle": 8.161438838750321,
+            "segment_idx": 1
+          }
+        ],
+        "max_bend_angle": 8.161438838750321
+      },
+      "severity": "medium",
+      "description": "MEDIUM severity: linearity 0.91 (expected >0.93); bend angle 8.2\u00b0 (threshold 8.0\u00b0)"
+    }
+  ],
+  "algorithm_version": "2.0",
+  "thresholds_used": {
+    "vertical": {
+      "expected_linearity": 0.99,
+      "high": {
+        "linearity_deviation": 0.1,
+        "axis_deviation": 8.0,
+        "max_local_deviation": 0.15,
+        "bend_angle": 12.0
+      },
+      "medium": {
+        "linearity_deviation": 0.06,
+        "axis_deviation": 5.0,
+        "max_local_deviation": 0.1,
+        "bend_angle": 8.0
+      },
+      "low": {
+        "linearity_deviation": 0.04,
+        "axis_deviation": 3.0,
+        "max_local_deviation": 0.06,
+        "bend_angle": 5.0
+      }
+    },
+    "horizontal": {
+      "expected_linearity": 0.75,
+      "high": {
+        "linearity_deviation": 0.25,
+        "axis_deviation": 20.0,
+        "max_local_deviation": 0.2,
+        "bend_angle": 25.0
+      },
+      "medium": {
+        "linearity_deviation": 0.18,
+        "axis_deviation": 15.0,
+        "max_local_deviation": 0.12,
+        "bend_angle": 18.0
+      },
+      "low": {
+        "linearity_deviation": 0.12,
+        "axis_deviation": 10.0,
+        "max_local_deviation": 0.08,
+        "bend_angle": 12.0
+      }
+    }
+  }
+}
