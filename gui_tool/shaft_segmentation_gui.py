@@ -1051,10 +1051,8 @@ else:
             ttk.Spinbox(settings_frame, textvariable=self.slice_height_var,
                        from_=1.0, to=100.0, width=10).pack(side=tk.LEFT, padx=5)
 
-            # Damage detection checkbox
-            self.damage_detection_var = tk.BooleanVar(value=True)
-            ttk.Checkbutton(settings_frame, text="Enable Damage Detection",
-                           variable=self.damage_detection_var).pack(side=tk.LEFT, padx=20)
+            # Damage detection disabled
+            self.damage_detection_var = tk.BooleanVar(value=False)
 
             # Progress
             progress_frame = ttk.LabelFrame(main_frame, text="Progress", padding="5")
