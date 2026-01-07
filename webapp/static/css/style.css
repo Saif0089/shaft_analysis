@@ -1,0 +1,423 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: #1a1a2e;
+    color: #eee;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header */
+#header {
+    background: #16213e;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #0f3460;
+}
+
+#header h1 {
+    font-size: 1.2em;
+    color: #e94560;
+}
+
+#slice-info {
+    font-size: 0.9em;
+    color: #888;
+}
+
+#slice-info span {
+    margin-left: 20px;
+}
+
+/* Main container */
+#main-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Sidebars */
+aside {
+    width: 280px;
+    background: #16213e;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+#left-sidebar {
+    border-right: 1px solid #0f3460;
+}
+
+#right-sidebar {
+    border-left: 1px solid #0f3460;
+}
+
+/* Panels */
+.panel {
+    background: #1a1a2e;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+.panel h3 {
+    font-size: 0.85em;
+    color: #e94560;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Buttons */
+.btn {
+    background: #0f3460;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: background 0.2s;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.btn:hover {
+    background: #1a4a7a;
+}
+
+.btn.primary {
+    background: #e94560;
+}
+
+.btn.primary:hover {
+    background: #ff6b6b;
+}
+
+.btn.danger {
+    background: #c0392b;
+}
+
+.btn.danger:hover {
+    background: #e74c3c;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Mode buttons */
+.mode-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+.mode-btn {
+    width: auto;
+}
+
+.mode-btn.active {
+    background: #e94560;
+}
+
+/* Form controls */
+select, input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    background: #0f3460;
+    border: 1px solid #1a4a7a;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 0.85em;
+    margin-bottom: 5px;
+}
+
+select:focus, input:focus {
+    outline: none;
+    border-color: #e94560;
+}
+
+input[type="color"] {
+    width: 40px;
+    height: 30px;
+    padding: 2px;
+    background: #0f3460;
+    border: 1px solid #1a4a7a;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="range"] {
+    flex: 1;
+    margin: 0 10px;
+}
+
+/* Control rows */
+.control-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.85em;
+}
+
+.control-row label {
+    min-width: 80px;
+    color: #888;
+}
+
+.xyz-inputs {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+}
+
+.xyz-inputs input {
+    width: 60px;
+    margin-bottom: 0;
+}
+
+/* Add label row */
+.add-label-row {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.add-label-row input[type="text"] {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.add-label-row .btn {
+    width: auto;
+    margin-bottom: 0;
+}
+
+/* Label list */
+#label-list {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.label-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+
+.label-item:hover {
+    background: #0f3460;
+}
+
+.label-item.selected {
+    background: #1a4a7a;
+}
+
+.label-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    margin-right: 8px;
+}
+
+.label-name {
+    flex: 1;
+    font-size: 0.85em;
+}
+
+.label-delete {
+    opacity: 0;
+    color: #e94560;
+    cursor: pointer;
+    padding: 2px 6px;
+}
+
+.label-item:hover .label-delete {
+    opacity: 1;
+}
+
+/* Box list */
+#box-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.box-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 3px;
+    cursor: pointer;
+    background: #0f3460;
+}
+
+.box-item:hover {
+    background: #1a4a7a;
+}
+
+.box-item.selected {
+    border: 2px solid #e94560;
+}
+
+.box-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    margin-right: 8px;
+}
+
+.box-label {
+    flex: 1;
+    font-size: 0.85em;
+}
+
+/* Viewer container */
+#viewer-container {
+    flex: 1;
+    position: relative;
+    background: #0a0a15;
+}
+
+#viewer-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Loading overlay */
+#loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+#loading-overlay.hidden {
+    display: none;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #333;
+    border-top-color: #e94560;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Status */
+#status-text {
+    font-size: 0.85em;
+    color: #888;
+    padding: 5px;
+    background: #0f3460;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+#model-status {
+    font-size: 0.8em;
+    color: #666;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: #16213e;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 300px;
+}
+
+.modal-content h3 {
+    margin-bottom: 15px;
+    color: #e94560;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.modal-buttons .btn {
+    flex: 1;
+}
+
+/* Utility */
+.hidden {
+    display: none !important;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #0f3460;
+    margin: 10px 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0f3460;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1a4a7a;
+}
