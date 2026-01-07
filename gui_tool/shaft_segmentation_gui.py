@@ -839,17 +839,18 @@ if USE_PYQT:
             row1_layout.addWidget(self.device_combo)
             settings_layout.addLayout(row1_layout)
 
-            # Second row: damage detection option
-            row2_layout = QHBoxLayout()
-            self.damage_detection_checkbox = QCheckBox("Enable Damage Detection")
-            self.damage_detection_checkbox.setChecked(True)
-            self.damage_detection_checkbox.setToolTip(
-                "Analyze steel members (buntons, guards, columns) for damage/curvature.\n"
-                "Generates a damage report with visualizations."
-            )
-            row2_layout.addWidget(self.damage_detection_checkbox)
-            row2_layout.addStretch()
-            settings_layout.addLayout(row2_layout)
+            # Second row: damage detection option (disabled - not ready for production)
+            # row2_layout = QHBoxLayout()
+            # self.damage_detection_checkbox = QCheckBox("Enable Damage Detection")
+            # self.damage_detection_checkbox.setChecked(False)
+            # self.damage_detection_checkbox.setToolTip(
+            #     "Analyze steel members (buntons, guards, columns) for damage/curvature.\n"
+            #     "Generates a damage report with visualizations."
+            # )
+            # row2_layout.addWidget(self.damage_detection_checkbox)
+            # row2_layout.addStretch()
+            # settings_layout.addLayout(row2_layout)
+            self.damage_detection_checkbox = None  # Disabled
 
             layout.addWidget(settings_group)
 
@@ -956,7 +957,7 @@ if USE_PYQT:
             self.processing_thread = ProcessingThread(
                 self.processor, pc_path, out_path,
                 self.slice_height_spin.value(),
-                enable_damage_detection=self.damage_detection_checkbox.isChecked()
+                enable_damage_detection=False  # Damage detection disabled
             )
             self.processing_thread.progress_signal.connect(self.log)
             self.processing_thread.progress_value_signal.connect(self.progress_bar.setValue)
