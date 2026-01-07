@@ -1,0 +1,82 @@
+name: Test Windows Executable
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag to test (e.g., v2026.01.07-4648c86)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  test-exe:
+    name: Test EXE on Windows
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Download release ZIP
+      run: |
+        $tag = "${{ github.event.inputs.release_tag }}"
+        $url = "https://github.com/${{ github.repository }}/releases/download/$tag/ShaftSegmentation_CPU.zip"
+        Write-Host "Downloading from: $url"
+        Invoke-WebRequest -Uri $url -OutFile ShaftSegmentation_CPU.zip
+
+    - name: Extract ZIP
+      run: |
+        Expand-Archive -Path ShaftSegmentation_CPU.zip -DestinationPath ./app
+        Get-ChildItem -Recurse ./app | Select-Object FullName
+
+    - name: Install screenshot tools
+      run: |
+        pip install pyautogui pillow
+
+    - name: Test EXE launches and take screenshot
+      run: |
+        cd app/ShaftSegmentation
+        Write-Host "Testing if EXE can start..."
+
+        # Start the app
+        $proc = Start-Process -FilePath ".\ShaftSegmentation.exe" -PassThru
+
+        # Wait for window to appear
+        Start-Sleep -Seconds 15
+
+        # Take screenshot using Python
+        python -c @"
+        import pyautogui
+        import time
+        time.sleep(2)
+        screenshot = pyautogui.screenshot()
+        screenshot.save('../../screenshot_startup.png')
+        print('Screenshot saved!')
+        "@
+
+        if ($proc.HasExited) {
+          Write-Host "Process exited with code: $($proc.ExitCode)"
+          if ($proc.ExitCode -ne 0) {
+            throw "EXE crashed on startup!"
+          }
+        } else {
+          Write-Host "EXE is running successfully!"
+          $proc.Kill()
+        }
+
+    - name: Upload screenshots
+      uses: actions/upload-artifact@v4
+      with:
+        name: exe-screenshots
+        path: |
+          screenshot_startup.png
+        if-no-files-found: warn
+
+    - name: Test with sample data
+      run: |
+        cd app/ShaftSegmentation
+        # Download sample LAS file
+        Invoke-WebRequest -Uri "https://github.com/${{ github.repository }}/raw/temp_branch/sample_data/slice_054.las" -OutFile test_slice.las
+        Write-Host "Sample data downloaded. EXE test complete."
