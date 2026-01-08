@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   build-and-release:
-    name: Build CPU & GPU and Create Release
+    name: Build Portable Python Package
     runs-on: windows-latest
 
     steps:
@@ -23,116 +23,86 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Install base dependencies
+    - name: Create portable distribution
       run: |
-        python -m pip install --upgrade pip
-        pip install pyinstaller
-        pip install PyQt5>=5.15.0
-        pip install numpy>=1.21.0
-        pip install laspy>=2.0.0
-        pip install plyfile>=0.7.0
-        pip install matplotlib>=3.5.0
+        # Create distribution folder
+        New-Item -ItemType Directory -Force -Path dist/ShaftSegmentation
 
-    # Build CPU Version
-    - name: Install PyTorch CPU
-      run: |
-        pip uninstall -y torch torchvision 2>$null
-        pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+        # Download Python embeddable package
+        $pythonUrl = "https://www.python.org/ftp/python/3.11.9/python-3.11.9-embed-amd64.zip"
+        Write-Host "Downloading Python embeddable..."
+        Invoke-WebRequest -Uri $pythonUrl -OutFile python-embed.zip
+        Expand-Archive -Path python-embed.zip -DestinationPath dist/ShaftSegmentation/python -Force
 
-    - name: Build CPU executable
-      working-directory: gui_tool
-      run: |
-        # Build with PyInstaller
-        pyinstaller --clean --onedir --noconsole --name ShaftSegmentation `
-          --add-data "checkpoints;checkpoints" `
-          --add-data "models;models" `
-          --collect-all torch `
-          --collect-binaries torch `
-          --copy-metadata torch `
-          --hidden-import torch `
-          --hidden-import torch.nn `
-          --hidden-import torch.nn.functional `
-          --hidden-import torch.utils `
-          --hidden-import torch.utils.data `
-          --hidden-import torch._C `
-          --collect-all intel-openmp `
-          --collect-binaries intel-openmp `
-          --hidden-import PyQt5 `
-          --hidden-import PyQt5.QtWidgets `
-          --hidden-import PyQt5.QtCore `
-          --hidden-import PyQt5.QtGui `
-          --hidden-import numpy `
-          --hidden-import laspy `
-          --hidden-import plyfile `
-          --hidden-import matplotlib `
-          --hidden-import matplotlib.pyplot `
-          --hidden-import sklearn `
-          --hidden-import sklearn.decomposition `
-          shaft_segmentation_gui.py
+        # Enable pip in embeddable Python by uncommenting import site
+        $pthFile = Get-ChildItem "dist/ShaftSegmentation/python/python*._pth" | Select-Object -First 1
+        (Get-Content $pthFile.FullName) -replace '#import site', 'import site' | Set-Content $pthFile.FullName
+        Add-Content $pthFile.FullName "Lib\site-packages"
 
-    - name: Copy torch DLLs to _internal root
-      working-directory: gui_tool/dist/ShaftSegmentation/_internal
-      run: |
-        # PyTorch looks for DLLs in the root of _internal, not in torch/lib
-        # Copy all torch DLLs to the root _internal folder
-        Write-Host "Copying torch DLLs to _internal root..."
-        if (Test-Path "torch/lib") {
-          Copy-Item "torch/lib/*.dll" -Destination "." -Force
-          Write-Host "Copied DLLs from torch/lib:"
-          Get-ChildItem "torch/lib/*.dll" | ForEach-Object { Write-Host "  - $($_.Name)" }
-        }
-        # Also copy any other torch-related DLLs
-        Get-ChildItem -Recurse -Filter "*.dll" -Path "torch" | ForEach-Object {
-          if (-not (Test-Path $_.Name)) {
-            Copy-Item $_.FullName -Destination "." -Force
-            Write-Host "Copied: $($_.Name)"
-          }
-        }
+        # Download and install pip
+        Write-Host "Installing pip..."
+        Invoke-WebRequest -Uri "https://bootstrap.pypa.io/get-pip.py" -OutFile get-pip.py
+        & dist/ShaftSegmentation/python/python.exe get-pip.py --no-warn-script-location
 
-    - name: List DLLs in dist folder
-      working-directory: gui_tool/dist/ShaftSegmentation
-      run: |
-        Write-Host "=== All DLLs in _internal root ==="
-        Get-ChildItem "_internal/*.dll" | ForEach-Object { $_.Name }
-        Write-Host ""
-        Write-Host "=== Looking for c10.dll and torch DLLs ==="
-        Get-ChildItem -Recurse -Filter "c10*.dll" | ForEach-Object { $_.FullName }
-        Get-ChildItem -Recurse -Filter "torch*.dll" | ForEach-Object { $_.FullName }
+        # Install all dependencies
+        Write-Host "Installing dependencies..."
+        & dist/ShaftSegmentation/python/python.exe -m pip install --no-warn-script-location `
+          PyQt5>=5.15.0 `
+          numpy>=1.21.0 `
+          laspy>=2.0.0 `
+          plyfile>=0.7.0 `
+          matplotlib>=3.5.0 `
+          scikit-learn `
+          torch torchvision --index-url https://download.pytorch.org/whl/cpu
 
-    - name: Test EXE launches
-      working-directory: gui_tool/dist/ShaftSegmentation
+        # Copy application files
+        Write-Host "Copying application files..."
+        Copy-Item gui_tool/shaft_segmentation_gui.py -Destination dist/ShaftSegmentation/
+        Copy-Item -Recurse gui_tool/checkpoints -Destination dist/ShaftSegmentation/ -ErrorAction SilentlyContinue
+        Copy-Item -Recurse gui_tool/models -Destination dist/ShaftSegmentation/ -ErrorAction SilentlyContinue
+
+        # Create launcher batch file
+        Write-Host "Creating launcher..."
+        @'
+@echo off
+cd /d "%~dp0"
+start "" "python\pythonw.exe" "shaft_segmentation_gui.py"
+'@ | Set-Content dist/ShaftSegmentation/ShaftSegmentation.bat
+
+        # Create a simple exe launcher using PowerShell (optional - runs the bat invisibly)
+        Write-Host "Creating exe wrapper..."
+        @'
+@echo off
+cd /d "%~dp0"
+python\pythonw.exe shaft_segmentation_gui.py
+'@ | Set-Content dist/ShaftSegmentation/run.bat
+
+    - name: Test app launches
+      working-directory: dist/ShaftSegmentation
       continue-on-error: true
       run: |
-        Write-Host "Testing if EXE can start..."
-        # Run with console output to capture errors
-        $pinfo = New-Object System.Diagnostics.ProcessStartInfo
-        $pinfo.FileName = ".\ShaftSegmentation.exe"
-        $pinfo.RedirectStandardError = $true
-        $pinfo.RedirectStandardOutput = $true
-        $pinfo.UseShellExecute = $false
-        $p = New-Object System.Diagnostics.Process
-        $p.StartInfo = $pinfo
-        $p.Start() | Out-Null
-        Start-Sleep -Seconds 20
-        if ($p.HasExited) {
-          Write-Host "Process exited with code: $($p.ExitCode)"
-          $stdout = $p.StandardOutput.ReadToEnd()
-          $stderr = $p.StandardError.ReadToEnd()
-          Write-Host "STDOUT: $stdout"
-          Write-Host "STDERR: $stderr"
+        Write-Host "Testing if app can start..."
+        $proc = Start-Process -FilePath "python\pythonw.exe" -ArgumentList "shaft_segmentation_gui.py" -PassThru
+        Start-Sleep -Seconds 15
+        if ($proc.HasExited) {
+          Write-Host "Process exited with code: $($proc.ExitCode)"
+          # Try with python.exe to see error
+          Write-Host "Trying with python.exe to see errors..."
+          & python\python.exe shaft_segmentation_gui.py 2>&1 | Select-Object -First 50
         } else {
-          Write-Host "EXE is running successfully after 20 seconds!"
-          $p.Kill()
+          Write-Host "App is running successfully after 15 seconds!"
+          $proc.Kill()
         }
 
     - name: Take screenshot of running app
-      working-directory: gui_tool/dist/ShaftSegmentation
+      working-directory: dist/ShaftSegmentation
       continue-on-error: true
       run: |
+        # Use system Python for screenshot
         pip install pyautogui pillow
-        $proc = Start-Process -FilePath ".\ShaftSegmentation.exe" -PassThru
-        Start-Sleep -Seconds 10
-        python -c "import pyautogui; s=pyautogui.screenshot(); s.save('../../../screenshot.png'); print('Screenshot saved!')"
+        $proc = Start-Process -FilePath "python\pythonw.exe" -ArgumentList "shaft_segmentation_gui.py" -PassThru
+        Start-Sleep -Seconds 12
+        python -c "import pyautogui; s=pyautogui.screenshot(); s.save('../../screenshot.png'); print('Screenshot saved!')"
         if (-not $proc.HasExited) { $proc.Kill() }
 
     - name: Upload screenshot
@@ -143,9 +113,8 @@ jobs:
         if-no-files-found: warn
 
     - name: Create ZIP archive
-      working-directory: gui_tool
       run: |
-        Compress-Archive -Path dist/ShaftSegmentation -DestinationPath ../ShaftSegmentation_CPU.zip
+        Compress-Archive -Path dist/ShaftSegmentation -DestinationPath ShaftSegmentation_Portable.zip
 
     - name: Get version info
       id: version
@@ -161,14 +130,17 @@ jobs:
         tag_name: ${{ steps.version.outputs.version }}
         name: Shaft Segmentation Tool ${{ steps.version.outputs.date }}
         body: |
-          ## Shaft Point Cloud Segmentation Tool
+          ## Shaft Point Cloud Segmentation Tool (Portable)
 
           **Model:** Epoch 341 (93.4% accuracy, 84.3% mIoU)
 
           ### Downloads
-          - **ShaftSegmentation_CPU.zip** - Works on any PC (~200MB compressed)
+          - **ShaftSegmentation_Portable.zip** - Portable Python package, works on any 64-bit Windows PC
 
-          **Installation:** Extract the ZIP and run `ShaftSegmentation.exe` from the extracted folder.
+          ### Installation
+          1. Download and extract the ZIP file
+          2. Double-click `ShaftSegmentation.bat` to run
+          3. No installation or admin rights required
 
           ### Features
           - Accepts LAS, E57, PLY, PCD point cloud files
@@ -177,14 +149,13 @@ jobs:
           - Outputs combined PLY + per-class family PLYs + visualizations
 
           ### Usage
-          1. Download the appropriate .exe for your system
-          2. Double-click to run (no installation needed)
-          3. Select your point cloud file and output directory
-          4. Click "Start Processing"
+          1. Run `ShaftSegmentation.bat`
+          2. Select your point cloud file and output directory
+          3. Click "Start Processing"
 
           Built from commit: ${{ github.sha }}
         files: |
-          ShaftSegmentation_CPU.zip
+          ShaftSegmentation_Portable.zip
         draft: false
         prerelease: false
       env:
@@ -196,6 +167,6 @@ jobs:
         Write-Host "PUBLIC DOWNLOAD LINK"
         Write-Host "============================================"
         Write-Host ""
-        Write-Host "https://github.com/${{ github.repository }}/releases/latest/download/ShaftSegmentation_CPU.zip"
+        Write-Host "https://github.com/${{ github.repository }}/releases/latest/download/ShaftSegmentation_Portable.zip"
         Write-Host ""
         Write-Host "============================================"
