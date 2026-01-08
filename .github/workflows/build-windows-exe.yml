@@ -44,15 +44,19 @@ jobs:
         Invoke-WebRequest -Uri "https://bootstrap.pypa.io/get-pip.py" -OutFile get-pip.py
         & dist/ShaftSegmentation/python/python.exe get-pip.py --no-warn-script-location
 
-        # Install all dependencies
-        Write-Host "Installing dependencies..."
+        # Install dependencies from PyPI first
+        Write-Host "Installing PyPI dependencies..."
         & dist/ShaftSegmentation/python/python.exe -m pip install --no-warn-script-location `
-          PyQt5>=5.15.0 `
-          numpy>=1.21.0 `
-          laspy>=2.0.0 `
-          plyfile>=0.7.0 `
-          matplotlib>=3.5.0 `
-          scikit-learn `
+          PyQt5 `
+          numpy `
+          laspy `
+          plyfile `
+          matplotlib `
+          scikit-learn
+
+        # Install PyTorch from PyTorch index (CPU version)
+        Write-Host "Installing PyTorch CPU..."
+        & dist/ShaftSegmentation/python/python.exe -m pip install --no-warn-script-location `
           torch torchvision --index-url https://download.pytorch.org/whl/cpu
 
         # Copy application files
