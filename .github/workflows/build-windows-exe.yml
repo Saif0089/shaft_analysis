@@ -63,19 +63,13 @@ jobs:
 
         # Create launcher batch file
         Write-Host "Creating launcher..."
-        @'
-@echo off
-cd /d "%~dp0"
-start "" "python\pythonw.exe" "shaft_segmentation_gui.py"
-'@ | Set-Content dist/ShaftSegmentation/ShaftSegmentation.bat
+        $batContent = '@echo off' + "`r`n" + 'cd /d "%~dp0"' + "`r`n" + 'start "" "python\pythonw.exe" "shaft_segmentation_gui.py"'
+        Set-Content -Path "dist/ShaftSegmentation/ShaftSegmentation.bat" -Value $batContent -NoNewline
 
-        # Create a simple exe launcher using PowerShell (optional - runs the bat invisibly)
-        Write-Host "Creating exe wrapper..."
-        @'
-@echo off
-cd /d "%~dp0"
-python\pythonw.exe shaft_segmentation_gui.py
-'@ | Set-Content dist/ShaftSegmentation/run.bat
+        # Create alternative launcher
+        Write-Host "Creating run.bat..."
+        $runContent = '@echo off' + "`r`n" + 'cd /d "%~dp0"' + "`r`n" + 'python\pythonw.exe shaft_segmentation_gui.py'
+        Set-Content -Path "dist/ShaftSegmentation/run.bat" -Value $runContent -NoNewline
 
     - name: Test app launches
       working-directory: dist/ShaftSegmentation
