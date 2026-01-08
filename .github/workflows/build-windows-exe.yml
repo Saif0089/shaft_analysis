@@ -39,57 +39,36 @@ jobs:
         pip uninstall -y torch torchvision 2>$null
         pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 
-    - name: Find torch lib path and build
+    - name: Build CPU executable
       working-directory: gui_tool
       run: |
-        # Find the torch lib directory
-        $torchPath = python -c "import torch; import os; print(os.path.dirname(torch.__file__))"
-        Write-Host "Torch path: $torchPath"
-        $torchLibPath = Join-Path $torchPath "lib"
-        Write-Host "Torch lib path: $torchLibPath"
-
-        # List DLLs in torch/lib
-        Write-Host "DLLs in torch/lib:"
-        Get-ChildItem "$torchLibPath\*.dll" | ForEach-Object { Write-Host "  $($_.Name)" }
-
-        # Build with explicit binary additions for torch DLLs
-        # Add each DLL from torch/lib to the root of _internal
-        $addBinaryArgs = ""
-        Get-ChildItem "$torchLibPath\*.dll" | ForEach-Object {
-          $addBinaryArgs += " --add-binary `"$($_.FullName);.`""
-        }
-
-        Write-Host "Building with PyInstaller..."
-        $cmd = @"
-        pyinstaller --clean --onedir --noconsole --name ShaftSegmentation ``
-          --add-data "checkpoints;checkpoints" ``
-          --add-data "models;models" ``
-          $addBinaryArgs ``
-          --collect-all torch ``
-          --collect-binaries torch ``
-          --copy-metadata torch ``
-          --hidden-import torch ``
-          --hidden-import torch.nn ``
-          --hidden-import torch.nn.functional ``
-          --hidden-import torch.utils ``
-          --hidden-import torch.utils.data ``
-          --hidden-import torch._C ``
-          --collect-all intel-openmp ``
-          --collect-binaries intel-openmp ``
-          --hidden-import PyQt5 ``
-          --hidden-import PyQt5.QtWidgets ``
-          --hidden-import PyQt5.QtCore ``
-          --hidden-import PyQt5.QtGui ``
-          --hidden-import numpy ``
-          --hidden-import laspy ``
-          --hidden-import plyfile ``
-          --hidden-import matplotlib ``
-          --hidden-import matplotlib.pyplot ``
-          --hidden-import sklearn ``
-          --hidden-import sklearn.decomposition ``
+        # Build with PyInstaller
+        pyinstaller --clean --onedir --noconsole --name ShaftSegmentation `
+          --add-data "checkpoints;checkpoints" `
+          --add-data "models;models" `
+          --collect-all torch `
+          --collect-binaries torch `
+          --copy-metadata torch `
+          --hidden-import torch `
+          --hidden-import torch.nn `
+          --hidden-import torch.nn.functional `
+          --hidden-import torch.utils `
+          --hidden-import torch.utils.data `
+          --hidden-import torch._C `
+          --collect-all intel-openmp `
+          --collect-binaries intel-openmp `
+          --hidden-import PyQt5 `
+          --hidden-import PyQt5.QtWidgets `
+          --hidden-import PyQt5.QtCore `
+          --hidden-import PyQt5.QtGui `
+          --hidden-import numpy `
+          --hidden-import laspy `
+          --hidden-import plyfile `
+          --hidden-import matplotlib `
+          --hidden-import matplotlib.pyplot `
+          --hidden-import sklearn `
+          --hidden-import sklearn.decomposition `
           shaft_segmentation_gui.py
-"@
-        Invoke-Expression $cmd
 
     - name: Copy torch DLLs to _internal root
       working-directory: gui_tool/dist/ShaftSegmentation/_internal
