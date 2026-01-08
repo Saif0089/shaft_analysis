@@ -72,11 +72,30 @@ jobs:
           --hidden-import sklearn.decomposition `
           shaft_segmentation_gui.py
 
+    - name: Copy torch DLLs to _internal root
+      working-directory: gui_tool/dist/ShaftSegmentation/_internal
+      run: |
+        # PyTorch looks for DLLs in the root of _internal, not in torch/lib
+        # Copy all torch DLLs to the root _internal folder
+        Write-Host "Copying torch DLLs to _internal root..."
+        if (Test-Path "torch/lib") {
+          Copy-Item "torch/lib/*.dll" -Destination "." -Force
+          Write-Host "Copied DLLs from torch/lib:"
+          Get-ChildItem "torch/lib/*.dll" | ForEach-Object { Write-Host "  - $($_.Name)" }
+        }
+        # Also copy any other torch-related DLLs
+        Get-ChildItem -Recurse -Filter "*.dll" -Path "torch" | ForEach-Object {
+          if (-not (Test-Path $_.Name)) {
+            Copy-Item $_.FullName -Destination "." -Force
+            Write-Host "Copied: $($_.Name)"
+          }
+        }
+
     - name: List DLLs in dist folder
       working-directory: gui_tool/dist/ShaftSegmentation
       run: |
-        Write-Host "=== All DLLs in dist folder ==="
-        Get-ChildItem -Recurse -Filter "*.dll" | ForEach-Object { $_.FullName }
+        Write-Host "=== All DLLs in _internal root ==="
+        Get-ChildItem "_internal/*.dll" | ForEach-Object { $_.Name }
         Write-Host ""
         Write-Host "=== Looking for c10.dll and torch DLLs ==="
         Get-ChildItem -Recurse -Filter "c10*.dll" | ForEach-Object { $_.FullName }
